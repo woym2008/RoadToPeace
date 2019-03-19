@@ -9,35 +9,47 @@
 public static class GameComponentsLookup {
 
     public const int Collision = 0;
-    public const int Drag = 1;
-    public const int GameObject = 2;
-    public const int GameOver = 3;
-    public const int Life = 4;
-    public const int Move = 5;
-    public const int Position = 6;
-    public const int Timer = 7;
+    public const int DestoryOnReset = 1;
+    public const int Destroyed = 2;
+    public const int DestroyedListener = 3;
+    public const int Drag = 4;
+    public const int GameOver = 5;
+    public const int Life = 6;
+    public const int Move = 7;
+    public const int Position = 8;
+    public const int Reset = 9;
+    public const int Timer = 10;
+    public const int View = 11;
 
-    public const int TotalComponents = 8;
+    public const int TotalComponents = 12;
 
     public static readonly string[] componentNames = {
         "Collision",
+        "DestoryOnReset",
+        "Destroyed",
+        "DestroyedListener",
         "Drag",
-        "GameObject",
         "GameOver",
         "Life",
         "Move",
         "Position",
-        "Timer"
+        "Reset",
+        "Timer",
+        "View"
     };
 
     public static readonly System.Type[] componentTypes = {
         typeof(CollisionComponent),
+        typeof(DestoryOnResetComponent),
+        typeof(DestroyedComponent),
+        typeof(DestroyedListenerComponent),
         typeof(DragComponent),
-        typeof(GameObjectComponent),
         typeof(GameOverComponent),
         typeof(LifeComponent),
         typeof(MoveComponent),
         typeof(PositionComponent),
-        typeof(TimerComponent)
+        typeof(ResetComponent),
+        typeof(TimerComponent),
+        typeof(ViewComponent)
     };
 }

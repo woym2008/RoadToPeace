@@ -1,7 +1,7 @@
 ﻿/* ========================================================
- *	类名称：GameSystem
+ *	类名称：MovementSystem
  *	作 者：Zhangfan
- *	创建时间：2019-03-18 19:06:28
+ *	创建时间：2019-03-19 19:40:59
  *	版 本：V1.0.0
  *	描 述：
 * ========================================================*/
@@ -12,11 +12,10 @@ using System.Text;
 using System.Threading.Tasks;
 using Entitas;
 
-public class GameSystem : Feature
+public class MovementSystem : Feature
 {
-    public GameSystem(Contexts contexts)
+    public MovementSystem(Contexts contexts, Services services)
     {
-        Add(new GameResetSystem(contexts));
+        //Add(new )
     }
-
 }

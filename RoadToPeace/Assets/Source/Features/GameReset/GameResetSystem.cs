@@ -10,18 +10,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
 using Entitas;
 
-public class GameStartSystem : ReactiveSystem<GameEntity>, IInitializeSystem
+public class GameResetSystem : ReactiveSystem<GameEntity>, IInitializeSystem
 {
     readonly GameContext game;
     IGroup<GameEntity> _deleteEntitys;
 
-    public GameStartSystem(Contexts contexts)
+    public GameResetSystem(Contexts contexts)
         : base(contexts.game)
     {
         game = contexts.game;
-        //_deleteEntitys = game.GetGroup(GameMatcher.)
+        _deleteEntitys = game.GetGroup(GameMatcher.DestoryOnReset);
     }
 
     public void Initialize()
@@ -31,18 +32,18 @@ public class GameStartSystem : ReactiveSystem<GameEntity>, IInitializeSystem
 
     protected override void Execute(List<GameEntity> entities)
     {
+        Debug.Log("Debug reset add Execute");
+        game.isReset = false;
     }
 
     protected override bool Filter(GameEntity entity)
     {
-        return true;
+        return entity.isReset;
     }
 
     protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
     {
-        return new Collector<GameEntity>(
-            new[] { context.GetGroup(GameMatcher.GameObject) },
-            new[] { GroupEvent.Removed }
-        );
+        Debug.Log("Debug reset add");
+        return context.CreateCollector(GameMatcher.Reset.Added());
     }
 }

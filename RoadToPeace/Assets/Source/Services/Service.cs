@@ -1,7 +1,7 @@
 ﻿/* ========================================================
- *	类名称：GameSystem
+ *	类名称：Service
  *	作 者：Zhangfan
- *	创建时间：2019-03-18 19:06:28
+ *	创建时间：2019-03-19 19:06:17
  *	版 本：V1.0.0
  *	描 述：
 * ========================================================*/
@@ -12,11 +12,16 @@ using System.Text;
 using System.Threading.Tasks;
 using Entitas;
 
-public class GameSystem : Feature
+public abstract class Service
 {
-    public GameSystem(Contexts contexts)
+    protected readonly Contexts _contexts;
+
+    public Service(Contexts contexts)
     {
-        Add(new GameResetSystem(contexts));
+        _contexts = contexts;
     }
 
+    protected virtual void DropState()
+    {
+    }
 }
