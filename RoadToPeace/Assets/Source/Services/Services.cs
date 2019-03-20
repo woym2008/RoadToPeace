@@ -21,6 +21,8 @@ public class Services
 
     public IdService Idservice;
 
+    public CreatePlayerService CreatePlayerService;
+
     public Services(Contexts contexts)
     {
         InputService = new UnityInputService();
@@ -30,5 +32,7 @@ public class Services
         //TimeService = new 
 
         Idservice = new IdService(contexts);
+
+        CreatePlayerService = new CreatePlayerService(contexts);
     }
 }
