@@ -14,9 +14,17 @@ using Entitas;
 
 public class GameSystem : Feature
 {
-    public GameSystem(Contexts contexts)
+    public GameSystem(Contexts contexts, Services services)
     {
-        Add(new GameResetSystem(contexts));
+        Add(new PlayerCreateSystem(contexts, services));
+        Add(new GameResetSystem(contexts, services));        
+        Add(new CreateTileSystem(contexts, services));
+
+        Add(new ResourcesSystem(contexts, services));
+
+        //Add(new ApplyPositionSystem(contexts));
+
+        Add(new MovementSystem(contexts, services));
     }
 
 }

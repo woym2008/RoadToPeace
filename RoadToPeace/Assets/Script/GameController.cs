@@ -12,7 +12,7 @@ public class GameController : MonoBehaviour
     void Start()
     {
         var contexts = Contexts.sharedInstance;
-        _gamesystem = new GameSystem(contexts);
+        _gamesystem = new GameSystem(contexts, new Services(contexts));
         _gamesystem.Initialize();
 
         _gamecontext = contexts.game;

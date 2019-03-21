@@ -18,7 +18,7 @@ public class GameResetSystem : ReactiveSystem<GameEntity>, IInitializeSystem
     readonly GameContext game;
     IGroup<GameEntity> _deleteEntitys;
 
-    public GameResetSystem(Contexts contexts)
+    public GameResetSystem(Contexts contexts, Services servers)
         : base(contexts.game)
     {
         game = contexts.game;
