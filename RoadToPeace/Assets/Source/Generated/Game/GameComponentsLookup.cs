@@ -10,33 +10,41 @@ public static class GameComponentsLookup {
 
     public const int Asset = 0;
     public const int AssetLoaded = 1;
-    public const int Collision = 2;
-    public const int DestoryOnReset = 3;
-    public const int Destroyed = 4;
-    public const int DestroyedListener = 5;
-    public const int Drag = 6;
-    public const int GameOver = 7;
-    public const int Id = 8;
-    public const int Life = 9;
-    public const int Move = 10;
-    public const int Player = 11;
-    public const int Position = 12;
-    public const int Reset = 13;
-    public const int Timer = 14;
-    public const int View = 15;
+    public const int Brick = 2;
+    public const int Collision = 3;
+    public const int DestoryOnReset = 4;
+    public const int Destroyed = 5;
+    public const int DestroyedListener = 6;
+    public const int Drag = 7;
+    public const int Floor = 8;
+    public const int FloorSpeed = 9;
+    public const int GameOver = 10;
+    public const int Id = 11;
+    public const int LastFloor = 12;
+    public const int Life = 13;
+    public const int Move = 14;
+    public const int Player = 15;
+    public const int Position = 16;
+    public const int Reset = 17;
+    public const int Timer = 18;
+    public const int View = 19;
 
-    public const int TotalComponents = 16;
+    public const int TotalComponents = 20;
 
     public static readonly string[] componentNames = {
         "Asset",
         "AssetLoaded",
+        "Brick",
         "Collision",
         "DestoryOnReset",
         "Destroyed",
         "DestroyedListener",
         "Drag",
+        "Floor",
+        "FloorSpeed",
         "GameOver",
         "Id",
+        "LastFloor",
         "Life",
         "Move",
         "Player",
@@ -49,13 +57,17 @@ public static class GameComponentsLookup {
     public static readonly System.Type[] componentTypes = {
         typeof(AssetComponent),
         typeof(AssetLoadedComponent),
+        typeof(BrickComponent),
         typeof(CollisionComponent),
         typeof(DestoryOnResetComponent),
         typeof(DestroyedComponent),
         typeof(DestroyedListenerComponent),
         typeof(DragComponent),
+        typeof(FloorComponent),
+        typeof(FloorSpeedComponent),
         typeof(GameOverComponent),
         typeof(IdComponent),
+        typeof(LastFloorComponent),
         typeof(LifeComponent),
         typeof(MoveComponent),
         typeof(PlayerComponent),

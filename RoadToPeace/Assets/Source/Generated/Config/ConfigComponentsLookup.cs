@@ -8,15 +8,18 @@
 //------------------------------------------------------------------------------
 public static class ConfigComponentsLookup {
 
-    public const int StartPlayerPosition = 0;
+    public const int RoadBoundary = 0;
+    public const int StartPlayerPosition = 1;
 
-    public const int TotalComponents = 1;
+    public const int TotalComponents = 2;
 
     public static readonly string[] componentNames = {
+        "RoadBoundary",
         "StartPlayerPosition"
     };
 
     public static readonly System.Type[] componentTypes = {
+        typeof(RoadBoundaryComponent),
         typeof(StartPlayerPositionComponent)
     };
 }

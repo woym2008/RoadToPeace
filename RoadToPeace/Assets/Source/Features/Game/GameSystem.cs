@@ -18,7 +18,7 @@ public class GameSystem : Feature
     {
         Add(new PlayerCreateSystem(contexts, services));
         Add(new GameResetSystem(contexts, services));        
-        Add(new CreateTileSystem(contexts, services));
+        Add(new CreateBrickSystem(contexts, services));
 
         Add(new ResourcesSystem(contexts, services));
 
