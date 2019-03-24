@@ -17,19 +17,20 @@ public static class GameComponentsLookup {
     public const int DestroyedListener = 6;
     public const int Drag = 7;
     public const int Floor = 8;
-    public const int FloorSpeed = 9;
-    public const int GameOver = 10;
-    public const int Id = 11;
-    public const int LastFloor = 12;
-    public const int Life = 13;
-    public const int Move = 14;
-    public const int Player = 15;
-    public const int Position = 16;
-    public const int Reset = 17;
-    public const int Timer = 18;
-    public const int View = 19;
+    public const int FloorData = 9;
+    public const int FloorSpeed = 10;
+    public const int GameOver = 11;
+    public const int Id = 12;
+    public const int LastFloor = 13;
+    public const int Life = 14;
+    public const int Move = 15;
+    public const int Player = 16;
+    public const int Position = 17;
+    public const int Reset = 18;
+    public const int Timer = 19;
+    public const int View = 20;
 
-    public const int TotalComponents = 20;
+    public const int TotalComponents = 21;
 
     public static readonly string[] componentNames = {
         "Asset",
@@ -41,6 +42,7 @@ public static class GameComponentsLookup {
         "DestroyedListener",
         "Drag",
         "Floor",
+        "FloorData",
         "FloorSpeed",
         "GameOver",
         "Id",
@@ -64,6 +66,7 @@ public static class GameComponentsLookup {
         typeof(DestroyedListenerComponent),
         typeof(DragComponent),
         typeof(FloorComponent),
+        typeof(FloorDataComponent),
         typeof(FloorSpeedComponent),
         typeof(GameOverComponent),
         typeof(IdComponent),

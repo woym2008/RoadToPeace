@@ -11,16 +11,49 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Entitas;
+using UnityEngine;
 
-public class CreateFloorSystem : IExecuteSystem
+public class CreateFloorSystem : ReactiveSystem<GameEntity>
 {
+    private IGroup<GameEntity> _gamegroup;
+    private Contexts _contexts;
     public CreateFloorSystem(Contexts contexts, Services services)
+        : base(contexts.game)
     {
-
+        _contexts = contexts;
+        _gamegroup = contexts.game.GetGroup(GameMatcher.Floor);
     }
 
-    public void Execute()
+    protected override void Execute(List<GameEntity> entities)
     {
-        throw new NotImplementedException();
+        //float width = _contexts.config.floorwidth;
+        //Vector3 poslast = _contexts.config.firstpos;
+        //foreach (var floor in _gamegroup)
+        //{
+        //    if(floor.isLastFloor)
+        //    {
+        //        poslast = floor.position.position;
+        //        floor.isLastFloor = false;
+        //        break;
+        //    }
+        //}
+        //GameEntity entity = _contexts.game.CreateEntity();
+        //entity.isFloor = true;
+        //entity.isLastFloor = true;
+        //entity.ReplacePosition(new Vector3(
+        //    poslast.x + width,
+        //    poslast.y,
+        //    poslast.z
+        //    ));
+    }
+
+    protected override bool Filter(GameEntity entity)
+    {
+        return !_contexts.game.isGameOver;
+    }
+
+    protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
+    {
+        return context.CreateCollector(GameMatcher.Floor.Removed());
     }
 }

@@ -39,6 +39,8 @@ public class MoveFloorSystem : IExecuteSystem
                     if (floorentity.position.position.x < _contexts.config.roadBoundary.left)
                     {
                         floorentity.isDestroyed = true;
+                        //减去一个entity 再创建一个新的
+
                     }
                 }
             }
