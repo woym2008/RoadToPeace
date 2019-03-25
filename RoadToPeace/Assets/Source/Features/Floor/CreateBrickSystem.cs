@@ -33,6 +33,6 @@ public class CreateBrickSystem : ReactiveSystem<GameEntity>
 
     protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
     {
-        throw new NotImplementedException();
+        return context.CreateCollector(GameMatcher.Floor.Added());
     }
 }
