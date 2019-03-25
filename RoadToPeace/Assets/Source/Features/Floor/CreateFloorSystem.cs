@@ -26,25 +26,25 @@ public class CreateFloorSystem : ReactiveSystem<GameEntity>
 
     protected override void Execute(List<GameEntity> entities)
     {
-        //float width = _contexts.config.floorwidth;
-        //Vector3 poslast = _contexts.config.firstpos;
-        //foreach (var floor in _gamegroup)
-        //{
-        //    if(floor.isLastFloor)
-        //    {
-        //        poslast = floor.position.position;
-        //        floor.isLastFloor = false;
-        //        break;
-        //    }
-        //}
-        //GameEntity entity = _contexts.game.CreateEntity();
-        //entity.isFloor = true;
-        //entity.isLastFloor = true;
-        //entity.ReplacePosition(new Vector3(
-        //    poslast.x + width,
-        //    poslast.y,
-        //    poslast.z
-        //    ));
+        float width = _contexts.config.floorData.floorWidth;
+        Vector3 poslast = _contexts.config.floorData.overPos;
+        foreach (var floor in _gamegroup)
+        {
+            if (floor.isLastFloor)
+            {
+                poslast = floor.position.position;
+                floor.isLastFloor = false;
+                break;
+            }
+        }
+        GameEntity entity = _contexts.game.CreateEntity();
+        entity.isFloor = true;
+        entity.isLastFloor = true;
+        entity.ReplacePosition(new Vector3(
+            poslast.x + width,
+            poslast.y,
+            poslast.z
+            ));
     }
 
     protected override bool Filter(GameEntity entity)

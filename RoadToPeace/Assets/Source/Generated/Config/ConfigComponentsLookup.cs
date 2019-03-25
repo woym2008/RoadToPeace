@@ -8,17 +8,26 @@
 //------------------------------------------------------------------------------
 public static class ConfigComponentsLookup {
 
-    public const int RoadBoundary = 0;
-    public const int StartPlayerPosition = 1;
+    public const int BrickTypeCount = 0;
+    public const int BrickTypeList = 1;
+    public const int FloorData = 2;
+    public const int RoadBoundary = 3;
+    public const int StartPlayerPosition = 4;
 
-    public const int TotalComponents = 2;
+    public const int TotalComponents = 5;
 
     public static readonly string[] componentNames = {
+        "BrickTypeCount",
+        "BrickTypeList",
+        "FloorData",
         "RoadBoundary",
         "StartPlayerPosition"
     };
 
     public static readonly System.Type[] componentTypes = {
+        typeof(BrickTypeCountComponent),
+        typeof(BrickTypeListComponent),
+        typeof(FloorDataComponent),
         typeof(RoadBoundaryComponent),
         typeof(StartPlayerPositionComponent)
     };

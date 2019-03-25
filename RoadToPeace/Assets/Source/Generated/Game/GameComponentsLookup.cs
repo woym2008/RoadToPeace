@@ -11,41 +11,49 @@ public static class GameComponentsLookup {
     public const int Asset = 0;
     public const int AssetLoaded = 1;
     public const int Brick = 2;
-    public const int Collision = 3;
-    public const int DestoryOnReset = 4;
-    public const int Destroyed = 5;
-    public const int DestroyedListener = 6;
-    public const int Drag = 7;
-    public const int Floor = 8;
-    public const int FloorData = 9;
-    public const int FloorSpeed = 10;
-    public const int GameOver = 11;
-    public const int Id = 12;
-    public const int LastFloor = 13;
-    public const int Life = 14;
-    public const int Move = 15;
-    public const int Player = 16;
-    public const int Position = 17;
-    public const int Reset = 18;
-    public const int Timer = 19;
-    public const int View = 20;
+    public const int BrickData = 3;
+    public const int BrickParent = 4;
+    public const int BrickType = 5;
+    public const int Collision = 6;
+    public const int DestoryOnReset = 7;
+    public const int Destroyed = 8;
+    public const int DestroyedListener = 9;
+    public const int Drag = 10;
+    public const int Floor = 11;
+    public const int FloorSpeed = 12;
+    public const int GameOver = 13;
+    public const int GameStart = 14;
+    public const int Id = 15;
+    public const int IsBrickPassed = 16;
+    public const int LastFloor = 17;
+    public const int Life = 18;
+    public const int Move = 19;
+    public const int Player = 20;
+    public const int Position = 21;
+    public const int Reset = 22;
+    public const int Timer = 23;
+    public const int View = 24;
 
-    public const int TotalComponents = 21;
+    public const int TotalComponents = 25;
 
     public static readonly string[] componentNames = {
         "Asset",
         "AssetLoaded",
         "Brick",
+        "BrickData",
+        "BrickParent",
+        "BrickType",
         "Collision",
         "DestoryOnReset",
         "Destroyed",
         "DestroyedListener",
         "Drag",
         "Floor",
-        "FloorData",
         "FloorSpeed",
         "GameOver",
+        "GameStart",
         "Id",
+        "IsBrickPassed",
         "LastFloor",
         "Life",
         "Move",
@@ -60,16 +68,20 @@ public static class GameComponentsLookup {
         typeof(AssetComponent),
         typeof(AssetLoadedComponent),
         typeof(BrickComponent),
+        typeof(BrickDataComponent),
+        typeof(BrickParentComponent),
+        typeof(BrickTypeComponent),
         typeof(CollisionComponent),
         typeof(DestoryOnResetComponent),
         typeof(DestroyedComponent),
         typeof(DestroyedListenerComponent),
         typeof(DragComponent),
         typeof(FloorComponent),
-        typeof(FloorDataComponent),
         typeof(FloorSpeedComponent),
         typeof(GameOverComponent),
+        typeof(GameStartComponent),
         typeof(IdComponent),
+        typeof(IsBrickPassedComponent),
         typeof(LastFloorComponent),
         typeof(LifeComponent),
         typeof(MoveComponent),

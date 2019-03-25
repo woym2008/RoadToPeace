@@ -6,28 +6,28 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-public partial class GameContext {
+public partial class ConfigContext {
 
-    public GameEntity floorDataEntity { get { return GetGroup(GameMatcher.FloorData).GetSingleEntity(); } }
+    public ConfigEntity floorDataEntity { get { return GetGroup(ConfigMatcher.FloorData).GetSingleEntity(); } }
     public FloorDataComponent floorData { get { return floorDataEntity.floorData; } }
     public bool hasFloorData { get { return floorDataEntity != null; } }
 
-    public GameEntity SetFloorData(float newFloorWidth, float newFloorHeight, UnityEngine.Vector3 newFirstPos) {
+    public ConfigEntity SetFloorData(float newFloorWidth, float newFloorHeight, UnityEngine.Vector3 newFirstPos, UnityEngine.Vector3 newOverPos, int newNumFloor) {
         if (hasFloorData) {
             throw new Entitas.EntitasException("Could not set FloorData!\n" + this + " already has an entity with FloorDataComponent!",
                 "You should check if the context already has a floorDataEntity before setting it or use context.ReplaceFloorData().");
         }
         var entity = CreateEntity();
-        entity.AddFloorData(newFloorWidth, newFloorHeight, newFirstPos);
+        entity.AddFloorData(newFloorWidth, newFloorHeight, newFirstPos, newOverPos, newNumFloor);
         return entity;
     }
 
-    public void ReplaceFloorData(float newFloorWidth, float newFloorHeight, UnityEngine.Vector3 newFirstPos) {
+    public void ReplaceFloorData(float newFloorWidth, float newFloorHeight, UnityEngine.Vector3 newFirstPos, UnityEngine.Vector3 newOverPos, int newNumFloor) {
         var entity = floorDataEntity;
         if (entity == null) {
-            entity = SetFloorData(newFloorWidth, newFloorHeight, newFirstPos);
+            entity = SetFloorData(newFloorWidth, newFloorHeight, newFirstPos, newOverPos, newNumFloor);
         } else {
-            entity.ReplaceFloorData(newFloorWidth, newFloorHeight, newFirstPos);
+            entity.ReplaceFloorData(newFloorWidth, newFloorHeight, newFirstPos, newOverPos, newNumFloor);
         }
     }
 
@@ -44,31 +44,35 @@ public partial class GameContext {
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-public partial class GameEntity {
+public partial class ConfigEntity {
 
-    public FloorDataComponent floorData { get { return (FloorDataComponent)GetComponent(GameComponentsLookup.FloorData); } }
-    public bool hasFloorData { get { return HasComponent(GameComponentsLookup.FloorData); } }
+    public FloorDataComponent floorData { get { return (FloorDataComponent)GetComponent(ConfigComponentsLookup.FloorData); } }
+    public bool hasFloorData { get { return HasComponent(ConfigComponentsLookup.FloorData); } }
 
-    public void AddFloorData(float newFloorWidth, float newFloorHeight, UnityEngine.Vector3 newFirstPos) {
-        var index = GameComponentsLookup.FloorData;
+    public void AddFloorData(float newFloorWidth, float newFloorHeight, UnityEngine.Vector3 newFirstPos, UnityEngine.Vector3 newOverPos, int newNumFloor) {
+        var index = ConfigComponentsLookup.FloorData;
         var component = (FloorDataComponent)CreateComponent(index, typeof(FloorDataComponent));
         component.floorWidth = newFloorWidth;
         component.floorHeight = newFloorHeight;
         component.firstPos = newFirstPos;
+        component.overPos = newOverPos;
+        component.numFloor = newNumFloor;
         AddComponent(index, component);
     }
 
-    public void ReplaceFloorData(float newFloorWidth, float newFloorHeight, UnityEngine.Vector3 newFirstPos) {
-        var index = GameComponentsLookup.FloorData;
+    public void ReplaceFloorData(float newFloorWidth, float newFloorHeight, UnityEngine.Vector3 newFirstPos, UnityEngine.Vector3 newOverPos, int newNumFloor) {
+        var index = ConfigComponentsLookup.FloorData;
         var component = (FloorDataComponent)CreateComponent(index, typeof(FloorDataComponent));
         component.floorWidth = newFloorWidth;
         component.floorHeight = newFloorHeight;
         component.firstPos = newFirstPos;
+        component.overPos = newOverPos;
+        component.numFloor = newNumFloor;
         ReplaceComponent(index, component);
     }
 
     public void RemoveFloorData() {
-        RemoveComponent(GameComponentsLookup.FloorData);
+        RemoveComponent(ConfigComponentsLookup.FloorData);
     }
 }
 
@@ -80,15 +84,15 @@ public partial class GameEntity {
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-public sealed partial class GameMatcher {
+public sealed partial class ConfigMatcher {
 
-    static Entitas.IMatcher<GameEntity> _matcherFloorData;
+    static Entitas.IMatcher<ConfigEntity> _matcherFloorData;
 
-    public static Entitas.IMatcher<GameEntity> FloorData {
+    public static Entitas.IMatcher<ConfigEntity> FloorData {
         get {
             if (_matcherFloorData == null) {
-                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.FloorData);
-                matcher.componentNames = GameComponentsLookup.componentNames;
+                var matcher = (Entitas.Matcher<ConfigEntity>)Entitas.Matcher<ConfigEntity>.AllOf(ConfigComponentsLookup.FloorData);
+                matcher.componentNames = ConfigComponentsLookup.componentNames;
                 _matcherFloorData = matcher;
             }
 
