@@ -37,6 +37,10 @@ public class UnityViewService : Service, IViewService
         {
             view.InitializeView(contexts, entity);
             entity.AddView(view);
+            if(entity.hasPosition)
+            {
+                view.Position = entity.position.position;
+            }
         }
 
         //viewObject.GetComponents(_eventListenerBuffer);

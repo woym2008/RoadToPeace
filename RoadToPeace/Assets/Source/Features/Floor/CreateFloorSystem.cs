@@ -27,6 +27,7 @@ public class CreateFloorSystem : ReactiveSystem<GameEntity>
     protected override void Execute(List<GameEntity> entities)
     {
         float width = _contexts.config.floorData.floorWidth;
+        Debug.LogWarning("Execute width" + width);
         Vector3 poslast = _contexts.config.floorData.overPos;
         foreach (var floor in _gamegroup)
         {

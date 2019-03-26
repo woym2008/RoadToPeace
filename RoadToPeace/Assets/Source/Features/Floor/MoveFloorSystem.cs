@@ -11,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Entitas;
+using UnityEngine;
 
 public class MoveFloorSystem : IExecuteSystem
 {
@@ -34,13 +35,14 @@ public class MoveFloorSystem : IExecuteSystem
             {
                 if(floorentity.hasPosition)
                 {
-                    floorentity.position.position.x += _contexts.game.floorSpeed.value;
+                    floorentity.position.position.x -= _contexts.game.floorSpeed.value * Time.deltaTime;
 
-                    if (floorentity.position.position.x < _contexts.config.roadBoundary.left)
+                    if (floorentity.position.position.x < _contexts.config.floorData.overPos.x)
                     {
                         floorentity.isDestroyed = true;
                         //减去一个entity 再创建一个新的
-
+                        Debug.Log("Destory one floor");
+                        break;
                     }
                 }
             }

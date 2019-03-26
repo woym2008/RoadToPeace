@@ -16,11 +16,13 @@ public class FloorSystem : Feature
 {
     public FloorSystem(Contexts contexts, Services services)
     {
+        Add(new FirstCreateFloorSystem(contexts, services));
         Add(new CreateFloorSystem(contexts, services));
         Add(new CreateBrickSystem(contexts, services));
 
-        Add(new DragFloorSystem(contexts, services));
+        //Add(new DragFloorSystem(contexts, services));
         Add(new MoveFloorSystem(contexts, services));
-        Add(new DestoryFloorSystem(contexts, services));
+        //Add(new DestoryFloorSystem(contexts, services));
+        Add(new UpdateBrickSystem(contexts, services));
     }
 }

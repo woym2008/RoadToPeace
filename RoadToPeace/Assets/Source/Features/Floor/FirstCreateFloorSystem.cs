@@ -39,10 +39,12 @@ public class FirstCreateFloorSystem : ReactiveSystem<GameEntity>
             }
 
             curpos = curpos + new Vector3(
-                curpos.x + _contexts.config.floorData.floorWidth,
-                curpos.y,
-                curpos.z
+                _contexts.config.floorData.floorWidth,
+                0,
+                0
                 );
+
+            Debug.Log("width: " + curpos);
         }
     }
 

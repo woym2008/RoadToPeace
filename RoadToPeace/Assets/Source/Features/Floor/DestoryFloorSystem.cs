@@ -14,24 +14,34 @@ using Entitas;
 
 public class DestoryFloorSystem : ReactiveSystem<GameEntity>
 {
+    IGroup<GameEntity> _entityGroup;
     public DestoryFloorSystem(Contexts contexts, Services services)
         : base(contexts.game)
     {
-
+        _entityGroup = contexts.game.GetGroup(GameMatcher.Brick);
     }
 
     protected override void Execute(List<GameEntity> entities)
     {
-        throw new NotImplementedException();
+        foreach(var entity in entities)
+        {
+            foreach(var brickentity in _entityGroup)
+            {
+                if(brickentity.brickParent.parent == entity)
+                {
+                    brickentity.isDestroyed = true;
+                }
+            }
+        }
     }
 
     protected override bool Filter(GameEntity entity)
     {
-        throw new NotImplementedException();
+        return true;
     }
 
     protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
     {
-        throw new NotImplementedException();
+        return context.CreateCollector(GameMatcher.Floor.Removed());
     }
 }

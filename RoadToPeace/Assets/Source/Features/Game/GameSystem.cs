@@ -17,14 +17,18 @@ public class GameSystem : Feature
     public GameSystem(Contexts contexts, Services services)
     {
         Add(new PlayerCreateSystem(contexts, services));
-        Add(new GameResetSystem(contexts, services));        
-        Add(new CreateBrickSystem(contexts, services));
+        Add(new GameResetSystem(contexts, services));
+
+        Add(new FloorSystem(contexts, services));
+        //Add(new CreateBrickSystem(contexts, services));
 
         Add(new ResourcesSystem(contexts, services));
 
         //Add(new ApplyPositionSystem(contexts));
 
         Add(new MovementSystem(contexts, services));
+
+        Add(new DestroySystem(contexts, services));
     }
 
 }

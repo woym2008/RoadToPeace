@@ -16,6 +16,8 @@ public class GameController : MonoBehaviour
         _gamesystem.Initialize();
 
         _gamecontext = contexts.game;
+
+        _gamecontext.isGameStart = true;
     }
 
     // Update is called once per frame
