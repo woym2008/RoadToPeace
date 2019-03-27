@@ -44,17 +44,19 @@ public class FirstCreateFloorSystem : ReactiveSystem<GameEntity>
                 0
                 );
 
-            Debug.Log("width: " + curpos);
+            //Debug.Log("width: " + curpos);
         }
     }
 
     protected override bool Filter(GameEntity entity)
     {
-        return !_contexts.game.isGameOver;
+        //return !_contexts.game.isGameOver;
+        return (_contexts.game.gameState.state == GameState.Ready);
     }
 
     protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
     {
-        return context.CreateCollector(GameMatcher.GameStart);
+        //return context.CreateCollector(GameMatcher.GameStart);
+        return context.CreateCollector(GameMatcher.GameState);
     }
 }

@@ -22,19 +22,24 @@ public static class GameComponentsLookup {
     public const int Floor = 11;
     public const int FloorSpeed = 12;
     public const int GameOver = 13;
-    public const int GameStart = 14;
-    public const int Id = 15;
-    public const int IsBrickPassed = 16;
-    public const int LastFloor = 17;
-    public const int Life = 18;
-    public const int Move = 19;
-    public const int Player = 20;
-    public const int Position = 21;
-    public const int Reset = 22;
-    public const int Timer = 23;
-    public const int View = 24;
+    public const int GameReady = 14;
+    public const int GameReadyListener = 15;
+    public const int GameStart = 16;
+    public const int GameStartListener = 17;
+    public const int GameState = 18;
+    public const int GameStateListener = 19;
+    public const int Id = 20;
+    public const int IsBrickPassed = 21;
+    public const int LastFloor = 22;
+    public const int Life = 23;
+    public const int Move = 24;
+    public const int Player = 25;
+    public const int Position = 26;
+    public const int Reset = 27;
+    public const int Timer = 28;
+    public const int View = 29;
 
-    public const int TotalComponents = 25;
+    public const int TotalComponents = 30;
 
     public static readonly string[] componentNames = {
         "Asset",
@@ -51,7 +56,12 @@ public static class GameComponentsLookup {
         "Floor",
         "FloorSpeed",
         "GameOver",
+        "GameReady",
+        "GameReadyListener",
         "GameStart",
+        "GameStartListener",
+        "GameState",
+        "GameStateListener",
         "Id",
         "IsBrickPassed",
         "LastFloor",
@@ -79,7 +89,12 @@ public static class GameComponentsLookup {
         typeof(FloorComponent),
         typeof(FloorSpeedComponent),
         typeof(GameOverComponent),
+        typeof(GameReadyComponent),
+        typeof(GameReadyListenerComponent),
         typeof(GameStartComponent),
+        typeof(GameStartListenerComponent),
+        typeof(GameStateComponent),
+        typeof(GameStateListenerComponent),
         typeof(IdComponent),
         typeof(IsBrickPassedComponent),
         typeof(LastFloorComponent),

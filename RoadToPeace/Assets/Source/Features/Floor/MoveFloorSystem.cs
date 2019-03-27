@@ -17,12 +17,14 @@ public class MoveFloorSystem : IExecuteSystem
 {
     private readonly Contexts _contexts;
     private readonly Services _services;
+    private readonly GameContext _game;
     private readonly IGroup<GameEntity> _floorgroup;
 
     public MoveFloorSystem(Contexts contexts, Services services)
     {
         _contexts = contexts;
         _services = services;
+        _game = _contexts.game;
         _floorgroup = contexts.game.GetGroup(GameMatcher.Floor);
     }
 
@@ -31,21 +33,25 @@ public class MoveFloorSystem : IExecuteSystem
         var player = _contexts.game.playerEntity;
         if(player != null && player.hasPosition)
         {
-            foreach(var floorentity in _floorgroup)
+            if(_game.hasGameState && _game.gameState.state == GameState.Running)
             {
-                if(floorentity.hasPosition)
+                foreach (var floorentity in _floorgroup)
                 {
-                    floorentity.position.position.x -= _contexts.game.floorSpeed.value * Time.deltaTime;
-
-                    if (floorentity.position.position.x < _contexts.config.floorData.overPos.x)
+                    if (floorentity.hasPosition)
                     {
-                        floorentity.isDestroyed = true;
-                        //减去一个entity 再创建一个新的
-                        Debug.Log("Destory one floor");
-                        break;
+                        floorentity.position.position.x -= _contexts.game.floorSpeed.value * Time.deltaTime;
+
+                        if (floorentity.position.position.x < _contexts.config.floorData.overPos.x)
+                        {
+                            floorentity.isDestroyed = true;
+                            //减去一个entity 再创建一个新的
+                            Debug.Log("Destory one floor");
+                            break;
+                        }
                     }
                 }
             }
+            
         }
     }
 }

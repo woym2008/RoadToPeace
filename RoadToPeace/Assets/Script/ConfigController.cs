@@ -26,6 +26,9 @@ public class ConfigController : MonoBehaviour
 
     public Transform PlayerPos;
 
+    public Transform CameraRunningPos;
+    public Transform CameraTitlePos;
+
     private void Awake()
     {
         var contexts = Contexts.sharedInstance;
@@ -42,6 +45,8 @@ public class ConfigController : MonoBehaviour
         contexts.config.ReplaceStartPlayerPosition(PlayerPos.position);
 
         contexts.config.ReplaceBrickTypeCount(BrickRes.Count);
+
+        contexts.config.ReplaceCameraPos(CameraRunningPos.position, CameraTitlePos.position);
 
         contexts.game.SetFloorSpeed(FloorSpeed);
     }

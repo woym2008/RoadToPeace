@@ -1,7 +1,7 @@
 ﻿/* ========================================================
- *	类名称：GameStartComponent
+ *	类名称：GameReadyComponent
  *	作 者：Zhangfan
- *	创建时间：2019-03-25 17:12:29
+ *	创建时间：2019-03-27 17:58:47
  *	版 本：V1.0.0
  *	描 述：
 * ========================================================*/
@@ -13,9 +13,8 @@ using System.Threading.Tasks;
 using Entitas;
 using Entitas.CodeGeneration.Attributes;
 
-[Game]
+[Game,Event(EventTarget.Self)]
 [Unique]
-[Event(EventTarget.Self)]
-public class GameStartComponent : IComponent
+public class GameReadyComponent : IComponent
 {
 }

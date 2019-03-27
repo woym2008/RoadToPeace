@@ -1,7 +1,7 @@
 ﻿/* ========================================================
- *	类名称：GameStartComponent
+ *	类名称：CameraMoveSystem
  *	作 者：Zhangfan
- *	创建时间：2019-03-25 17:12:29
+ *	创建时间：2019-03-27 16:11:23
  *	版 本：V1.0.0
  *	描 述：
 * ========================================================*/
@@ -11,11 +11,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Entitas;
-using Entitas.CodeGeneration.Attributes;
 
-[Game]
-[Unique]
-[Event(EventTarget.Self)]
-public class GameStartComponent : IComponent
+public class CameraMoveSystem : IExecuteSystem
 {
+
+    public CameraMoveSystem(Contexts contexts, Services services)
+    {
+        ;
+    }
+
+    public void Execute()
+    {
+        throw new NotImplementedException();
+    }
 }

@@ -33,9 +33,13 @@ public class GameOverSystem : ReactiveSystem<GameEntity>
 
     protected override void Execute(List<GameEntity> entities)
     {
-        if (!game.isGameOver && game.hasLife)
+        //if (!game.isGameOver && game.hasLife)
+        //{
+        //    game.isGameOver = true;
+        //}
+        if(game.hasGameState && (game.gameState.state == GameState.GameOver) && game.hasLife)
         {
-            game.isGameOver = true;
+            game.ReplaceGameState(GameState.GameOver);
         }
     }
 }

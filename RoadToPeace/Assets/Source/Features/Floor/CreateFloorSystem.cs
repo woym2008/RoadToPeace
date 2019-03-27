@@ -50,7 +50,7 @@ public class CreateFloorSystem : ReactiveSystem<GameEntity>
 
     protected override bool Filter(GameEntity entity)
     {
-        return !_contexts.game.isGameOver;
+        return _contexts.game.gameState.state == GameState.Running;
     }
 
     protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
