@@ -11,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Entitas;
+using UnityEngine;
 
 public class DestoryFloorSystem : ReactiveSystem<GameEntity>
 {
@@ -29,6 +30,8 @@ public class DestoryFloorSystem : ReactiveSystem<GameEntity>
             {
                 if(brickentity.brickParent.parent == entity)
                 {
+                    Debug.Log(brickentity);
+                    brickentity.RemoveBrickParent();
                     brickentity.isDestroyed = true;
                 }
             }
@@ -42,6 +45,7 @@ public class DestoryFloorSystem : ReactiveSystem<GameEntity>
 
     protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
     {
+        Debug.Log("On Trigger Removed");
         return context.CreateCollector(GameMatcher.Floor.Removed());
     }
 }

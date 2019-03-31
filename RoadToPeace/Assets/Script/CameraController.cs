@@ -7,6 +7,10 @@ public class CameraController : MonoBehaviour, IGameStateListener, IGameReadyLis
 {
     private Transform _transform;
 
+    public float movetime = 2.0f;
+    public float curtime = 0;
+    public Vector3 cachepos;
+
     private void Awake()
     {
         //Contexts.sharedInstance.game.CreateEntity().AddGameStateListener(this);
@@ -33,7 +37,7 @@ public class CameraController : MonoBehaviour, IGameStateListener, IGameReadyLis
         //{
         //    StartCoroutine(onCameraMove(onFinish));
         //}
-        Debug.LogError("OnGameState");
+        //Debug.LogError("OnGameState");
         if(state == GameState.Start)
         {
             //临时的 应该是当有button触发后 为 start 则 继续
@@ -52,11 +56,24 @@ public class CameraController : MonoBehaviour, IGameStateListener, IGameReadyLis
     {
         Vector3 target = Contexts.sharedInstance.config.cameraPos.runningpos;
 
-        while (target.x > _transform.position.x)
+        cachepos = Contexts.sharedInstance.config.cameraPos.titlepos;
+
+        //while (target.x > _transform.position.x)
+        //{
+        //    _transform.position = Vector3.Lerp(_transform.position, target, Time.deltaTime);
+        //    yield return 0;
+        //}
+        curtime = 0;
+
+        while (curtime < movetime)
         {
-            _transform.position = Vector3.Lerp(_transform.position, target, Time.deltaTime);
+            _transform.position = Vector3.Lerp(cachepos, target, curtime/movetime);
+
+            curtime += Time.deltaTime;
+
             yield return 0;
         }
+
         _transform.position = target;
 
         if(callback != null)

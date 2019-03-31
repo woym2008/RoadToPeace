@@ -11,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Entitas;
+using UnityEngine;
 
 public class DestroySystem : IExecuteSystem
 {
@@ -27,6 +28,7 @@ public class DestroySystem : IExecuteSystem
     {
         foreach (var e in _gameGroup.GetEntities(_gameBuffer))
         {
+            Debug.Log(e);
             e.Destroy();
         }
     }
