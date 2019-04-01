@@ -15,9 +15,16 @@ using Entitas;
 public class UpdateDragSystem : IExecuteSystem
 {
     private readonly Contexts _contexts;
+    private IGroup<GameEntity> _selectFloor;
+    private IGroup<GameEntity> _allFloor;
+
     public UpdateDragSystem(Contexts contexts, Services services)
     {
         _contexts = contexts;
+
+        _allFloor = contexts.game.GetGroup(GameMatcher.Floor);
+
+        _selectFloor = contexts.game.GetGroup(GameMatcher.DragFloor);
     }
 
     public void Execute()
@@ -29,6 +36,25 @@ public class UpdateDragSystem : IExecuteSystem
             {
                 //变换到世界坐标
                 //_contexts.input.pointerCurrentPos.value;
+                if(_selectFloor.count == 0)
+                {
+                    var pos = _contexts.input.pointerHoldingStartPos;
+                    //得写一个camera 的 component 能获取camera
+
+                    //
+                    foreach(var floor in _allFloor)
+                    {
+                        if(floor.hasPosition)
+                        {
+                            //检查点击位置 和 floor位置 如果ok 则设置为drag
+                            //floor.isDragFloor = true;
+                        }
+                    }
+                }
+                else
+                {
+                    //有正在拉着的floor 则处理
+                }
             }
         }
     }

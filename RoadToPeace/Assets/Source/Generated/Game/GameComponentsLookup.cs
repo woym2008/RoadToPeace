@@ -19,28 +19,29 @@ public static class GameComponentsLookup {
     public const int Destroyed = 8;
     public const int DestroyedListener = 9;
     public const int Drag = 10;
-    public const int Floor = 11;
-    public const int FloorSpeed = 12;
-    public const int GameOver = 13;
-    public const int GameReady = 14;
-    public const int GameReadyListener = 15;
-    public const int GameStart = 16;
-    public const int GameStartListener = 17;
-    public const int GameState = 18;
-    public const int GameStateListener = 19;
-    public const int Id = 20;
-    public const int IsBrickPassed = 21;
-    public const int LastFloor = 22;
-    public const int Life = 23;
-    public const int Move = 24;
-    public const int Player = 25;
-    public const int PlayerReady = 26;
-    public const int Position = 27;
-    public const int Reset = 28;
-    public const int Timer = 29;
-    public const int View = 30;
+    public const int DragFloor = 11;
+    public const int Floor = 12;
+    public const int FloorSpeed = 13;
+    public const int GameOver = 14;
+    public const int GameReady = 15;
+    public const int GameReadyListener = 16;
+    public const int GameStart = 17;
+    public const int GameStartListener = 18;
+    public const int GameState = 19;
+    public const int GameStateListener = 20;
+    public const int Id = 21;
+    public const int IsBrickPassed = 22;
+    public const int LastFloor = 23;
+    public const int Life = 24;
+    public const int Move = 25;
+    public const int Player = 26;
+    public const int PlayerReady = 27;
+    public const int Position = 28;
+    public const int Reset = 29;
+    public const int Timer = 30;
+    public const int View = 31;
 
-    public const int TotalComponents = 31;
+    public const int TotalComponents = 32;
 
     public static readonly string[] componentNames = {
         "Asset",
@@ -54,6 +55,7 @@ public static class GameComponentsLookup {
         "Destroyed",
         "DestroyedListener",
         "Drag",
+        "DragFloor",
         "Floor",
         "FloorSpeed",
         "GameOver",
@@ -88,6 +90,7 @@ public static class GameComponentsLookup {
         typeof(DestroyedComponent),
         typeof(DestroyedListenerComponent),
         typeof(DragComponent),
+        typeof(DragFloorComponent),
         typeof(FloorComponent),
         typeof(FloorSpeedComponent),
         typeof(GameOverComponent),
