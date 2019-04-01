@@ -12,7 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public class UnityView : MonoBehaviour, IView
+public class UnityView : MonoBehaviour, IView, IDestroyedListener
 {
     private GameObject _gameObject;
     private GameEntity _entity;
@@ -21,8 +21,14 @@ public class UnityView : MonoBehaviour, IView
     {
         _gameObject = this.gameObject;
         _entity = entity;
+        _entity.AddDestroyedListener(this);
         //_transform = this.transform;
         //Id = entity.
+    }
+
+    public void OnDestroyed(GameEntity entity)
+    {
+        Destroy(_gameObject);
     }
 
     public int Id { get; set; }

@@ -22,7 +22,7 @@ public class FloorSystem : Feature
 
         //Add(new DragFloorSystem(contexts, services));
         Add(new MoveFloorSystem(contexts, services));
-        //Add(new DestoryFloorSystem(contexts, services));
+        Add(new DestoryFloorSystem(contexts, services));
         Add(new UpdateBrickSystem(contexts, services));
     }
 }

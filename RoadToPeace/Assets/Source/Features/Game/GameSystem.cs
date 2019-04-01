@@ -28,9 +28,11 @@ public class GameSystem : Feature
 
         Add(new MovementSystem(contexts, services));
 
-        Add(new DestroySystem(contexts, services));
-
+        Add(new PlayerFirstMoveSystem(contexts, services));
+        
         Add(new GameEventSystems(contexts));
+
+        Add(new DestroySystem(contexts, services));
     }
 
 }

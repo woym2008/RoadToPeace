@@ -34,12 +34,13 @@ public static class GameComponentsLookup {
     public const int Life = 23;
     public const int Move = 24;
     public const int Player = 25;
-    public const int Position = 26;
-    public const int Reset = 27;
-    public const int Timer = 28;
-    public const int View = 29;
+    public const int PlayerReady = 26;
+    public const int Position = 27;
+    public const int Reset = 28;
+    public const int Timer = 29;
+    public const int View = 30;
 
-    public const int TotalComponents = 30;
+    public const int TotalComponents = 31;
 
     public static readonly string[] componentNames = {
         "Asset",
@@ -68,6 +69,7 @@ public static class GameComponentsLookup {
         "Life",
         "Move",
         "Player",
+        "PlayerReady",
         "Position",
         "Reset",
         "Timer",
@@ -101,6 +103,7 @@ public static class GameComponentsLookup {
         typeof(LifeComponent),
         typeof(MoveComponent),
         typeof(PlayerComponent),
+        typeof(PlayerReady),
         typeof(PositionComponent),
         typeof(ResetComponent),
         typeof(TimerComponent),

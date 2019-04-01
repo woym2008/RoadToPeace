@@ -25,6 +25,7 @@ public class ConfigController : MonoBehaviour
 
 
     public Transform PlayerPos;
+    public Transform PlayerRunPos;
 
     public Transform CameraRunningPos;
     public Transform CameraTitlePos;
@@ -43,6 +44,8 @@ public class ConfigController : MonoBehaviour
         contexts.config.ReplaceBrickTypeList(BrickRes);
 
         contexts.config.ReplaceStartPlayerPosition(PlayerPos.position);
+
+        contexts.config.ReplaceRunPlayerPosition(PlayerRunPos.position);
 
         contexts.config.ReplaceBrickTypeCount(BrickRes.Count);
 

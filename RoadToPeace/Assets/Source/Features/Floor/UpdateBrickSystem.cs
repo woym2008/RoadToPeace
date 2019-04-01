@@ -24,11 +24,14 @@ public class UpdateBrickSystem : IExecuteSystem
     {
         foreach(var entity in _entityGroup)
         {
-            entity.position.position.x = entity.brickParent.parent.position.position.x;
-            if(entity.hasView)
+            if(entity.hasPosition && entity.brickParent.parent.hasPosition)
             {
-                entity.view.Value.Position = entity.position.position;
-            }            
+                entity.position.position.x = entity.brickParent.parent.position.position.x;
+                if (entity.hasView)
+                {
+                    entity.view.Value.Position = entity.position.position;
+                }
+            }                        
         }
     }
 }

@@ -31,7 +31,6 @@ public class DestoryFloorSystem : ReactiveSystem<GameEntity>
                 if(brickentity.brickParent.parent == entity)
                 {
                     Debug.Log(brickentity);
-                    brickentity.RemoveBrickParent();
                     brickentity.isDestroyed = true;
                 }
             }
