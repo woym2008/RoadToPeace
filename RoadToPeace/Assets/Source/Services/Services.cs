@@ -25,7 +25,7 @@ public class Services
 
     public Services(Contexts contexts)
     {
-        InputService = new UnityInputService();
+        InputService = new UnityInputService(contexts);
 
         ViewService = new UnityViewService(contexts);
 
