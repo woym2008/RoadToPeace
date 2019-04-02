@@ -21,12 +21,15 @@ public class GameSystem : Feature
 
         Add(new FloorSystem(contexts, services));
         //Add(new CreateBrickSystem(contexts, services));
+        Add(new InputSystem(contexts, services));
 
         Add(new ResourcesSystem(contexts, services));
 
         //Add(new ApplyPositionSystem(contexts));
 
         Add(new MovementSystem(contexts, services));
+
+        Add(new UpdateDragSystem(contexts, services));
 
         Add(new PlayerFirstMoveSystem(contexts, services));
         

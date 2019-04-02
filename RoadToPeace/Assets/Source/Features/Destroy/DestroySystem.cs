@@ -28,7 +28,7 @@ public class DestroySystem : IExecuteSystem
     {
         foreach (var e in _gameGroup.GetEntities(_gameBuffer))
         {
-            Debug.Log(e);
+            //Debug.Log(e);
             e.Destroy();
         }
     }

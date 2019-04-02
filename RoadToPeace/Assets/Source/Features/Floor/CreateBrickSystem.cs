@@ -48,6 +48,7 @@ public class CreateBrickSystem : ReactiveSystem<GameEntity>
                 entity.position.position.y + _contexts.config.floorData.floorHeight,
                 0
                 ));
+            brick_up.ReplaceBrickYOffset(_contexts.config.floorData.floorHeight);
 
             brick_mid.isBrick = true;
             brick_mid.isIsBrickPassed = (passindex == 1) ? true : false;
@@ -59,6 +60,7 @@ public class CreateBrickSystem : ReactiveSystem<GameEntity>
                 entity.position.position.y,
                 0
                 ));
+            brick_mid.ReplaceBrickYOffset(0);
 
             brick_down.isBrick = true;
             brick_down.isIsBrickPassed = (passindex == 2) ? true : false;
@@ -70,6 +72,8 @@ public class CreateBrickSystem : ReactiveSystem<GameEntity>
                 entity.position.position.y - _contexts.config.floorData.floorHeight,
                 0
                 ));
+
+            brick_down.ReplaceBrickYOffset(-_contexts.config.floorData.floorHeight);
             //brick_up.addbr
 
             //Random.Range(0, count);

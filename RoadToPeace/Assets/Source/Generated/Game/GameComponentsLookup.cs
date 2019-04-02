@@ -14,34 +14,37 @@ public static class GameComponentsLookup {
     public const int BrickData = 3;
     public const int BrickParent = 4;
     public const int BrickType = 5;
-    public const int Collision = 6;
-    public const int DestoryOnReset = 7;
-    public const int Destroyed = 8;
-    public const int DestroyedListener = 9;
-    public const int Drag = 10;
-    public const int DragFloor = 11;
-    public const int Floor = 12;
-    public const int FloorSpeed = 13;
-    public const int GameOver = 14;
-    public const int GameReady = 15;
-    public const int GameReadyListener = 16;
-    public const int GameStart = 17;
-    public const int GameStartListener = 18;
-    public const int GameState = 19;
-    public const int GameStateListener = 20;
-    public const int Id = 21;
-    public const int IsBrickPassed = 22;
-    public const int LastFloor = 23;
-    public const int Life = 24;
-    public const int Move = 25;
-    public const int Player = 26;
-    public const int PlayerReady = 27;
-    public const int Position = 28;
-    public const int Reset = 29;
-    public const int Timer = 30;
-    public const int View = 31;
+    public const int BrickYOffset = 6;
+    public const int Collision = 7;
+    public const int DestoryOnReset = 8;
+    public const int Destroyed = 9;
+    public const int DestroyedListener = 10;
+    public const int Drag = 11;
+    public const int DragFloor = 12;
+    public const int DragOffset = 13;
+    public const int Floor = 14;
+    public const int FloorSpeed = 15;
+    public const int GameCamera = 16;
+    public const int GameOver = 17;
+    public const int GameReady = 18;
+    public const int GameReadyListener = 19;
+    public const int GameStart = 20;
+    public const int GameStartListener = 21;
+    public const int GameState = 22;
+    public const int GameStateListener = 23;
+    public const int Id = 24;
+    public const int IsBrickPassed = 25;
+    public const int LastFloor = 26;
+    public const int Life = 27;
+    public const int Move = 28;
+    public const int Player = 29;
+    public const int PlayerReady = 30;
+    public const int Position = 31;
+    public const int Reset = 32;
+    public const int Timer = 33;
+    public const int View = 34;
 
-    public const int TotalComponents = 32;
+    public const int TotalComponents = 35;
 
     public static readonly string[] componentNames = {
         "Asset",
@@ -50,14 +53,17 @@ public static class GameComponentsLookup {
         "BrickData",
         "BrickParent",
         "BrickType",
+        "BrickYOffset",
         "Collision",
         "DestoryOnReset",
         "Destroyed",
         "DestroyedListener",
         "Drag",
         "DragFloor",
+        "DragOffset",
         "Floor",
         "FloorSpeed",
+        "GameCamera",
         "GameOver",
         "GameReady",
         "GameReadyListener",
@@ -85,14 +91,17 @@ public static class GameComponentsLookup {
         typeof(BrickDataComponent),
         typeof(BrickParentComponent),
         typeof(BrickTypeComponent),
+        typeof(BrickYOffsetComponent),
         typeof(CollisionComponent),
         typeof(DestoryOnResetComponent),
         typeof(DestroyedComponent),
         typeof(DestroyedListenerComponent),
         typeof(DragComponent),
         typeof(DragFloorComponent),
+        typeof(DragOffsetComponent),
         typeof(FloorComponent),
         typeof(FloorSpeedComponent),
+        typeof(GameCameraComponent),
         typeof(GameOverComponent),
         typeof(GameReadyComponent),
         typeof(GameReadyListenerComponent),

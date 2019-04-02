@@ -22,7 +22,9 @@ public class CameraController : MonoBehaviour, IGameStateListener, IGameReadyLis
     // Start is called before the first frame update
     void Start()
     {
-        Contexts.sharedInstance.game.gameStateEntity.AddGameStateListener(this);
+        var gamecontext = Contexts.sharedInstance.game;
+        gamecontext.gameStateEntity.AddGameStateListener(this);
+        gamecontext.ReplaceGameCamera(this.gameObject.GetComponent<Camera>());
     }
 
     // Update is called once per frame

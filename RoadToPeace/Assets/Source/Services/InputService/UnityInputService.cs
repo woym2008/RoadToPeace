@@ -66,6 +66,7 @@ public class UnityInputService : Service, IInputService
 
         if (Input.GetMouseButton(0))
         {
+            //Debug.LogWarning("GetMouseButton");
             if (!_isHoldingLeft)
                 _leftstartpos = Input.mousePosition;
             _leftcurrentpos = Input.mousePosition;
