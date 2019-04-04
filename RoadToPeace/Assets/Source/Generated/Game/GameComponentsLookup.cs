@@ -32,19 +32,20 @@ public static class GameComponentsLookup {
     public const int GameStartListener = 21;
     public const int GameState = 22;
     public const int GameStateListener = 23;
-    public const int Id = 24;
-    public const int IsBrickPassed = 25;
-    public const int LastFloor = 26;
-    public const int Life = 27;
-    public const int Move = 28;
-    public const int Player = 29;
-    public const int PlayerReady = 30;
-    public const int Position = 31;
-    public const int Reset = 32;
-    public const int Timer = 33;
-    public const int View = 34;
+    public const int GridID = 24;
+    public const int Id = 25;
+    public const int IsBrickPassed = 26;
+    public const int LastFloor = 27;
+    public const int Life = 28;
+    public const int Move = 29;
+    public const int Player = 30;
+    public const int PlayerReady = 31;
+    public const int Position = 32;
+    public const int Reset = 33;
+    public const int Timer = 34;
+    public const int View = 35;
 
-    public const int TotalComponents = 35;
+    public const int TotalComponents = 36;
 
     public static readonly string[] componentNames = {
         "Asset",
@@ -71,6 +72,7 @@ public static class GameComponentsLookup {
         "GameStartListener",
         "GameState",
         "GameStateListener",
+        "GridID",
         "Id",
         "IsBrickPassed",
         "LastFloor",
@@ -109,6 +111,7 @@ public static class GameComponentsLookup {
         typeof(GameStartListenerComponent),
         typeof(GameStateComponent),
         typeof(GameStateListenerComponent),
+        typeof(GridID),
         typeof(IdComponent),
         typeof(IsBrickPassedComponent),
         typeof(LastFloorComponent),

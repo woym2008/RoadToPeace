@@ -26,7 +26,7 @@ public class UpdateDragSystem : IExecuteSystem
 
         _allFloor = contexts.game.GetGroup(GameMatcher.Floor);
 
-        _selectFloor = contexts.game.GetGroup(GameMatcher.DragFloor);
+        _selectFloor = contexts.game.GetGroup(GameMatcher.Drag);
     }
 
     public void Execute()
@@ -49,76 +49,65 @@ public class UpdateDragSystem : IExecuteSystem
                     var worldcurpos = camera.ScreenToWorldPoint(curpos);
 
                     var floorwidth = _contexts.config.floorData.floorWidth;
+                var floorheight = _contexts.config.floorData.floorHeight;
+                var halffloorheight = floorheight * 0.5f;
 
-                    if (_selectFloor != null && _selectFloor.count > 0)
+                foreach (var floor in _allFloor)
+                {
+                    if (floor.hasPosition)
                     {
-                        //var floorwidth = _contexts.config.floorData.floorWidth;
-                        foreach (var select in _selectFloor)
+                        if (!floor.hasDrag || !floor.drag.isdrag)
                         {
-                            if ((select.position.position.x - 0.5f * floorwidth) >= worldcurpos.x ||
-                                   (select.position.position.x + 0.5f * floorwidth) <= worldcurpos.x)
+                            if ((floor.position.position.x - 0.5f * floorwidth) < worldpos.x &&
+                           (floor.position.position.x + 0.5f * floorwidth) > worldpos.x)
                             {
-                                //select.isDragFloor = false;
-                                //select.RemoveDragOffset();
+                                //floor.ReplaceDrag(true);
+                                floor.ReplaceDrag(true, 0);
+                                floor.ReplaceDragOffset(worldpos - floor.position.position);
+                            }
+                        }
+
+                        else
+                        {
+                            if ((floor.position.position.x - 0.5f * floorwidth) >= worldcurpos.x ||
+                                (floor.position.position.x + 0.5f * floorwidth) <= worldcurpos.x)
+                            {
+                                //floor.ReplaceDrag(false);
+                                floor.RemoveDrag();
+                                floor.RemoveDragOffset();
                             }
                             else
                             {
-                                var newy = worldcurpos.y - select.dragOffset.offset.y;
+                                var newy = worldcurpos.y - floor.dragOffset.offset.y;
                                 //floor.ReplacePosition(new Vector3(
                                 //    floor.position.position.x,
                                 //    newy,
                                 //    floor.position.position.z
                                 //    ));
-                                //select.position.position.y = newy;
-                            }
-                        }
-                    }
-                //_offset = worldpos - 
-                //
-                foreach (var floor in _allFloor)
-                    {
-                        if(floor.hasPosition)
-                        {
-                            if(!floor.isDragFloor)
-                            {
-                                if ((floor.position.position.x - 0.5f * floorwidth) < worldpos.x &&
-                               (floor.position.position.x + 0.5f * floorwidth) > worldpos.x)
+                                var dis = newy - floor.position.position.y;
+                                if(dis > halffloorheight && floor.gridID.id >= 1)
                                 {
-                                    floor.isDragFloor = true;
-                                    floor.ReplaceDragOffset(worldpos - floor.position.position);
+                                    //向上
+                                    floor.position.position.y = floor.position.position.y + floorheight;
+                                    floor.gridID.id--;
+
                                 }
+                                else if(dis < -halffloorheight && floor.gridID.id <= 1)
+                                {
+                                    //向下
+                                    floor.position.position.y = floor.position.position.y - floorheight;
+                                    floor.gridID.id++;
+                                }
+
+
+                                //floor.position.position.y = newy;
                             }
-                            //else
-                            //{
-                            //    if ((floor.position.position.x - 0.5f * floorwidth) >= worldpos.x ||
-                            //   (floor.position.position.x + 0.5f * floorwidth) <= worldpos.x)
-                            //    {
-                            //        floor.isDragFloor = false;
-                            //        floor.RemoveDragOffset();
-                            //    }
-                            //    else
-                            //    {
-                            //        var newy = worldpos.y - floor.dragOffset.offset.y;
-                            //        //floor.ReplacePosition(new Vector3(
-                            //        //    floor.position.position.x,
-                            //        //    newy,
-                            //        //    floor.position.position.z
-                            //        //    ));
-                            //        floor.position.position.y = newy;
-                            //    }
-                            //}
-                            
-                            //检查点击位置 和 floor位置 如果ok 则设置为drag
-                            //floor.isDragFloor = true;
                         }
+
+                        //检查点击位置 和 floor位置 如果ok 则设置为drag
+                        //floor.isDragFloor = true;
                     }
-
-                //}
-                //else
-                //{
-                //    //有正在拉着的floor 则处理
-                //}
-
+                }
             }
         }
     }

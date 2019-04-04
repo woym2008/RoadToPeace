@@ -44,10 +44,10 @@ public class MoveFloorSystem : IExecuteSystem
                 {
                     if(_floorgroup.count != testnum)
                     {
-                        Debug.LogError("push one entity");
+                        Debug.Log("push one entity");
                     }
                     //if (floorentity.hasPosition)
-                    if(floorentity.isDrag == true)
+                    //if(floorentity.isDrag == true)
                     {
                         floorentity.position.position.x -= _contexts.game.floorSpeed.value * Time.fixedDeltaTime;
 
@@ -57,17 +57,17 @@ public class MoveFloorSystem : IExecuteSystem
                             floorentity.isDestroyed = true;
                             //减去一个entity 再创建一个新的
                             Debug.Log("Destory one floor");
-                            break;                            
+                            continue;                            
                         }
 
-                        floorentity.isDrag = false;
+                        //floorentity.isDrag = false;
                     }
                 }
 
-                foreach (var floorentity in listtest)
-                {
-                    floorentity.isDrag = true;
-                }
+                //foreach (var floorentity in listtest)
+                //{
+                    //floorentity.isDrag = true;
+                //}
             }
             
         }

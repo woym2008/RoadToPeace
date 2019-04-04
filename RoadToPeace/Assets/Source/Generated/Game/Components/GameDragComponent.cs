@@ -8,25 +8,27 @@
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    static readonly DragComponent dragComponent = new DragComponent();
+    public DragComponent drag { get { return (DragComponent)GetComponent(GameComponentsLookup.Drag); } }
+    public bool hasDrag { get { return HasComponent(GameComponentsLookup.Drag); } }
 
-    public bool isDrag {
-        get { return HasComponent(GameComponentsLookup.Drag); }
-        set {
-            if (value != isDrag) {
-                var index = GameComponentsLookup.Drag;
-                if (value) {
-                    var componentPool = GetComponentPool(index);
-                    var component = componentPool.Count > 0
-                            ? componentPool.Pop()
-                            : dragComponent;
+    public void AddDrag(bool newIsdrag, int newDragID) {
+        var index = GameComponentsLookup.Drag;
+        var component = (DragComponent)CreateComponent(index, typeof(DragComponent));
+        component.isdrag = newIsdrag;
+        component.dragID = newDragID;
+        AddComponent(index, component);
+    }
 
-                    AddComponent(index, component);
-                } else {
-                    RemoveComponent(index);
-                }
-            }
-        }
+    public void ReplaceDrag(bool newIsdrag, int newDragID) {
+        var index = GameComponentsLookup.Drag;
+        var component = (DragComponent)CreateComponent(index, typeof(DragComponent));
+        component.isdrag = newIsdrag;
+        component.dragID = newDragID;
+        ReplaceComponent(index, component);
+    }
+
+    public void RemoveDrag() {
+        RemoveComponent(GameComponentsLookup.Drag);
     }
 }
 

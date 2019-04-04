@@ -20,9 +20,9 @@ public class InitPointerSystem : IInitializeSystem
 
     void AddCommon(InputEntity e)
     {
-        //e.AddPointerHoldingTime(0f);
-        //e.isPointerStartedHolding = false;
-        //e.isPointerHolding = false;
-        //e.isPointerReleased = false;
+        e.AddPointerHoldingTime(0f);
+        e.isPointerStartedHolding = false;
+        e.isPointerHolding = false;
+        e.isPointerReleased = false;
     }
 }

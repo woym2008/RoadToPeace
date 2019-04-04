@@ -46,6 +46,7 @@ public class CreateFloorSystem : ReactiveSystem<GameEntity>
             poslast.y,
             poslast.z
             ));
+        entity.ReplaceGridID(1);
     }
 
     protected override bool Filter(GameEntity entity)

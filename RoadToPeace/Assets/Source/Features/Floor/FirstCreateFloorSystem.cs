@@ -30,8 +30,8 @@ public class FirstCreateFloorSystem : ReactiveSystem<GameEntity>
         {
             var floorEntity = _contexts.game.CreateEntity();
             floorEntity.isFloor = true;
-            floorEntity.isDrag = true;
             floorEntity.ReplacePosition(curpos);
+            floorEntity.ReplaceGridID(1);
 
             if ( i == (_contexts.config.floorData.numFloor - 1) )
             {

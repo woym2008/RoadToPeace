@@ -14,4 +14,6 @@ using Entitas;
 
 public class DragComponent : IComponent
 {
+    public bool isdrag;
+    public int dragID;
 }
