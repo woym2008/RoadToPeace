@@ -69,7 +69,7 @@ public class UpdateDragSystem : IExecuteSystem
                                 //    newy,
                                 //    floor.position.position.z
                                 //    ));
-                                select.position.position.y = newy;
+                                //select.position.position.y = newy;
                             }
                         }
                     }

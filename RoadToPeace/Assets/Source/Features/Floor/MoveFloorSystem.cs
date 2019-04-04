@@ -20,6 +20,8 @@ public class MoveFloorSystem : IExecuteSystem
     private readonly GameContext _game;
     private readonly IGroup<GameEntity> _floorgroup;
 
+    List<GameEntity> listtest = new List<GameEntity>();
+
     public MoveFloorSystem(Contexts contexts, Services services)
     {
         _contexts = contexts;
@@ -35,20 +37,36 @@ public class MoveFloorSystem : IExecuteSystem
         {
             if(_game.hasGameState && _game.gameState.state == GameState.Running)
             {
-                foreach (var floorentity in _floorgroup)
+                var floors = _floorgroup.GetEntities();
+                _floorgroup.GetEntities(listtest);
+                int testnum = _floorgroup.count;
+                foreach (var floorentity in listtest)
                 {
-                    if (floorentity.hasPosition)
+                    if(_floorgroup.count != testnum)
                     {
-                        floorentity.position.position.x -= _contexts.game.floorSpeed.value * Time.deltaTime;
+                        Debug.LogError("push one entity");
+                    }
+                    //if (floorentity.hasPosition)
+                    if(floorentity.isDrag == true)
+                    {
+                        floorentity.position.position.x -= _contexts.game.floorSpeed.value * Time.fixedDeltaTime;
 
                         if (floorentity.position.position.x < _contexts.config.floorData.overPos.x)
                         {
+                            floorentity.isFloor = false;
                             floorentity.isDestroyed = true;
                             //减去一个entity 再创建一个新的
                             Debug.Log("Destory one floor");
-                            break;
+                            break;                            
                         }
+
+                        floorentity.isDrag = false;
                     }
+                }
+
+                foreach (var floorentity in listtest)
+                {
+                    floorentity.isDrag = true;
                 }
             }
             
