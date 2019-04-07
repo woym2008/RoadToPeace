@@ -34,6 +34,7 @@ public class CreateBrickSystem : ReactiveSystem<GameEntity>
             var brick_up = _contexts.game.CreateEntity();
             var brick_mid = _contexts.game.CreateEntity();
             var brick_down = _contexts.game.CreateEntity();
+            var brick_earth = _contexts.game.CreateEntity();
 
             int passindex = Random.Range(0, 3);
 
@@ -41,7 +42,7 @@ public class CreateBrickSystem : ReactiveSystem<GameEntity>
             brick_up.isBrick = true;
             brick_up.isIsBrickPassed = (passindex == 0) ? true : false;
             suffix = (passindex == 0) ? "_Trap" : "";
-            brick_up.ReplaceAsset(_contexts.config.brickTypeList.typeList[randType] + suffix);
+            brick_up.ReplaceAsset(_contexts.config.brickTypeList.typeList[randType] + suffix, 1);
             brick_up.ReplaceBrickParent(entity);
             brick_up.ReplacePosition(new Vector3(
                 entity.position.position.x,
@@ -53,7 +54,7 @@ public class CreateBrickSystem : ReactiveSystem<GameEntity>
             brick_mid.isBrick = true;
             brick_mid.isIsBrickPassed = (passindex == 1) ? true : false;
             suffix = (passindex == 1) ? "_Trap" : "";
-            brick_mid.ReplaceAsset(_contexts.config.brickTypeList.typeList[randType] + suffix);
+            brick_mid.ReplaceAsset(_contexts.config.brickTypeList.typeList[randType] + suffix, 2);
             brick_mid.ReplaceBrickParent(entity);
             brick_mid.ReplacePosition(new Vector3(
                 entity.position.position.x,
@@ -65,16 +66,28 @@ public class CreateBrickSystem : ReactiveSystem<GameEntity>
             brick_down.isBrick = true;
             brick_down.isIsBrickPassed = (passindex == 2) ? true : false;
             suffix = (passindex == 1) ? "_Trap" : "";
-            brick_down.ReplaceAsset(_contexts.config.brickTypeList.typeList[randType] + suffix);
+            brick_down.ReplaceAsset(_contexts.config.brickTypeList.typeList[randType] + suffix, 3);
             brick_down.ReplaceBrickParent(entity);
             brick_down.ReplacePosition(new Vector3(
                 entity.position.position.x,
                 entity.position.position.y - _contexts.config.floorData.floorHeight,
                 0
                 ));
-
             brick_down.ReplaceBrickYOffset(-_contexts.config.floorData.floorHeight);
+
             //brick_up.addbr
+            brick_earth.isBrick = true;
+            //brick_earth.isIsBrickPassed = (passindex == 2) ? true : false;
+            suffix = "_Soil";
+            brick_earth.ReplaceAsset(_contexts.config.brickTypeList.typeList[randType] + suffix, 4);
+            brick_earth.ReplaceBrickParent(entity);
+            brick_earth.ReplacePosition(new Vector3(
+                entity.position.position.x,
+                entity.position.position.y - _contexts.config.floorData.floorHeight * 2.0f,
+                0
+                ));
+
+            brick_earth.ReplaceBrickYOffset(-_contexts.config.floorData.floorHeight * 2.0f);
 
             //Random.Range(0, count);
 

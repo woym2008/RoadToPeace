@@ -8,17 +8,19 @@
 //------------------------------------------------------------------------------
 public static class InputComponentsLookup {
 
-    public const int LeftSidePointer = 0;
-    public const int PointerCurrentPos = 1;
-    public const int PointerHolding = 2;
-    public const int PointerHoldingStartPos = 3;
-    public const int PointerHoldingTime = 4;
-    public const int PointerReleased = 5;
-    public const int PointerStartedHolding = 6;
+    public const int InputDatas = 0;
+    public const int LeftSidePointer = 1;
+    public const int PointerCurrentPos = 2;
+    public const int PointerHolding = 3;
+    public const int PointerHoldingStartPos = 4;
+    public const int PointerHoldingTime = 5;
+    public const int PointerReleased = 6;
+    public const int PointerStartedHolding = 7;
 
-    public const int TotalComponents = 7;
+    public const int TotalComponents = 8;
 
     public static readonly string[] componentNames = {
+        "InputDatas",
         "LeftSidePointer",
         "PointerCurrentPos",
         "PointerHolding",
@@ -29,6 +31,7 @@ public static class InputComponentsLookup {
     };
 
     public static readonly System.Type[] componentTypes = {
+        typeof(InputDatasComponent),
         typeof(LeftSidePointerComponent),
         typeof(PointerCurrentPosComponent),
         typeof(PointerHoldingComponent),

@@ -26,7 +26,7 @@ public class UnityViewService : Service, IViewService
         throw new NotImplementedException();
     }
 
-    public void LoadAsset(Contexts contexts, GameEntity entity, string assetName)
+    public void LoadAsset(Contexts contexts, GameEntity entity, string assetName, int sortid = 0)
     {
         var viewObject = GameObject.Instantiate(Resources.Load<GameObject>(string.Format("Prefabs/{0}", assetName)), _root);
         if (viewObject == null)
@@ -41,6 +41,7 @@ public class UnityViewService : Service, IViewService
             {
                 view.Position = entity.position.position;
             }
+            view.SortID = sortid;
         }
 
         //viewObject.GetComponents(_eventListenerBuffer);

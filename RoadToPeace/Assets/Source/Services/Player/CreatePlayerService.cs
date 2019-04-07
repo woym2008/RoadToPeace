@@ -26,7 +26,7 @@ public class CreatePlayerService : Service
 
         e.isPlayer = true;
         e.AddId(id);
-        e.AddAsset("Player");
+        e.AddAsset("Player",10);
         e.AddPosition(position);
     }
 }

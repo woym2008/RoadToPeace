@@ -36,5 +36,7 @@ public class UpdatePointerSystem : IExecuteSystem
         left.ReplacePointerHoldingTime(_inputService.HoldingTimeLeft());
         left.ReplacePointerHoldingStartPos(_inputService.LeftStartHoldingPos());
         left.ReplacePointerCurrentPos(_inputService.LeftPos());
+
+        left.ReplaceInputDatas(_inputService.GetInputDatas());
     }
 }

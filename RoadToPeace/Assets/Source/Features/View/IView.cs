@@ -19,6 +19,7 @@ public interface IView
     int Id { get; set; }
     Vector2 Position { get; set; }
     Transform Transform { get; }
+    int SortID { set; }
 
     void InitializeView(Contexts contexts, GameEntity entity);
 }

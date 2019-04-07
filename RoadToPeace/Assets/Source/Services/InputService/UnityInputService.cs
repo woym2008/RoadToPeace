@@ -12,6 +12,15 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
+public class InputData
+{
+    public int fingerindex;
+    public Vector3 startpos;
+    public Vector3 curpos;
+    public bool isHolding;
+    public bool isPressed;
+}
+
 public class UnityInputService : Service, IInputService
 {
     private float _holdingTimeLeft;
@@ -21,6 +30,8 @@ public class UnityInputService : Service, IInputService
 
     private Vector2 _leftstartpos;
     private Vector2 _leftcurrentpos;
+
+    private List<InputData> _InputDatas = new List<InputData>();
 
     public UnityInputService(Contexts contexts)
         : base(contexts)
@@ -58,6 +69,16 @@ public class UnityInputService : Service, IInputService
         return _leftstartpos;
     }
 
+    public InputData GetInputData(int index)
+    {
+        return FindInputData(index);
+    }
+
+    public InputData[] GetInputDatas()
+    {
+        return _InputDatas.ToArray();
+    }
+
     public void Update(float delta)
     {
         var hitCounter = 0;
@@ -67,12 +88,58 @@ public class UnityInputService : Service, IInputService
         if (Input.GetMouseButton(0))
         {
             //Debug.LogWarning("GetMouseButton");
-            if (!_isHoldingLeft)
-                _leftstartpos = Input.mousePosition;
-            _leftcurrentpos = Input.mousePosition;
+            //if (!_isHoldingLeft)
+            //    _leftstartpos = Input.mousePosition;
+            //_leftcurrentpos = Input.mousePosition;
+
+            var data = FindInputData(0);
+            if (data == null)
+            {
+                data = new InputData();
+                data.startpos = Input.mousePosition;
+                data.curpos = Input.mousePosition;
+                data.fingerindex = 0;
+                data.isHolding = false;
+                data.isPressed = true;
+                AddInputData(data);
+            }
+            else
+            {
+                data.curpos = Input.mousePosition;
+                data.isHolding = true;
+            }
+
             hitCounter++;
         }
 
+        #endregion
+
+        #region Touch
+        if (Input.touches.Length > 0)
+        {
+            foreach (var touch in Input.touches)
+            {
+                var data = FindInputData(touch.fingerId);
+                if(data == null)
+                {
+                    data = new InputData();
+                    data.startpos = touch.position;
+                    data.curpos = touch.position;
+                    data.fingerindex = touch.fingerId;
+                    data.isHolding = false;
+                    data.isPressed = true;
+                    AddInputData(data);
+                }
+                else
+                {
+                    data.curpos = touch.position;
+                    data.isHolding = true;
+                }
+
+                hitCounter++;
+            }
+            //Input.touches[0].fingerId
+        }
         #endregion
 
         if (hitCounter > 0)
@@ -105,5 +172,50 @@ public class UnityInputService : Service, IInputService
         }
 
 
+    }
+
+    private InputData FindInputData(int index)
+    {
+        foreach(var data in _InputDatas)
+        {
+            if(data.fingerindex == index)
+            {
+                return data;
+            }
+        }
+        return null;
+    }
+
+    private bool HasInputData(int index)
+    {
+        foreach (var data in _InputDatas)
+        {
+            if (data.fingerindex == index)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private void AddInputData(InputData data)
+    {
+        _InputDatas.Add(data);
+    }
+
+    private void ClearInputDAta()
+    {
+        for (int i=_InputDatas.Count; i>=0; --i)
+        {
+            if (_InputDatas[i].isPressed == false)
+            {
+                _InputDatas.Remove(_InputDatas[i]);
+            }
+            else
+            {
+                _InputDatas[i].isPressed = false;
+            }
+        }
     }
 }

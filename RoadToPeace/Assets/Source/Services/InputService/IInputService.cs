@@ -15,4 +15,8 @@ public interface IInputService
     Vector3 LeftStartHoldingPos();
 
     void Update(float delta);
+
+    InputData GetInputData(int index);
+
+    InputData[] GetInputDatas();
 }

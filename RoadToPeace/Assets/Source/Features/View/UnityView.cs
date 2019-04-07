@@ -55,4 +55,25 @@ public class UnityView : MonoBehaviour, IView, IDestroyedListener
     {
         get { return _gameObject.transform; }
     }
+
+    public int SortID
+    {
+        get
+        {
+            var objrenderer = gameObject.GetComponent<SpriteRenderer>();
+            if (objrenderer != null)
+            {
+                return objrenderer.sortingLayerID;
+            }
+            return 0;
+        }
+        set
+        {
+            var objrenderer = gameObject.GetComponent<SpriteRenderer>();
+            if (objrenderer != null)
+            {
+                objrenderer.sortingOrder = value;
+            }
+        }
+    }
 }

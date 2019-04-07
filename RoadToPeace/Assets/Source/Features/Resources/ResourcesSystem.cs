@@ -27,7 +27,7 @@ public class ResourcesSystem : ReactiveSystem<GameEntity>
     {
         foreach(var entity in entities)
         {
-            _viewservice.LoadAsset(_contexts, entity, entity.asset.name);
+            _viewservice.LoadAsset(_contexts, entity, entity.asset.name, entity.asset.sortid);
             entity.isAssetLoaded = true;
         }
 
