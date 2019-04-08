@@ -38,11 +38,22 @@ public class CreateBrickSystem : ReactiveSystem<GameEntity>
 
             int passindex = Random.Range(0, 3);
 
+            var childbricks = new GameEntity[3];
+
             string suffix = "";
             brick_up.isBrick = true;
-            brick_up.isIsBrickPassed = (passindex == 0) ? true : false;
-            suffix = (passindex == 0) ? "_Trap" : "";
-            brick_up.ReplaceAsset(_contexts.config.brickTypeList.typeList[randType] + suffix, 1);
+            if (entity.floorDifficulty.value > 0)
+            {
+                brick_up.isIsBrickPassed = (passindex == 0) ? false : true;
+                suffix = (passindex == 0) ? "_Trap" : "";
+            }
+            else
+            {
+                brick_up.isIsBrickPassed = true;
+                suffix = "";
+            }            
+            brick_up.ReplaceAsset(_contexts.config.brickTypeList.typeList[randType] + suffix, 3);
+            brick_up.ReplaceBrickType(randType);
             brick_up.ReplaceBrickParent(entity);
             brick_up.ReplacePosition(new Vector3(
                 entity.position.position.x,
@@ -50,11 +61,21 @@ public class CreateBrickSystem : ReactiveSystem<GameEntity>
                 0
                 ));
             brick_up.ReplaceBrickYOffset(_contexts.config.floorData.floorHeight);
+            childbricks[0] = brick_up;
 
             brick_mid.isBrick = true;
-            brick_mid.isIsBrickPassed = (passindex == 1) ? true : false;
-            suffix = (passindex == 1) ? "_Trap" : "";
-            brick_mid.ReplaceAsset(_contexts.config.brickTypeList.typeList[randType] + suffix, 2);
+            if(entity.floorDifficulty.value > 0)
+            {
+                brick_mid.isIsBrickPassed = (passindex == 1) ? false : true;
+                suffix = (passindex == 1) ? "_Trap" : "";
+            }
+            else
+            {
+                brick_mid.isIsBrickPassed = true;
+                suffix = "";
+            }            
+            brick_mid.ReplaceAsset(_contexts.config.brickTypeList.typeList[randType] + suffix, 3);
+            brick_mid.ReplaceBrickType(randType);
             brick_mid.ReplaceBrickParent(entity);
             brick_mid.ReplacePosition(new Vector3(
                 entity.position.position.x,
@@ -62,11 +83,21 @@ public class CreateBrickSystem : ReactiveSystem<GameEntity>
                 0
                 ));
             brick_mid.ReplaceBrickYOffset(0);
+            childbricks[1] = brick_mid;
 
             brick_down.isBrick = true;
-            brick_down.isIsBrickPassed = (passindex == 2) ? true : false;
-            suffix = (passindex == 1) ? "_Trap" : "";
+            if (entity.floorDifficulty.value > 0)
+            {
+                brick_down.isIsBrickPassed = (passindex == 2) ? false : true;
+                suffix = (passindex == 1) ? "_Trap" : "";
+            }
+            else
+            {
+                brick_down.isIsBrickPassed = true;
+                suffix = "";
+            }            
             brick_down.ReplaceAsset(_contexts.config.brickTypeList.typeList[randType] + suffix, 3);
+            brick_down.ReplaceBrickType(randType);
             brick_down.ReplaceBrickParent(entity);
             brick_down.ReplacePosition(new Vector3(
                 entity.position.position.x,
@@ -74,12 +105,13 @@ public class CreateBrickSystem : ReactiveSystem<GameEntity>
                 0
                 ));
             brick_down.ReplaceBrickYOffset(-_contexts.config.floorData.floorHeight);
+            childbricks[2] = brick_down;
 
             //brick_up.addbr
             brick_earth.isBrick = true;
             //brick_earth.isIsBrickPassed = (passindex == 2) ? true : false;
             suffix = "_Soil";
-            brick_earth.ReplaceAsset(_contexts.config.brickTypeList.typeList[randType] + suffix, 4);
+            brick_earth.ReplaceAsset(_contexts.config.brickTypeList.typeList[randType] + suffix, 3);
             brick_earth.ReplaceBrickParent(entity);
             brick_earth.ReplacePosition(new Vector3(
                 entity.position.position.x,
@@ -89,9 +121,8 @@ public class CreateBrickSystem : ReactiveSystem<GameEntity>
 
             brick_earth.ReplaceBrickYOffset(-_contexts.config.floorData.floorHeight * 2.0f);
 
-            //Random.Range(0, count);
-
-            //brick_up.asset.name = ;
+            //--------------------------------------------------------------------------------
+            entity.ReplaceFloorChild(childbricks);
         }
     }
 

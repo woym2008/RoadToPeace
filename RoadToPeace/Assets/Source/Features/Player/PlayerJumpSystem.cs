@@ -14,8 +14,13 @@ using Entitas;
 
 public class PlayerJumpSystem : IExecuteSystem
 {
+    private Contexts _contexts;
+    public PlayerJumpSystem(Contexts contexts, Services services)
+    {
+        _contexts = contexts;
+    }
     public void Execute()
     {
-        throw new NotImplementedException();
+        //throw new NotImplementedException();
     }
 }

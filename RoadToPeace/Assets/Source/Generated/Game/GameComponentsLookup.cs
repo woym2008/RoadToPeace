@@ -22,30 +22,33 @@ public static class GameComponentsLookup {
     public const int Drag = 11;
     public const int DragFloor = 12;
     public const int DragOffset = 13;
-    public const int Floor = 14;
-    public const int FloorSpeed = 15;
-    public const int GameCamera = 16;
-    public const int GameOver = 17;
-    public const int GameReady = 18;
-    public const int GameReadyListener = 19;
-    public const int GameStart = 20;
-    public const int GameStartListener = 21;
-    public const int GameState = 22;
-    public const int GameStateListener = 23;
-    public const int GridID = 24;
-    public const int Id = 25;
-    public const int IsBrickPassed = 26;
-    public const int LastFloor = 27;
-    public const int Life = 28;
-    public const int Move = 29;
-    public const int Player = 30;
-    public const int PlayerReady = 31;
-    public const int Position = 32;
-    public const int Reset = 33;
-    public const int Timer = 34;
-    public const int View = 35;
+    public const int FloorChild = 14;
+    public const int Floor = 15;
+    public const int FloorDifficulty = 16;
+    public const int FloorSpeed = 17;
+    public const int GameCamera = 18;
+    public const int GameOver = 19;
+    public const int GameReady = 20;
+    public const int GameReadyListener = 21;
+    public const int GameStart = 22;
+    public const int GameStartListener = 23;
+    public const int GameState = 24;
+    public const int GameStateListener = 25;
+    public const int GridID = 26;
+    public const int Id = 27;
+    public const int IsBrickPassed = 28;
+    public const int LastFloor = 29;
+    public const int Life = 30;
+    public const int Move = 31;
+    public const int Player = 32;
+    public const int PlayerCurFloor = 33;
+    public const int PlayerReady = 34;
+    public const int Position = 35;
+    public const int Reset = 36;
+    public const int Timer = 37;
+    public const int View = 38;
 
-    public const int TotalComponents = 36;
+    public const int TotalComponents = 39;
 
     public static readonly string[] componentNames = {
         "Asset",
@@ -62,7 +65,9 @@ public static class GameComponentsLookup {
         "Drag",
         "DragFloor",
         "DragOffset",
+        "FloorChild",
         "Floor",
+        "FloorDifficulty",
         "FloorSpeed",
         "GameCamera",
         "GameOver",
@@ -79,6 +84,7 @@ public static class GameComponentsLookup {
         "Life",
         "Move",
         "Player",
+        "PlayerCurFloor",
         "PlayerReady",
         "Position",
         "Reset",
@@ -101,7 +107,9 @@ public static class GameComponentsLookup {
         typeof(DragComponent),
         typeof(DragFloorComponent),
         typeof(DragOffsetComponent),
+        typeof(FloorChildComponent),
         typeof(FloorComponent),
+        typeof(FloorDifficultyComponent),
         typeof(FloorSpeedComponent),
         typeof(GameCameraComponent),
         typeof(GameOverComponent),
@@ -118,6 +126,7 @@ public static class GameComponentsLookup {
         typeof(LifeComponent),
         typeof(MoveComponent),
         typeof(PlayerComponent),
+        typeof(PlayerCurFloorComponent),
         typeof(PlayerReady),
         typeof(PositionComponent),
         typeof(ResetComponent),

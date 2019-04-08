@@ -27,11 +27,12 @@ public class GameSystem : Feature
 
         //Add(new ApplyPositionSystem(contexts));
 
-        Add(new MovementSystem(contexts, services));
+        //Add(new MovementSystem(contexts, services));
 
         Add(new UpdateDragSystem(contexts, services));
 
-        Add(new PlayerFirstMoveSystem(contexts, services));
+        //Add(new PlayerFirstMoveSystem(contexts, services));
+        Add(new PlayerSystem(contexts, services));
         
         Add(new GameEventSystems(contexts));
 

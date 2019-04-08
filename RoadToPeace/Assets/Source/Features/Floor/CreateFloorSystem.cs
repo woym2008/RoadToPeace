@@ -47,6 +47,9 @@ public class CreateFloorSystem : ReactiveSystem<GameEntity>
             poslast.z
             ));
         entity.ReplaceGridID(1);
+
+        //难度应该是逐渐上升的 这个值控制难度
+        entity.ReplaceFloorDifficulty(1);
     }
 
     protected override bool Filter(GameEntity entity)
