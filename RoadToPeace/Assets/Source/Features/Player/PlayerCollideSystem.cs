@@ -49,6 +49,8 @@ public class PlayerCollideSystem : IExecuteSystem
                         {
                             Debug.LogError("block!!! brick id is: " + gridid);
                             Debug.LogError("block brick object: " + curbrick.view.Value.Transform.name);
+                            Debug.LogError("Floor Pos: " + floor.position.position);
+                            Debug.LogError("Brick Pos: " + curbrick.position.position);
                             _contexts.game.isGameOver = true;
                         }
 

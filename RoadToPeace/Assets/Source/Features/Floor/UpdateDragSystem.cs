@@ -61,8 +61,8 @@ public class UpdateDragSystem : IExecuteSystem
                                 //---------------------------
                                 if (!floor.hasDrag || !floor.drag.isdrag)
                                 {
-                                    if ((floor.position.position.x - 0.5f * floorwidth) < worldpos.x &&
-                                   (floor.position.position.x + 0.5f * floorwidth) > worldpos.x)
+                                    if ((floor.position.position.x - 0.5f * floorwidth) < worldcurpos.x &&
+                                   (floor.position.position.x + 0.5f * floorwidth) > worldcurpos.x)
                                     {
                                         //floor.ReplaceDrag(true);
                                         floor.ReplaceDrag(true, data.fingerindex);
@@ -70,7 +70,7 @@ public class UpdateDragSystem : IExecuteSystem
                                     }
                                 }
 
-                                else if(data.fingerindex == floor.drag.dragID)
+                                else //if(data.fingerindex == floor.drag.dragID)
                                 {
                                     if ((floor.position.position.x - 0.5f * floorwidth) >= worldcurpos.x ||
                                         (floor.position.position.x + 0.5f * floorwidth) <= worldcurpos.x)
@@ -88,18 +88,18 @@ public class UpdateDragSystem : IExecuteSystem
                                         //    floor.position.position.z
                                         //    ));
                                         var dis = newy - floor.position.position.y;
-                                        if (dis > halffloorheight && floor.gridID.id >= 1)
+                                        if (dis > halffloorheight * 0.5f && floor.gridID.id <= 1)
                                         {
                                             //向上
                                             floor.position.position.y = floor.position.position.y + floorheight;
-                                            floor.gridID.id--;
+                                            floor.gridID.id++;
 
                                         }
-                                        else if (dis < -halffloorheight && floor.gridID.id <= 1)
+                                        else if (dis < -halffloorheight * 0.5f && floor.gridID.id >= 1)
                                         {
                                             //向下
                                             floor.position.position.y = floor.position.position.y - floorheight;
-                                            floor.gridID.id++;
+                                            floor.gridID.id--;
                                         }
 
 

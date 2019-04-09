@@ -89,7 +89,7 @@ public class CreateBrickSystem : ReactiveSystem<GameEntity>
             if (entity.floorDifficulty.value > 0)
             {
                 brick_down.isIsBrickPassed = (passindex == 2) ? false : true;
-                suffix = (passindex == 1) ? "_Trap" : "";
+                suffix = (passindex == 2) ? "_Trap" : "";
             }
             else
             {

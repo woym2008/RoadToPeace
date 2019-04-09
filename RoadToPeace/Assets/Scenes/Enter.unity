@@ -784,7 +784,7 @@ MonoBehaviour:
   FloorWidth: 2.52
   FloorHeight: 2.52
   NumFloor: 13
-  FloorSpeed: 1
+  FloorSpeed: 2
   PlayerPos: {fileID: 2094999945}
   PlayerRunPos: {fileID: 1537246862}
   CameraRunningPos: {fileID: 652174700}
