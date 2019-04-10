@@ -28,5 +28,6 @@ public class CreatePlayerService : Service
         e.AddId(id);
         e.AddAsset("Player",3);
         e.AddPosition(position);
+        e.ReplaceLife(1);
     }
 }

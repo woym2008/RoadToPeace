@@ -34,6 +34,17 @@ public class GameResetSystem : ReactiveSystem<GameEntity>, IInitializeSystem
     {
         Debug.Log("Debug reset add Execute");
         game.isReset = false;
+
+        //显示button reset
+
+        //先destroy之前游戏的所有
+        foreach(var obj in _deleteEntitys)
+        {
+            obj.isDestroyed = true;
+        }
+
+        //临时
+        game.ReplaceGameState(GameState.Ready);
     }
 
     protected override bool Filter(GameEntity entity)

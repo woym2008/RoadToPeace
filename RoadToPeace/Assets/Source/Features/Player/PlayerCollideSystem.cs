@@ -47,11 +47,16 @@ public class PlayerCollideSystem : IExecuteSystem
                         
                         if (!ispassed)
                         {
-                            Debug.LogError("block!!! brick id is: " + gridid);
-                            Debug.LogError("block brick object: " + curbrick.view.Value.Transform.name);
-                            Debug.LogError("Floor Pos: " + floor.position.position);
-                            Debug.LogError("Brick Pos: " + curbrick.position.position);
-                            _contexts.game.isGameOver = true;
+                            //Debug.LogError("block!!! brick id is: " + gridid);
+                            //Debug.LogError("block brick object: " + curbrick.view.Value.Transform.name);
+                            //Debug.LogError("Floor Pos: " + floor.position.position);
+                            //Debug.LogError("Brick Pos: " + curbrick.position.position);
+                            //_contexts.game.isGameOver = true;
+                            //_contexts.game.ReplaceGameState(GameState.GameOver);
+                            if(_contexts.game.hasLife)
+                            {
+                                _contexts.game.ReplaceLife(0);
+                            }
                         }
 
                         player.ReplacePlayerCurFloor(floor, gridid);

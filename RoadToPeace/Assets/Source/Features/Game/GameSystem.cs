@@ -17,6 +17,7 @@ public class GameSystem : Feature
     public GameSystem(Contexts contexts, Services services)
     {
         Add(new PlayerCreateSystem(contexts, services));
+        Add(new GameOverSystem(contexts));
         Add(new GameResetSystem(contexts, services));
 
         Add(new FloorSystem(contexts, services));
@@ -30,6 +31,8 @@ public class GameSystem : Feature
         //Add(new MovementSystem(contexts, services));
 
         Add(new UpdateDragSystem(contexts, services));
+
+        //Add(new LifeChangeSystem(contexts));
 
         //Add(new PlayerFirstMoveSystem(contexts, services));
         Add(new PlayerSystem(contexts, services));

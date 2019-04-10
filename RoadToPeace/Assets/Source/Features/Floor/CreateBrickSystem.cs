@@ -36,6 +36,11 @@ public class CreateBrickSystem : ReactiveSystem<GameEntity>
             var brick_down = _contexts.game.CreateEntity();
             var brick_earth = _contexts.game.CreateEntity();
 
+            brick_up.isDestoryOnReset = true;
+            brick_mid.isDestoryOnReset = true;
+            brick_down.isDestoryOnReset = true;
+            brick_earth.isDestoryOnReset = true;
+
             int passindex = Random.Range(0, 3);
 
             var childbricks = new GameEntity[3];

@@ -23,23 +23,18 @@ public class GameOverSystem : ReactiveSystem<GameEntity>
 
     protected override bool Filter(GameEntity entity)
     {
-        return true;
+        return (entity.gameState.state == GameState.GameOver);
     }
 
     protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
     {
-        return context.CreateCollector(GameMatcher.Life);
+        return context.CreateCollector(GameMatcher.GameState);
     }
 
     protected override void Execute(List<GameEntity> entities)
     {
-        //if (!game.isGameOver && game.hasLife)
-        //{
-        //    game.isGameOver = true;
-        //}
-        if(game.hasGameState && (game.gameState.state == GameState.GameOver) && game.hasLife)
-        {
-            game.ReplaceGameState(GameState.GameOver);
-        }
+        //temp
+        //game.ReplaceGameState(GameState.Ready);
+        game.isReset = true;
     }
 }

@@ -11,5 +11,7 @@ public class PlayerSystem : Feature
         Add(new PlayerCollideSystem(contexts, services));
 
         Add(new PlayerJumpSystem(contexts, services));
+
+        Add(new LifeChangeSystem(contexts));
     }
 }
