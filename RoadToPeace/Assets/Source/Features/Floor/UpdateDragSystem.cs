@@ -34,7 +34,7 @@ public class UpdateDragSystem : IExecuteSystem
         if(_contexts.game.gameState.state == GameState.Running)
         {
             //已经点击了
-            Debug.Log("isPointerHolding: " + _contexts.input.leftSidePointerEntity.isPointerHolding);
+            //Debug.Log("isPointerHolding: " + _contexts.input.leftSidePointerEntity.isPointerHolding);
             if(_contexts.input.leftSidePointerEntity.isPointerHolding)
             {
                 //变换到世界坐标
@@ -49,67 +49,68 @@ public class UpdateDragSystem : IExecuteSystem
                 var datas = _contexts.input.inputDatas.datas;
                 if(datas != null)
                 {
-                    foreach (var data in datas)
+                    if(datas.Length > 0)
                     {
-                        var worldpos = camera.ScreenToWorldPoint(data.startpos);
-                        var worldcurpos = camera.ScreenToWorldPoint(data.curpos);
-
-                        foreach (var floor in _allFloor)
+                        foreach (var data in datas)
                         {
-                            if (floor.hasPosition)
+                            var worldpos = camera.ScreenToWorldPoint(data.startpos);
+                            var worldcurpos = camera.ScreenToWorldPoint(data.curpos);
+
+                            foreach (var floor in _allFloor)
                             {
-                                //---------------------------
-                                if (!floor.hasDrag || !floor.drag.isdrag)
+                                if (floor.hasPosition)
                                 {
-                                    if ((floor.position.position.x - 0.5f * floorwidth) < worldcurpos.x &&
-                                   (floor.position.position.x + 0.5f * floorwidth) > worldcurpos.x)
+                                    //---------------------------
+                                    if (!floor.hasDrag || !floor.drag.isdrag)
                                     {
-                                        //floor.ReplaceDrag(true);
-                                        floor.ReplaceDrag(true, data.fingerindex);
-                                        floor.ReplaceDragOffset(worldpos - floor.position.position);
-                                    }
-                                }
-
-                                else //if(data.fingerindex == floor.drag.dragID)
-                                {
-                                    if ((floor.position.position.x - 0.5f * floorwidth) >= worldcurpos.x ||
-                                        (floor.position.position.x + 0.5f * floorwidth) <= worldcurpos.x)
-                                    {
-                                        //floor.ReplaceDrag(false);
-                                        floor.RemoveDrag();
-                                        floor.RemoveDragOffset();
-                                    }
-                                    else
-                                    {
-                                        var newy = worldcurpos.y - floor.dragOffset.offset.y;
-                                        //floor.ReplacePosition(new Vector3(
-                                        //    floor.position.position.x,
-                                        //    newy,
-                                        //    floor.position.position.z
-                                        //    ));
-                                        var dis = newy - floor.position.position.y;
-                                        if (dis > halffloorheight * 0.5f && floor.gridID.id <= 1)
+                                        if ((floor.position.position.x - 0.5f * floorwidth) < worldcurpos.x &&
+                                       (floor.position.position.x + 0.5f * floorwidth) > worldcurpos.x)
                                         {
-                                            //向上
-                                            floor.position.position.y = floor.position.position.y + floorheight;
-                                            floor.gridID.id++;
-
+                                            if (!data.isHolding)
+                                            {
+                                                Debug.LogWarning("FirstClick");
+                                            }
+                                            //floor.ReplaceDrag(true);
+                                            floor.ReplaceDrag(true, data.fingerindex);
+                                            floor.ReplaceDragOffset(worldcurpos);
                                         }
-                                        else if (dis < -halffloorheight * 0.5f && floor.gridID.id >= 1)
-                                        {
-                                            //向下
-                                            floor.position.position.y = floor.position.position.y - floorheight;
-                                            floor.gridID.id--;
-                                        }
-
-
-                                        //floor.position.position.y = newy;
                                     }
-                                }
-                                //---------------------------
-                                if (!floor.hasDrag || !floor.drag.isdrag)
-                                {
 
+                                    else //if(data.fingerindex == floor.drag.dragID)
+                                    {
+                                        if ((floor.position.position.x - 0.5f * floorwidth) >= worldcurpos.x ||
+                                            (floor.position.position.x + 0.5f * floorwidth) <= worldcurpos.x)
+                                        {
+                                            //floor.ReplaceDrag(false);
+                                            floor.RemoveDrag();
+                                            floor.RemoveDragOffset();
+                                        }
+                                        else
+                                        {
+                                            var dis = worldcurpos.y - floor.dragOffset.offset.y;
+                                            if (dis > halffloorheight * 0.5f && floor.gridID.id <= 1)
+                                            {
+                                                //向上
+                                                floor.position.position.y = floor.position.position.y + floorheight;
+                                                floor.gridID.id++;
+
+                                            }
+                                            else if (dis < -halffloorheight * 0.5f && floor.gridID.id >= 1)
+                                            {
+                                                //向下
+                                                floor.position.position.y = floor.position.position.y - floorheight;
+                                                floor.gridID.id--;
+                                            }
+
+
+                                            //floor.position.position.y = newy;
+                                        }
+                                    }
+                                    //---------------------------
+                                    if (!floor.hasDrag || !floor.drag.isdrag)
+                                    {
+
+                                    }
                                 }
                             }
                         }

@@ -10,12 +10,12 @@ public class TitleController : MonoBehaviour, IGameStateListener
 
     public void OnGameState(GameEntity entity, GameState state)
     {
-        Debug.LogWarning("TitleController start game 0");
+        //Debug.LogWarning("TitleController start game 0");
         if (_titleImage.gameObject.activeSelf)
         {
             if(state == GameState.Start)
             {
-                Debug.LogWarning("TitleController start game");
+                //Debug.LogWarning("TitleController start game");
 
                 StartCoroutine(FadeOut(onFinish));
             }

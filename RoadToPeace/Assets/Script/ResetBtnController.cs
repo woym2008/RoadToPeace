@@ -24,17 +24,17 @@ public class ResetBtnController : MonoBehaviour, IGameStateListener
 
     public void OnGameState(GameEntity entity, GameState state)
     {
-        Debug.LogWarning("GameOver Btn Show" + state);
+        //Debug.LogWarning("GameOver Btn Show" + state);
         if (state == GameState.GameOver)
         {
             _btn.gameObject.SetActive(true);
-            Debug.LogWarning("GameOver Btn Show");
+            //Debug.LogWarning("GameOver Btn Show");
         }
     }
 
     private void OnClick()
     {
-        Debug.LogWarning("Btn OnClick");
+        //Debug.LogWarning("Btn OnClick");
         _btn.gameObject.SetActive(false);
 
         var gamecontext = Contexts.sharedInstance.game;
