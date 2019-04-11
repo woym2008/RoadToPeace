@@ -142,6 +142,8 @@ public class UnityInputService : Service, IInputService
         }
         #endregion
 
+        ClearInputData();
+
         if (hitCounter > 0)
         {
             if (_isHoldingLeft)
@@ -204,11 +206,11 @@ public class UnityInputService : Service, IInputService
         _InputDatas.Add(data);
     }
 
-    private void ClearInputDAta()
+    private void ClearInputData()
     {
-        for (int i=_InputDatas.Count; i>=0; --i)
+        for (int i=_InputDatas.Count-1; i>=0; --i)
         {
-            if (_InputDatas[i].isPressed == false)
+            if (_InputDatas[i] == null || _InputDatas[i].isPressed == false)
             {
                 _InputDatas.Remove(_InputDatas[i]);
             }
