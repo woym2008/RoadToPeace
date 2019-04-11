@@ -17,6 +17,10 @@ public class PlayerCollideSystem : IExecuteSystem
 
     public void Execute()
     {
+        if(_contexts.game.gameState.state != GameState.Running)
+        {
+            return;
+        }
         var player = _contexts.game.playerEntity;
         var floorwidth = _contexts.config.floorData.floorWidth;
         if(player.hasPosition)

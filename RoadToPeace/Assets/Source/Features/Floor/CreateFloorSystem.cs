@@ -27,7 +27,7 @@ public class CreateFloorSystem : ReactiveSystem<GameEntity>
     protected override void Execute(List<GameEntity> entities)
     {
         float width = _contexts.config.floorData.floorWidth;
-        Debug.LogWarning("Execute width" + width);
+        //Debug.LogWarning("Execute width" + width);
         Vector3 poslast = _contexts.config.floorData.overPos;
         foreach (var floor in _gamegroup)
         {
@@ -50,6 +50,7 @@ public class CreateFloorSystem : ReactiveSystem<GameEntity>
 
         //难度应该是逐渐上升的 这个值控制难度
         entity.ReplaceFloorDifficulty(1);
+        entity.isDestoryOnReset = true;
     }
 
     protected override bool Filter(GameEntity entity)

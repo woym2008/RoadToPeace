@@ -5,11 +5,10 @@ using UnityEngine.UI;
 
 public class StartBtnController : MonoBehaviour
 {
-    private Button _btn;
+    public Button _btn;
     // Start is called before the first frame update
     void Start()
     {
-        _btn = this.gameObject.GetComponent<Button>();
         _btn.onClick.AddListener(OnClick);
     }
 
@@ -26,6 +25,6 @@ public class StartBtnController : MonoBehaviour
             Contexts.sharedInstance.game.ReplaceGameState(GameState.Start);
         }
 
-        this.gameObject.SetActive(false);
+        _btn.gameObject.SetActive(false);
     }
 }

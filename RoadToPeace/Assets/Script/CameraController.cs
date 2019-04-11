@@ -52,6 +52,9 @@ public class CameraController : MonoBehaviour, IGameStateListener, IGameReadyLis
     private void onFinish()
     {
         Contexts.sharedInstance.game.ReplaceGameState(GameState.Running);
+
+        //First run
+        Contexts.sharedInstance.game.isGameStart = true;
     }
 
     IEnumerator onCameraMove(Action callback)

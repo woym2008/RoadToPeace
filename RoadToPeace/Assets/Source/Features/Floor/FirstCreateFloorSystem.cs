@@ -29,6 +29,7 @@ public class FirstCreateFloorSystem : ReactiveSystem<GameEntity>
         for(int i = 0; i < _contexts.config.floorData.numFloor; ++i)
         {
             var floorEntity = _contexts.game.CreateEntity();
+            floorEntity.isDestoryOnReset = true;
             floorEntity.isFloor = true;
             floorEntity.ReplacePosition(curpos);
             floorEntity.ReplaceGridID(1);

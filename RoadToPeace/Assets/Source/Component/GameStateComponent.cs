@@ -15,6 +15,7 @@ using Entitas.CodeGeneration.Attributes;
 
 public enum GameState
 {
+    Null,
     Ready,
     Start,
     Running,

@@ -27,6 +27,9 @@ public class LifeChangeSystem : ReactiveSystem<GameEntity>
         if (game.hasGameState && (game.gameState.state == GameState.Running) && game.hasLife)
         {
             game.ReplaceGameState(GameState.GameOver);
+
+
+            //释放墓碑
         }
     }
 }

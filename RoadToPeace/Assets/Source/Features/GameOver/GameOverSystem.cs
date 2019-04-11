@@ -35,6 +35,6 @@ public class GameOverSystem : ReactiveSystem<GameEntity>
     {
         //temp
         //game.ReplaceGameState(GameState.Ready);
-        game.isReset = true;
+        //game.isReset = true;
     }
 }
