@@ -8,6 +8,8 @@ TextureImporter:
     21300006: man_run_3
     21300008: man_run_4
     21300010: man_run_5
+    21300012: man_run_6
+    21300014: man_run_7
   externalObjects: {}
   serializedVersion: 9
   mipmaps:
@@ -126,7 +128,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d64b64cbe9bff5b48a132a8d36c78427
+      spriteID: d3bef476647dad14090bad2b5b841ac7
       vertices: []
       indices: 
       edges: []
@@ -146,7 +148,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 50dc23a521d22cd42a5de521dd608412
+      spriteID: d86ebe3fe63998947beca7390d60376c
       vertices: []
       indices: 
       edges: []
@@ -166,13 +168,33 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 38d4220e5f2061342957075c13d22816
+      spriteID: 0190248bb441a1e438698897a13e2fe4
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
       name: man_run_3
+      rect:
+        serializedVersion: 2
+        x: 1200
+        y: 624
+        width: 400
+        height: 400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ae6a7f20aa987b64f88c439c8ae2a78c
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: man_run_4
       rect:
         serializedVersion: 2
         x: 0
@@ -186,13 +208,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 00dce233f9c14f745a706e04f60e573c
+      spriteID: 83794bb80653a8a498cfa7e356cda1c1
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: man_run_4
+      name: man_run_5
       rect:
         serializedVersion: 2
         x: 400
@@ -206,13 +228,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 01b0c44eb9bca0546b138cb65fe9dcca
+      spriteID: f15aab6420dfbfd41b007ddf3a1d0523
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: man_run_5
+      name: man_run_6
       rect:
         serializedVersion: 2
         x: 800
@@ -226,7 +248,27 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b567ae8b77a8f224aaf07897f9719ad4
+      spriteID: b15545bbd67aa2b4e82705cf9294505e
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: man_run_7
+      rect:
+        serializedVersion: 2
+        x: 1200
+        y: 224
+        width: 400
+        height: 400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 837cd4a55a520884699aba8308295c7b
       vertices: []
       indices: 
       edges: []
