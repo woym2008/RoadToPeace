@@ -61,6 +61,7 @@ public class PlayerCollideSystem : IExecuteSystem
                             {
                                 _contexts.game.ReplaceLife(0);
                             }
+                            curbrick.isBrickBroken = true;
                         }
 
                         player.ReplacePlayerCurFloor(floor, gridid);

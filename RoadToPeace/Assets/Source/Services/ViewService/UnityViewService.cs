@@ -36,7 +36,12 @@ public class UnityViewService : Service, IViewService
         if (view != null)
         {
             view.InitializeView(contexts, entity);
-            entity.AddView(view);
+            //entity.AddView(view);
+            if(entity.hasView)
+            {
+                entity.view.Value.DestroyImmediate();
+            }
+            entity.ReplaceView(view);
             if(entity.hasPosition)
             {
                 view.Position = entity.position.position;
@@ -54,4 +59,6 @@ public class UnityViewService : Service, IViewService
         //    listener.RegisterListeners(entity);
 
     }
+
+    //public void ReplaceAsset
 }

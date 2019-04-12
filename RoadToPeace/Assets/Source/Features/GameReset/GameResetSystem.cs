@@ -32,7 +32,6 @@ public class GameResetSystem : ReactiveSystem<GameEntity>, IInitializeSystem
 
     protected override void Execute(List<GameEntity> entities)
     {
-        Debug.Log("Debug reset add Execute");
         game.isReset = false;
 
         //显示button reset
@@ -43,8 +42,12 @@ public class GameResetSystem : ReactiveSystem<GameEntity>, IInitializeSystem
             obj.isDestroyed = true;
         }
 
-        //临时
         game.ReplaceGameState(GameState.Ready);
+
+        if(game.playerEntity != null)
+        {
+            game.playerEntity.ReplacePlayerState(PlayerGameState.Wait);
+        }
     }
 
     protected override bool Filter(GameEntity entity)
@@ -54,7 +57,6 @@ public class GameResetSystem : ReactiveSystem<GameEntity>, IInitializeSystem
 
     protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
     {
-        Debug.Log("Debug reset add");
         return context.CreateCollector(GameMatcher.Reset.Added());
     }
 }

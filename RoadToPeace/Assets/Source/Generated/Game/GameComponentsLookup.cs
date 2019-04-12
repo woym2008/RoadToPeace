@@ -11,51 +11,53 @@ public static class GameComponentsLookup {
     public const int Anim = 0;
     public const int Asset = 1;
     public const int AssetLoaded = 2;
-    public const int Brick = 3;
-    public const int BrickData = 4;
-    public const int BrickParent = 5;
-    public const int BrickType = 6;
-    public const int BrickYOffset = 7;
-    public const int Collision = 8;
-    public const int DestoryOnReset = 9;
-    public const int Destroyed = 10;
-    public const int DestroyedListener = 11;
-    public const int Drag = 12;
-    public const int DragFloor = 13;
-    public const int DragOffset = 14;
-    public const int FloorChild = 15;
-    public const int Floor = 16;
-    public const int FloorDifficulty = 17;
-    public const int FloorSpeed = 18;
-    public const int GameCamera = 19;
-    public const int GameOver = 20;
-    public const int GameReady = 21;
-    public const int GameReadyListener = 22;
-    public const int GameStart = 23;
-    public const int GameStartListener = 24;
-    public const int GameState = 25;
-    public const int GameStateListener = 26;
-    public const int GridID = 27;
-    public const int Id = 28;
-    public const int IsBrickPassed = 29;
-    public const int LastFloor = 30;
-    public const int Life = 31;
-    public const int Move = 32;
-    public const int Player = 33;
-    public const int PlayerCurFloor = 34;
-    public const int PlayerReady = 35;
-    public const int PlayerState = 36;
-    public const int Position = 37;
-    public const int Reset = 38;
-    public const int Timer = 39;
-    public const int View = 40;
+    public const int BrickBroken = 3;
+    public const int Brick = 4;
+    public const int BrickData = 5;
+    public const int BrickParent = 6;
+    public const int BrickType = 7;
+    public const int BrickYOffset = 8;
+    public const int Collision = 9;
+    public const int DestoryOnReset = 10;
+    public const int Destroyed = 11;
+    public const int DestroyedListener = 12;
+    public const int Drag = 13;
+    public const int DragFloor = 14;
+    public const int DragOffset = 15;
+    public const int FloorChild = 16;
+    public const int Floor = 17;
+    public const int FloorDifficulty = 18;
+    public const int FloorSpeed = 19;
+    public const int GameCamera = 20;
+    public const int GameOver = 21;
+    public const int GameReady = 22;
+    public const int GameReadyListener = 23;
+    public const int GameStart = 24;
+    public const int GameStartListener = 25;
+    public const int GameState = 26;
+    public const int GameStateListener = 27;
+    public const int GridID = 28;
+    public const int Id = 29;
+    public const int IsBrickPassed = 30;
+    public const int LastFloor = 31;
+    public const int Life = 32;
+    public const int Move = 33;
+    public const int Player = 34;
+    public const int PlayerCurFloor = 35;
+    public const int PlayerReady = 36;
+    public const int PlayerState = 37;
+    public const int Position = 38;
+    public const int Reset = 39;
+    public const int Timer = 40;
+    public const int View = 41;
 
-    public const int TotalComponents = 41;
+    public const int TotalComponents = 42;
 
     public static readonly string[] componentNames = {
         "Anim",
         "Asset",
         "AssetLoaded",
+        "BrickBroken",
         "Brick",
         "BrickData",
         "BrickParent",
@@ -100,6 +102,7 @@ public static class GameComponentsLookup {
         typeof(AnimComponent),
         typeof(AssetComponent),
         typeof(AssetLoadedComponent),
+        typeof(BrickBrokenComponent),
         typeof(BrickComponent),
         typeof(BrickDataComponent),
         typeof(BrickParentComponent),

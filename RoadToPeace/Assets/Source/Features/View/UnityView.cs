@@ -31,6 +31,12 @@ public class UnityView : MonoBehaviour, IView, IDestroyedListener
         Destroy(_gameObject);
     }
 
+    public void DestroyImmediate()
+    {
+        _entity.RemoveDestroyedListener(this);
+        Destroy(_gameObject);
+    }
+
     public int Id { get; set; }
 
     public bool Enabled

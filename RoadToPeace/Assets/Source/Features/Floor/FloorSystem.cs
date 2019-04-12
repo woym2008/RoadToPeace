@@ -20,6 +20,8 @@ public class FloorSystem : Feature
         Add(new CreateFloorSystem(contexts, services));
         Add(new CreateBrickSystem(contexts, services));
 
+        Add(new BrickBrokenSystem(contexts, services));
+
         //Add(new DragFloorSystem(contexts, services));
         Add(new MoveFloorSystem(contexts, services));
         Add(new DestoryFloorSystem(contexts, services));

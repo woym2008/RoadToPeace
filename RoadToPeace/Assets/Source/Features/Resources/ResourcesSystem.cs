@@ -35,7 +35,8 @@ public class ResourcesSystem : ReactiveSystem<GameEntity>
 
     protected override bool Filter(GameEntity entity)
     {
-        return entity.hasAsset && !entity.isAssetLoaded;
+        //return entity.hasAsset && !entity.isAssetLoaded;
+        return entity.hasAsset;
     }
 
     protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)

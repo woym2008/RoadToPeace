@@ -31,5 +31,7 @@ public class GameRestartController : MonoBehaviour, IGameStateListener
         yield return new WaitForSeconds(1);
 
         _context.ReplaceGameState(GameState.Running);
+
+        _context.playerEntity.ReplacePlayerState(PlayerGameState.Run);
     }
 }

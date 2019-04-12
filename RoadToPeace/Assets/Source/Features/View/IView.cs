@@ -22,4 +22,5 @@ public interface IView
     int SortID { set; }
 
     void InitializeView(Contexts contexts, GameEntity entity);
+    void DestroyImmediate();
 }
