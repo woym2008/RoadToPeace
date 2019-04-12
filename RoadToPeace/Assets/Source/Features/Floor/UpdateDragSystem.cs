@@ -60,24 +60,110 @@ public class UpdateDragSystem : IExecuteSystem
                             {
                                 if (floor.hasPosition)
                                 {
+                                    switch(data.state)
+                                    {
+                                        case InputData.InputState.Begin:
+                                            {
+                                                if (!floor.hasDrag || !floor.drag.isdrag)
+                                                {
+                                                    if ((floor.position.position.x - 0.5f * floorwidth) < worldcurpos.x &&
+                                                   (floor.position.position.x + 0.5f * floorwidth) > worldcurpos.x)
+                                                    {
+                                                        Debug.LogWarning("FirstClick");
+                                                        //floor.ReplaceDrag(true);
+                                                        floor.ReplaceDrag(true, data.fingerindex);
+                                                        floor.ReplaceDragOffset(worldcurpos);
+                                                    }
+                                                }
+                                            }
+                                            break;
+                                        case InputData.InputState.Touching:
+                                            {
+                                                //Debug.LogWarning("Touching");
+                                                //if (!floor.hasDrag || !floor.drag.isdrag)
+                                                //{
+                                                //    if ((floor.position.position.x - 0.5f * floorwidth) < worldcurpos.x &&
+                                                //   (floor.position.position.x + 0.5f * floorwidth) > worldcurpos.x)
+                                                //    {
+                                                //        Debug.LogWarning("FirstClick");
+                                                //        //floor.ReplaceDrag(true);
+                                                //        floor.ReplaceDrag(true, data.fingerindex);
+                                                //        floor.ReplaceDragOffset(worldcurpos);
+                                                //    }
+                                                //}
+                                                //else
+                                                if (floor.hasDrag && floor.drag.isdrag)
+                                                {
+                                                    if (data.fingerindex == floor.drag.dragID)
+                                                    {
+                                                        var dis = worldcurpos.y - floor.dragOffset.offset.y;
+                                                        if (dis > halffloorheight * 0.5f && floor.gridID.id <= 1)
+                                                        {
+                                                            //向上
+                                                            floor.position.position.y = floor.position.position.y + floorheight;
+                                                            floor.gridID.id++;
+
+                                                        }
+                                                        else if (dis < -halffloorheight * 0.5f && floor.gridID.id >= 1)
+                                                        {
+                                                            //向下
+                                                            floor.position.position.y = floor.position.position.y - floorheight;
+                                                            floor.gridID.id--;
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                            break;
+                                        case InputData.InputState.End:
+                                        case InputData.InputState.Discar:
+                                            {
+                                                //Debug.LogError("End");
+                                                if (floor.hasDrag && floor.drag.isdrag)
+                                                {
+                                                    floor.RemoveDrag();
+                                                    floor.RemoveDragOffset();
+                                                }
+                                            }
+                                            break;
+                                    }
                                     //---------------------------
+                                    /*
                                     if (!floor.hasDrag || !floor.drag.isdrag)
                                     {
                                         if ((floor.position.position.x - 0.5f * floorwidth) < worldcurpos.x &&
                                        (floor.position.position.x + 0.5f * floorwidth) > worldcurpos.x)
                                         {
-                                            if (!data.isHolding)
+                                            if (data.state == InputData.InputState.Begin)
                                             {
                                                 Debug.LogWarning("FirstClick");
+                                                //floor.ReplaceDrag(true);
+                                                floor.ReplaceDrag(true, data.fingerindex);
+                                                floor.ReplaceDragOffset(worldcurpos);
                                             }
-                                            //floor.ReplaceDrag(true);
-                                            floor.ReplaceDrag(true, data.fingerindex);
-                                            floor.ReplaceDragOffset(worldcurpos);
                                         }
                                     }
 
                                     else //if(data.fingerindex == floor.drag.dragID)
                                     {
+                                        if (data.fingerindex == floor.drag.dragID)
+                                        {
+                                            var dis = worldcurpos.y - floor.dragOffset.offset.y;
+                                            if (dis > halffloorheight * 0.5f && floor.gridID.id <= 1)
+                                            {
+                                                //向上
+                                                floor.position.position.y = floor.position.position.y + floorheight;
+                                                floor.gridID.id++;
+
+                                            }
+                                            else if (dis < -halffloorheight * 0.5f && floor.gridID.id >= 1)
+                                            {
+                                                //向下
+                                                floor.position.position.y = floor.position.position.y - floorheight;
+                                                floor.gridID.id--;
+                                            }
+                                        }
+
+                                        /*
                                         if ((floor.position.position.x - 0.5f * floorwidth) >= worldcurpos.x ||
                                             (floor.position.position.x + 0.5f * floorwidth) <= worldcurpos.x)
                                         {
@@ -110,12 +196,26 @@ public class UpdateDragSystem : IExecuteSystem
                                     if (!floor.hasDrag || !floor.drag.isdrag)
                                     {
 
-                                    }
+                                    }*/
                                 }
                             }
                         }
                     }
-
+                    else
+                    {
+                        foreach (var floor in _allFloor)
+                        {
+                            if(floor.hasDrag)
+                            {
+                                floor.RemoveDrag();
+                                floor.RemoveDragOffset();
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    Debug.LogWarning("empty");
                 }
 
                 //--------------------------------------------------------------

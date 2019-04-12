@@ -44,7 +44,7 @@ public class MoveFloorSystem : IExecuteSystem
                 {
                     if(_floorgroup.count != testnum)
                     {
-                        Debug.Log("push one entity");
+                        //Debug.Log("push one entity");
                     }
                     //if (floorentity.hasPosition)
                     //if(floorentity.isDrag == true)
