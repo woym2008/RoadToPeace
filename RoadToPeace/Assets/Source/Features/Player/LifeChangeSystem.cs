@@ -5,11 +5,11 @@ using System.Collections.Generic;
 
 public class LifeChangeSystem : ReactiveSystem<GameEntity>
 {
-    readonly GameContext game;
+    readonly GameContext _gameContext;
     public LifeChangeSystem(Contexts contexts)
         : base(contexts.game)
     {
-        game = contexts.game;
+        _gameContext = contexts.game;
 
     }
     protected override bool Filter(GameEntity entity)
@@ -24,12 +24,16 @@ public class LifeChangeSystem : ReactiveSystem<GameEntity>
 
     protected override void Execute(List<GameEntity> entities)
     {
-        if (game.hasGameState && (game.gameState.state == GameState.Running) && game.hasLife)
+        if (_gameContext.hasGameState && (_gameContext.gameState.state == GameState.Running) && _gameContext.hasLife)
         {
-            game.ReplaceGameState(GameState.GameOver);
+            _gameContext.ReplaceGameState(GameState.GameOver);
 
 
             //释放墓碑
+            if(_gameContext.playerEntity != null)
+            {
+                _gameContext.playerEntity.ReplacePlayerState(PlayerGameState.Die);
+            }
         }
     }
 }

@@ -8,49 +8,52 @@
 //------------------------------------------------------------------------------
 public static class GameComponentsLookup {
 
-    public const int Asset = 0;
-    public const int AssetLoaded = 1;
-    public const int Brick = 2;
-    public const int BrickData = 3;
-    public const int BrickParent = 4;
-    public const int BrickType = 5;
-    public const int BrickYOffset = 6;
-    public const int Collision = 7;
-    public const int DestoryOnReset = 8;
-    public const int Destroyed = 9;
-    public const int DestroyedListener = 10;
-    public const int Drag = 11;
-    public const int DragFloor = 12;
-    public const int DragOffset = 13;
-    public const int FloorChild = 14;
-    public const int Floor = 15;
-    public const int FloorDifficulty = 16;
-    public const int FloorSpeed = 17;
-    public const int GameCamera = 18;
-    public const int GameOver = 19;
-    public const int GameReady = 20;
-    public const int GameReadyListener = 21;
-    public const int GameStart = 22;
-    public const int GameStartListener = 23;
-    public const int GameState = 24;
-    public const int GameStateListener = 25;
-    public const int GridID = 26;
-    public const int Id = 27;
-    public const int IsBrickPassed = 28;
-    public const int LastFloor = 29;
-    public const int Life = 30;
-    public const int Move = 31;
-    public const int Player = 32;
-    public const int PlayerCurFloor = 33;
-    public const int PlayerReady = 34;
-    public const int Position = 35;
-    public const int Reset = 36;
-    public const int Timer = 37;
-    public const int View = 38;
+    public const int Anim = 0;
+    public const int Asset = 1;
+    public const int AssetLoaded = 2;
+    public const int Brick = 3;
+    public const int BrickData = 4;
+    public const int BrickParent = 5;
+    public const int BrickType = 6;
+    public const int BrickYOffset = 7;
+    public const int Collision = 8;
+    public const int DestoryOnReset = 9;
+    public const int Destroyed = 10;
+    public const int DestroyedListener = 11;
+    public const int Drag = 12;
+    public const int DragFloor = 13;
+    public const int DragOffset = 14;
+    public const int FloorChild = 15;
+    public const int Floor = 16;
+    public const int FloorDifficulty = 17;
+    public const int FloorSpeed = 18;
+    public const int GameCamera = 19;
+    public const int GameOver = 20;
+    public const int GameReady = 21;
+    public const int GameReadyListener = 22;
+    public const int GameStart = 23;
+    public const int GameStartListener = 24;
+    public const int GameState = 25;
+    public const int GameStateListener = 26;
+    public const int GridID = 27;
+    public const int Id = 28;
+    public const int IsBrickPassed = 29;
+    public const int LastFloor = 30;
+    public const int Life = 31;
+    public const int Move = 32;
+    public const int Player = 33;
+    public const int PlayerCurFloor = 34;
+    public const int PlayerReady = 35;
+    public const int PlayerState = 36;
+    public const int Position = 37;
+    public const int Reset = 38;
+    public const int Timer = 39;
+    public const int View = 40;
 
-    public const int TotalComponents = 39;
+    public const int TotalComponents = 41;
 
     public static readonly string[] componentNames = {
+        "Anim",
         "Asset",
         "AssetLoaded",
         "Brick",
@@ -86,6 +89,7 @@ public static class GameComponentsLookup {
         "Player",
         "PlayerCurFloor",
         "PlayerReady",
+        "PlayerState",
         "Position",
         "Reset",
         "Timer",
@@ -93,6 +97,7 @@ public static class GameComponentsLookup {
     };
 
     public static readonly System.Type[] componentTypes = {
+        typeof(AnimComponent),
         typeof(AssetComponent),
         typeof(AssetLoadedComponent),
         typeof(BrickComponent),
@@ -128,6 +133,7 @@ public static class GameComponentsLookup {
         typeof(PlayerComponent),
         typeof(PlayerCurFloorComponent),
         typeof(PlayerReady),
+        typeof(PlayerStateComponent),
         typeof(PositionComponent),
         typeof(ResetComponent),
         typeof(TimerComponent),

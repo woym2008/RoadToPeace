@@ -44,6 +44,11 @@ public class UnityViewService : Service, IViewService
             view.SortID = sortid;
         }
 
+        var anim = viewObject.GetComponent<IAnim>();
+        if(anim != null)
+        {
+            entity.AddAnim(anim);
+        }
         //viewObject.GetComponents(_eventListenerBuffer);
         //foreach (var listener in _eventListenerBuffer)
         //    listener.RegisterListeners(entity);
