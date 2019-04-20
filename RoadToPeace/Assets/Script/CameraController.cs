@@ -70,7 +70,7 @@ public class CameraController : MonoBehaviour, IGameStateListener, IGameReadyLis
         //}
         float dis = target.x - cachepos.x;
         curtime = 0;
-        movetime = dis*0.5f / Contexts.sharedInstance.game.floorSpeed.value;
+        movetime = dis*0.73f / Contexts.sharedInstance.game.floorSpeed.value;
 
         while (curtime < movetime)
         {
@@ -83,10 +83,10 @@ public class CameraController : MonoBehaviour, IGameStateListener, IGameReadyLis
 
         _transform.position = target;
 
-        while(!Contexts.sharedInstance.game.isPlayerReady)
-        {
-            yield return 0;
-        }
+        //while(!Contexts.sharedInstance.game.isPlayerReady)
+        //{
+        //    yield return 0;
+        //}
 
         if(callback != null)
         {

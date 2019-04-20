@@ -54,6 +54,13 @@ public class UnityViewService : Service, IViewService
         {
             entity.AddAnim(anim);
         }
+
+        var autodestory = viewObject.GetComponent<IAutoDestorySelf>();
+        if(autodestory != null)
+        {
+            autodestory.SetEntity(entity);
+            entity.AddAutoDestorySelf(autodestory);
+        }
         //viewObject.GetComponents(_eventListenerBuffer);
         //foreach (var listener in _eventListenerBuffer)
         //    listener.RegisterListeners(entity);

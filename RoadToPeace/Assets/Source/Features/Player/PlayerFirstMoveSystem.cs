@@ -25,7 +25,7 @@ public class PlayerFirstMoveSystem : IExecuteSystem
 
     public void Execute()
     {
-        if(_game.gameState.state == GameState.Start && _game.isPlayerReady == false)
+        if((_game.gameState.state == GameState.Start || _game.gameState.state == GameState.Running) && _game.isPlayerReady == false)
         {
             if (_game.playerEntity != null)
             {

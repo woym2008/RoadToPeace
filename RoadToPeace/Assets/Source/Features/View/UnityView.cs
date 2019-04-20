@@ -34,6 +34,7 @@ public class UnityView : MonoBehaviour, IView, IDestroyedListener
     public void DestroyImmediate()
     {
         _entity.RemoveDestroyedListener(this);
+        //Debug.Log("Destory " + this.gameObject.name);
         Destroy(_gameObject);
     }
 
@@ -79,6 +80,11 @@ public class UnityView : MonoBehaviour, IView, IDestroyedListener
             if (objrenderer != null)
             {
                 objrenderer.sortingOrder = value;
+
+                //if(gameObject.transform.childCount > 0)
+                //{
+                //    gameObject.transform.getc
+                //  }
             }
         }
     }

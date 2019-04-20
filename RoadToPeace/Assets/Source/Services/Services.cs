@@ -23,6 +23,8 @@ public class Services
 
     public CreatePlayerService CreatePlayerService;
 
+    public CreateEffectService CreateEffectService;
+
     public Services(Contexts contexts)
     {
         InputService = new UnityInputService(contexts);
@@ -34,5 +36,7 @@ public class Services
         Idservice = new IdService(contexts);
 
         CreatePlayerService = new CreatePlayerService(contexts);
+
+        CreateEffectService = new CreateEffectService(contexts);
     }
 }

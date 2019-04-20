@@ -56,7 +56,7 @@ public class MoveFloorSystem : IExecuteSystem
                             floorentity.isFloor = false;
                             floorentity.isDestroyed = true;
                             //减去一个entity 再创建一个新的
-                            Debug.Log("Destory one floor");
+                            //Debug.Log("Destory one floor");
                             continue;                            
                         }
 

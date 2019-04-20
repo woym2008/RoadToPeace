@@ -69,7 +69,7 @@ public class UpdateDragSystem : IExecuteSystem
                                                     if ((floor.position.position.x - 0.5f * floorwidth) < worldcurpos.x &&
                                                    (floor.position.position.x + 0.5f * floorwidth) > worldcurpos.x)
                                                     {
-                                                        Debug.LogWarning("FirstClick");
+                                                        //Debug.LogWarning("FirstClick");
                                                         //floor.ReplaceDrag(true);
                                                         floor.ReplaceDrag(true, data.fingerindex);
                                                         floor.ReplaceDragOffset(worldcurpos);

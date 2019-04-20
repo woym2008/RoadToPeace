@@ -22,15 +22,16 @@ public class PlayerCollideSystem : IExecuteSystem
             return;
         }
         var player = _contexts.game.playerEntity;
-        var floorwidth = _contexts.config.floorData.floorWidth;
-        if(player.hasPosition)
+        var halffloorwidth = _contexts.config.floorData.floorWidth * 0.5f;
+        var floorheight = _contexts.config.floorData.floorHeight;
+        if (player.hasPosition)
         {
             foreach(var floor in _floors)
             {
                 if(floor.hasPosition)
                 {
-                    if(player.position.position.x > (floor.position.position.x - floorwidth) &&
-                        player.position.position.x < (floor.position.position.x + floorwidth))
+                    if(player.position.position.x > (floor.position.position.x - halffloorwidth) &&
+                        player.position.position.x < (floor.position.position.x + halffloorwidth))
                     {
                         //enter this floor
                         var gridid = floor.gridID.id;
@@ -62,6 +63,8 @@ public class PlayerCollideSystem : IExecuteSystem
                                 _contexts.game.ReplaceLife(0);
                             }
                             curbrick.isBrickBroken = true;
+                            _serivces.CreateEffectService.CreateEffect("Dust",curbrick.position.position + 
+                            new Vector3(0, floorheight*0.5f, 0),10);
                         }
 
                         player.ReplacePlayerCurFloor(floor, gridid);
