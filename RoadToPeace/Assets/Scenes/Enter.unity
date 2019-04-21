@@ -5560,7 +5560,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 4
+  m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 0bf1c069816669d448841e08f533bc7f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -5757,11 +5757,14 @@ MonoBehaviour:
   FloorWidth: 2.52
   FloorHeight: 2.52
   NumFloor: 15
-  FloorSpeed: 2
+  FloorSpeed: 4
   PlayerPos: {fileID: 2094999945}
   PlayerRunPos: {fileID: 1537246862}
   CameraRunningPos: {fileID: 652174700}
   CameraTitlePos: {fileID: 1536950270}
+  PlayerJumpUpSpeed: 5
+  PlayerJumpOffSpeed: -5
+  PlayerJumpHeight: 1
 --- !u!4 &1743055587
 Transform:
   m_ObjectHideFlags: 0

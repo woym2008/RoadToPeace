@@ -30,6 +30,10 @@ public class ConfigController : MonoBehaviour
     public Transform CameraRunningPos;
     public Transform CameraTitlePos;
 
+    public float PlayerJumpUpSpeed = 1;
+    public float PlayerJumpOffSpeed = 1;
+    public float PlayerJumpHeight = 1;
+
     private void Awake()
     {
         var contexts = Contexts.sharedInstance;
@@ -52,6 +56,12 @@ public class ConfigController : MonoBehaviour
         contexts.config.ReplaceCameraPos(CameraRunningPos.position, CameraTitlePos.position);
 
         contexts.game.SetFloorSpeed(FloorSpeed);
+
+        contexts.config.ReplacePlayerData(
+            PlayerJumpUpSpeed,
+            PlayerJumpOffSpeed,
+            PlayerJumpHeight
+            );
     }
     private void Start()
     {

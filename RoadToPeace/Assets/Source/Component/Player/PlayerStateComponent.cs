@@ -7,7 +7,8 @@ public enum PlayerGameState
 {
     Wait,
     Run,
-    Jump,
+    JumpUp,
+    JumpOff,    
     Die,
 }
 

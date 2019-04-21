@@ -14,7 +14,13 @@ public class PlayerSystem : Feature
 
         Add(new PlayerRunSystem(contexts, services));
 
-        Add(new PlayerJumpSystem(contexts, services));
+        Add(new PlayerJumpUpSystem(contexts, services));
+
+        Add(new PlayerJumpOffSystem(contexts, services));
+
+        Add(new PlayerJumpUpUpdateSystem(contexts, services));
+
+        Add(new PlayerJumpOffUpdateSystem(contexts, services));
 
         Add(new PlayerDieSystem(contexts, services));
 

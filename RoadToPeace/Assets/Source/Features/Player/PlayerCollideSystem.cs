@@ -58,6 +58,7 @@ public class PlayerCollideSystem : IExecuteSystem
                             //Debug.LogError("Brick Pos: " + curbrick.position.position);
                             //_contexts.game.isGameOver = true;
                             //_contexts.game.ReplaceGameState(GameState.GameOver);
+                            /*
                             if(_contexts.game.hasLife)
                             {
                                 _contexts.game.ReplaceLife(0);
@@ -65,6 +66,13 @@ public class PlayerCollideSystem : IExecuteSystem
                             curbrick.isBrickBroken = true;
                             _serivces.CreateEffectService.CreateEffect("Dust",curbrick.position.position + 
                             new Vector3(0, floorheight*0.5f, 0),10);
+                            */
+                            //test 
+                            if(player.playerState.state == PlayerGameState.Run)
+                            {
+                                player.ReplacePlayerState(PlayerGameState.JumpUp);
+                            }
+
                         }
 
                         player.ReplacePlayerCurFloor(floor, gridid);

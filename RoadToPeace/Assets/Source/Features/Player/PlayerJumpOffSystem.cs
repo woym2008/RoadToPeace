@@ -3,14 +3,15 @@ using System.Collections;
 using Entitas;
 using System.Collections.Generic;
 
-public class PlayerRunSystem : ReactiveSystem<GameEntity>
+public class PlayerJumpOffSystem : ReactiveSystem<GameEntity>
 {
     private readonly Contexts _contexts;
-    public PlayerRunSystem(Contexts contexts, Services services)
+    public PlayerJumpOffSystem(Contexts contexts, Services services)
         : base(contexts.game)
     {
         _contexts = contexts;
     }
+
     protected override void Execute(List<GameEntity> entities)
     {
         foreach (var player in entities)
@@ -18,15 +19,14 @@ public class PlayerRunSystem : ReactiveSystem<GameEntity>
             if (player.hasAnim)
             {
                 var anim = player.anim.anim;
-                anim.PlayAnim("run");
-                player.view.Value.SortID = 3;
+                anim.PlayAnim("jumpoff");
             }
         }
     }
 
     protected override bool Filter(GameEntity entity)
     {
-        return (entity.playerState.state == PlayerGameState.Run);
+        return (entity.playerState.state == PlayerGameState.JumpOff);
     }
 
     protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
