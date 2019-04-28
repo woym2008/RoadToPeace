@@ -25,6 +25,8 @@ public class Services
 
     public CreateEffectService CreateEffectService;
 
+    public SpecialFloorService SpecialFloorService;
+
     public Services(Contexts contexts)
     {
         InputService = new UnityInputService(contexts);
@@ -38,5 +40,7 @@ public class Services
         CreatePlayerService = new CreatePlayerService(contexts);
 
         CreateEffectService = new CreateEffectService(contexts);
+
+        SpecialFloorService = new SpecialFloorService(contexts);
     }
 }

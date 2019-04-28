@@ -18,4 +18,6 @@ using Entitas.CodeGeneration.Attributes;
 public class FloorSpeedComponent : IComponent
 {
     public float value;
+    //目标速度，为了速度不会突然提升提升
+    public float targetvalue;
 }

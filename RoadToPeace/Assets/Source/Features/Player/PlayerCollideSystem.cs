@@ -48,31 +48,35 @@ public class PlayerCollideSystem : IExecuteSystem
                         var childs = floor.floorChild.childs;
                         var curbrick = childs[gridid];
                         var type = curbrick.brickType;
-                        var ispassed = curbrick.isIsBrickPassed;
-                        
-                        if (!ispassed)
+                        //var ispassed = curbrick.isIsBrickPassed;
+                        if(curbrick.hasWayOfPassBrick)
                         {
-                            //Debug.LogError("block!!! brick id is: " + gridid);
-                            //Debug.LogError("block brick object: " + curbrick.view.Value.Transform.name);
-                            //Debug.LogError("Floor Pos: " + floor.position.position);
-                            //Debug.LogError("Brick Pos: " + curbrick.position.position);
-                            //_contexts.game.isGameOver = true;
-                            //_contexts.game.ReplaceGameState(GameState.GameOver);
-                            /*
-                            if(_contexts.game.hasLife)
+                            var passway = curbrick.wayOfPassBrick.value;
+                            switch(passway)
                             {
-                                _contexts.game.ReplaceLife(0);
+                                case PassBrickWay.Jump:
+                                    {
+                                        if (player.playerState.state == PlayerGameState.Run)
+                                        {
+                                            player.ReplacePlayerState(PlayerGameState.JumpUp);
+                                        }
+                                    }
+                                    break;
+                                case PassBrickWay.Collision:
+                                    {
+                                        if (player.playerState.state == PlayerGameState.Run)
+                                        {
+                                            if (_contexts.game.hasLife)
+                                            {
+                                                _contexts.game.ReplaceLife(0);
+                                            }
+                                            curbrick.isBrickBroken = true;
+                                            _serivces.CreateEffectService.CreateEffect("Dust", curbrick.position.position +
+                                            new Vector3(0, floorheight * 0.5f, 0), 10);
+                                        }
+                                    }
+                                    break;
                             }
-                            curbrick.isBrickBroken = true;
-                            _serivces.CreateEffectService.CreateEffect("Dust",curbrick.position.position + 
-                            new Vector3(0, floorheight*0.5f, 0),10);
-                            */
-                            //test 
-                            if(player.playerState.state == PlayerGameState.Run)
-                            {
-                                player.ReplacePlayerState(PlayerGameState.JumpUp);
-                            }
-
                         }
 
                         player.ReplacePlayerCurFloor(floor, gridid);

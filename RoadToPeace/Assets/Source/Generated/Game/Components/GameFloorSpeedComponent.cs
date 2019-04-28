@@ -12,22 +12,22 @@ public partial class GameContext {
     public FloorSpeedComponent floorSpeed { get { return floorSpeedEntity.floorSpeed; } }
     public bool hasFloorSpeed { get { return floorSpeedEntity != null; } }
 
-    public GameEntity SetFloorSpeed(float newValue) {
+    public GameEntity SetFloorSpeed(float newValue, float newTargetvalue) {
         if (hasFloorSpeed) {
             throw new Entitas.EntitasException("Could not set FloorSpeed!\n" + this + " already has an entity with FloorSpeedComponent!",
                 "You should check if the context already has a floorSpeedEntity before setting it or use context.ReplaceFloorSpeed().");
         }
         var entity = CreateEntity();
-        entity.AddFloorSpeed(newValue);
+        entity.AddFloorSpeed(newValue, newTargetvalue);
         return entity;
     }
 
-    public void ReplaceFloorSpeed(float newValue) {
+    public void ReplaceFloorSpeed(float newValue, float newTargetvalue) {
         var entity = floorSpeedEntity;
         if (entity == null) {
-            entity = SetFloorSpeed(newValue);
+            entity = SetFloorSpeed(newValue, newTargetvalue);
         } else {
-            entity.ReplaceFloorSpeed(newValue);
+            entity.ReplaceFloorSpeed(newValue, newTargetvalue);
         }
     }
 
@@ -49,17 +49,19 @@ public partial class GameEntity {
     public FloorSpeedComponent floorSpeed { get { return (FloorSpeedComponent)GetComponent(GameComponentsLookup.FloorSpeed); } }
     public bool hasFloorSpeed { get { return HasComponent(GameComponentsLookup.FloorSpeed); } }
 
-    public void AddFloorSpeed(float newValue) {
+    public void AddFloorSpeed(float newValue, float newTargetvalue) {
         var index = GameComponentsLookup.FloorSpeed;
         var component = (FloorSpeedComponent)CreateComponent(index, typeof(FloorSpeedComponent));
         component.value = newValue;
+        component.targetvalue = newTargetvalue;
         AddComponent(index, component);
     }
 
-    public void ReplaceFloorSpeed(float newValue) {
+    public void ReplaceFloorSpeed(float newValue, float newTargetvalue) {
         var index = GameComponentsLookup.FloorSpeed;
         var component = (FloorSpeedComponent)CreateComponent(index, typeof(FloorSpeedComponent));
         component.value = newValue;
+        component.targetvalue = newTargetvalue;
         ReplaceComponent(index, component);
     }
 

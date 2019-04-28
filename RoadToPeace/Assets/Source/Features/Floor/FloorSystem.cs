@@ -26,5 +26,7 @@ public class FloorSystem : Feature
         Add(new MoveFloorSystem(contexts, services));
         Add(new DestoryFloorSystem(contexts, services));
         Add(new UpdateBrickSystem(contexts, services));
+
+        Add(new SpecialFloorUpdate(contexts, services));
     }
 }

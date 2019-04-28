@@ -22,7 +22,7 @@ public class ConfigController : MonoBehaviour
     public int NumFloor = 10;
 
     public float FloorSpeed = 1.0f;
-
+    public float FloorSpeedUpValue = 0.5f;
 
     public Transform PlayerPos;
     public Transform PlayerRunPos;
@@ -33,6 +33,10 @@ public class ConfigController : MonoBehaviour
     public float PlayerJumpUpSpeed = 1;
     public float PlayerJumpOffSpeed = 1;
     public float PlayerJumpHeight = 1;
+
+    public float DifficultLevelUpTime = 20.0f;
+
+
 
     private void Awake()
     {
@@ -55,13 +59,19 @@ public class ConfigController : MonoBehaviour
 
         contexts.config.ReplaceCameraPos(CameraRunningPos.position, CameraTitlePos.position);
 
-        contexts.game.SetFloorSpeed(FloorSpeed);
+        //初始化 速度和目标速度都一样
+        contexts.game.SetFloorSpeed(FloorSpeed, FloorSpeed);
+        contexts.config.SetFloorBaseSpeed(FloorSpeed);
 
         contexts.config.ReplacePlayerData(
             PlayerJumpUpSpeed,
             PlayerJumpOffSpeed,
             PlayerJumpHeight
             );
+
+        contexts.config.ReplaceDifficultLevelup(DifficultLevelUpTime);
+
+        contexts.config.ReplaceFloorSpeedUp(FloorSpeedUpValue);
     }
     private void Start()
     {

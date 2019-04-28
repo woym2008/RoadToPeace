@@ -16,12 +16,14 @@ using UnityEngine;
 public class CreateFloorSystem : ReactiveSystem<GameEntity>
 {
     private IGroup<GameEntity> _gamegroup;
+    private IGroup<GameEntity> _specialfloors;
     private Contexts _contexts;
     public CreateFloorSystem(Contexts contexts, Services services)
         : base(contexts.game)
     {
         _contexts = contexts;
         _gamegroup = contexts.game.GetGroup(GameMatcher.Floor);
+        _specialfloors = contexts.game.GetGroup(GameMatcher.SpecialFloor);
     }
 
     protected override void Execute(List<GameEntity> entities)
@@ -38,24 +40,57 @@ public class CreateFloorSystem : ReactiveSystem<GameEntity>
                 break;
             }
         }
-        GameEntity entity = _contexts.game.CreateEntity();
-        entity.isFloor = true;
-        entity.isLastFloor = true;
-        entity.ReplacePosition(new Vector3(
-            poslast.x + width,
-            poslast.y,
-            poslast.z
-            ));
-        entity.ReplaceGridID(1);
 
-        //难度应该是逐渐上升的 这个值控制难度
-        entity.ReplaceFloorDifficulty(1);
-        entity.isDestoryOnReset = true;
+
+        //决定接下来的floor是什么
+        //普通格子还是特殊 目前暂时使用70%】
+        //应该在Config有个值控制普通格子概率
+        var isnormal = UnityEngine.Random.Range(0.0f,1.0f);
+        if(isnormal < 0.7f || _specialfloors.count == 0)
+        {
+            GameEntity entity = _contexts.game.CreateEntity();
+            entity.isFloor = true;
+            entity.isLastFloor = true;
+            entity.ReplacePosition(new Vector3(
+                poslast.x + width,
+                poslast.y,
+                poslast.z
+                ));
+            entity.ReplaceGridID(1);
+
+            //难度应该是逐渐上升的 这个值控制难度
+            entity.ReplaceFloorDifficulty(1);
+            entity.isDestoryOnReset = true;
+        }
+        else
+        {
+            var index = UnityEngine.Random.Range(0, _specialfloors.count);
+            //如果是特殊格子 从所有特殊格子中随机一种
+            var entitis = _specialfloors.GetEntities();
+            var nextdata = entitis[index];
+            var count = nextdata.specialFloor.floordata.GetFloorData().Length;
+            foreach (var data in nextdata.specialFloor.floordata.GetFloorData())
+            {
+                count--;
+
+                GameEntity entity = _contexts.game.CreateEntity();
+                entity.isFloor = true;
+                if(count == 0)
+                {
+                    entity.isLastFloor = true;
+                }
+                poslast += new Vector3(width,0,0);
+                entity.ReplacePosition(poslast);
+                entity.ReplaceGridID(1); //临时这么写 这个应该也是配置出来的
+                entity.ReplaceSpecialFloorData(data);
+            }
+        }
+
     }
 
     protected override bool Filter(GameEntity entity)
     {
-        return _contexts.game.gameState.state == GameState.Running;
+        return (_contexts.game.gameState.state == GameState.Running) && (_gamegroup.count <= _contexts.config.floorData.numFloor);
     }
 
     protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)

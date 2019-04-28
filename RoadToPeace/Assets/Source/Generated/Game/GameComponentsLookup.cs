@@ -22,37 +22,43 @@ public static class GameComponentsLookup {
     public const int DestoryOnReset = 11;
     public const int Destroyed = 12;
     public const int DestroyedListener = 13;
-    public const int Drag = 14;
-    public const int DragFloor = 15;
-    public const int DragOffset = 16;
-    public const int FloorChild = 17;
-    public const int Floor = 18;
-    public const int FloorDifficulty = 19;
-    public const int FloorSpeed = 20;
-    public const int GameCamera = 21;
-    public const int GameOver = 22;
-    public const int GameReady = 23;
-    public const int GameReadyListener = 24;
-    public const int GameStart = 25;
-    public const int GameStartListener = 26;
-    public const int GameState = 27;
-    public const int GameStateListener = 28;
-    public const int GridID = 29;
-    public const int Id = 30;
-    public const int IsBrickPassed = 31;
-    public const int LastFloor = 32;
-    public const int Life = 33;
-    public const int Move = 34;
-    public const int Player = 35;
-    public const int PlayerCurFloor = 36;
-    public const int PlayerReady = 37;
-    public const int PlayerState = 38;
-    public const int Position = 39;
-    public const int Reset = 40;
-    public const int Timer = 41;
-    public const int View = 42;
+    public const int DifficultCountDown = 14;
+    public const int Difficulty = 15;
+    public const int Drag = 16;
+    public const int DragFloor = 17;
+    public const int DragOffset = 18;
+    public const int FloorChild = 19;
+    public const int Floor = 20;
+    public const int FloorDifficulty = 21;
+    public const int FloorSpeed = 22;
+    public const int GameCamera = 23;
+    public const int GameOver = 24;
+    public const int GameReady = 25;
+    public const int GameReadyListener = 26;
+    public const int GameStart = 27;
+    public const int GameStartListener = 28;
+    public const int GameState = 29;
+    public const int GameStateListener = 30;
+    public const int GridID = 31;
+    public const int Id = 32;
+    public const int IsBrickPassed = 33;
+    public const int LastFloor = 34;
+    public const int Life = 35;
+    public const int Move = 36;
+    public const int Player = 37;
+    public const int PlayerCurFloor = 38;
+    public const int PlayerReady = 39;
+    public const int PlayerState = 40;
+    public const int Position = 41;
+    public const int Reset = 42;
+    public const int SpecialFloor = 43;
+    public const int SpecialFloorData = 44;
+    public const int Timer = 45;
+    public const int VelocityIncrement = 46;
+    public const int View = 47;
+    public const int WayOfPassBrick = 48;
 
-    public const int TotalComponents = 43;
+    public const int TotalComponents = 49;
 
     public static readonly string[] componentNames = {
         "Anim",
@@ -69,6 +75,8 @@ public static class GameComponentsLookup {
         "DestoryOnReset",
         "Destroyed",
         "DestroyedListener",
+        "DifficultCountDown",
+        "Difficulty",
         "Drag",
         "DragFloor",
         "DragOffset",
@@ -96,8 +104,12 @@ public static class GameComponentsLookup {
         "PlayerState",
         "Position",
         "Reset",
+        "SpecialFloor",
+        "SpecialFloorData",
         "Timer",
-        "View"
+        "VelocityIncrement",
+        "View",
+        "WayOfPassBrick"
     };
 
     public static readonly System.Type[] componentTypes = {
@@ -115,6 +127,8 @@ public static class GameComponentsLookup {
         typeof(DestoryOnResetComponent),
         typeof(DestroyedComponent),
         typeof(DestroyedListenerComponent),
+        typeof(DifficultCountDownComponent),
+        typeof(DifficultyComponent),
         typeof(DragComponent),
         typeof(DragFloorComponent),
         typeof(DragOffsetComponent),
@@ -142,7 +156,11 @@ public static class GameComponentsLookup {
         typeof(PlayerStateComponent),
         typeof(PositionComponent),
         typeof(ResetComponent),
+        typeof(SpecialFloorComponent),
+        typeof(SpecialFloorDataComponent),
         typeof(TimerComponent),
-        typeof(ViewComponent)
+        typeof(VelocityIncrementComponent),
+        typeof(ViewComponent),
+        typeof(WayOfPassBrickComponent)
     };
 }

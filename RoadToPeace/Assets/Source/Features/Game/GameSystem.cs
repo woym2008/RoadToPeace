@@ -20,7 +20,7 @@ public class GameSystem : Feature
         Add(new GameOverSystem(contexts));
         Add(new GameResetSystem(contexts, services));
 
-
+        Add(new GameDataSystem(contexts, services));
         Add(new FloorSystem(contexts, services));
         //Add(new CreateBrickSystem(contexts, services));
         Add(new InputSystem(contexts, services));
@@ -31,7 +31,7 @@ public class GameSystem : Feature
 
         //Add(new MovementSystem(contexts, services));
 
-        Add(new UpdateDragSystem(contexts, services));
+
 
         //Add(new LifeChangeSystem(contexts));
 

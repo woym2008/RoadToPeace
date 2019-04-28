@@ -17,6 +17,9 @@ public class GameController : MonoBehaviour
         _gamecontext = contexts.game;
         _gamecontext.ReplaceGameState(GameState.Ready);
         _gamecontext.isPlayerReady = false;
+        _gamecontext.ReplaceDifficulty(0);
+
+        _gamecontext.ReplaceDifficultCountDown(0);
     }
     // Start is called before the first frame update
     void Start()
