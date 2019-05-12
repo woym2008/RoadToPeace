@@ -15,16 +15,20 @@ MonoBehaviour:
   minlevel: 0
   maxlevel: 999
   floors:
-  - type: 3
-    brick1_data: _Jump
-    brick2_data: 
+  - type: 1
+    brick1_data: 
+    brick2_data: Jump
     brick3_data: 
-  - type: 2
-    brick1_data: _Trap
-    brick2_data: _Trap
-    brick3_data: _Trap
-  - type: 2
-    brick1_data: _Trap
+  - type: 1
+    brick1_data: Trap
+    brick2_data: Trap
+    brick3_data: Trap
+  - type: 1
+    brick1_data: 
+    brick2_data: Trap
+    brick3_data: 
+  - type: 1
+    brick1_data: 
     brick2_data: 
-    brick3_data: _Trap
-  scene: 
+    brick3_data: Trap
+  scene: Grass

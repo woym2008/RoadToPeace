@@ -52,9 +52,12 @@ public class CreateBrickSystem : ReactiveSystem<GameEntity>
             if (entity.hasSpecialFloorData)
             {
                 var data = entity.specialFloorData.data;
-                var up_resstr = string.Format("{0}{1}", _contexts.config.brickTypeList.typeList[data.type], data.brick1_data);
-                var mid_resstr = string.Format("{0}{1}", _contexts.config.brickTypeList.typeList[data.type], data.brick2_data);
-                var down_resstr = string.Format("{0}{1}", _contexts.config.brickTypeList.typeList[data.type], data.brick3_data);
+                var ex_upstr = data.brick1_data == "" ? "" : "_";
+                var up_resstr = string.Format("{0}{1}{2}", _contexts.config.brickTypeList.typeList[data.type], ex_upstr, data.brick1_data);
+                var ex_midstr = data.brick2_data == "" ? "" : "_";
+                var mid_resstr = string.Format("{0}{1}{2}", _contexts.config.brickTypeList.typeList[data.type], ex_midstr, data.brick2_data);
+                var ex_downstr = data.brick3_data == "" ? "" : "_";
+                var down_resstr = string.Format("{0}{1}{2}", _contexts.config.brickTypeList.typeList[data.type], ex_downstr, data.brick3_data);
                 var earth_resstr = string.Format("{0}_{1}", _contexts.config.brickTypeList.typeList[data.type], "Soil");
                 Debug.Log("up:" + up_resstr);
                 Debug.Log("mid:" + mid_resstr);
@@ -228,6 +231,15 @@ public class CreateBrickSystem : ReactiveSystem<GameEntity>
                 return PassBrickWay.Collision;
                 break;
             case "_Electrocution":
+                return PassBrickWay.Electrocution;
+                break;
+            case "Jump":
+                return PassBrickWay.Jump;
+                break;
+            case "Trap":
+                return PassBrickWay.Collision;
+                break;
+            case "Electrocution":
                 return PassBrickWay.Electrocution;
                 break;
         }
