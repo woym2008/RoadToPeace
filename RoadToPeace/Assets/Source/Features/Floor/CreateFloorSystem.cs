@@ -83,6 +83,7 @@ public class CreateFloorSystem : ReactiveSystem<GameEntity>
                 entity.ReplacePosition(poslast);
                 entity.ReplaceGridID(1); //临时这么写 这个应该也是配置出来的
                 entity.ReplaceSpecialFloorData(data);
+                entity.isDestoryOnReset = true;
             }
         }
 
