@@ -29,6 +29,10 @@ public class DestroySystem : IExecuteSystem
         foreach (var e in _gameGroup.GetEntities(_gameBuffer))
         {
             //Debug.Log(e);
+            if(e.hasFloorChild)
+            {
+                e.RemoveFloorChild();
+            }
             e.Destroy();
         }
     }
