@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: d7474c1cf95cb5e48a01ffabb5435b67
+guid: b23ee7e5855dc60409ec6e98173a7bae
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
@@ -8,7 +8,7 @@ ModelImporter:
     2100000: default
     2300000: //RootNode
     3300000: //RootNode
-    4300000: Pillar
+    4300000: Box020
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -40,7 +40,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 9
+    globalScale: 10
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
@@ -49,7 +49,7 @@ ModelImporter:
     importCameras: 1
     importLights: 1
     swapUVChannels: 0
-    generateSecondaryUV: 1
+    generateSecondaryUV: 0
     useFileUnits: 1
     optimizeMeshForGPU: 1
     keepQuads: 0
