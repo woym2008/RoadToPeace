@@ -15,11 +15,19 @@ using UnityEngine;
 public class ConfigController : MonoBehaviour
 {
     public List<string> BrickRes = new List<string>();
+    public List<string> RealBrickPath = new List<string>();
     public Transform FirstPos;
     public Transform OverPos;
     public float FloorWidth;
     public float FloorHeight;
     public int NumFloor = 10;
+    //----------------------------------
+    public Transform GroundFirstPos;
+    public Transform GroundOverPos;
+    public float GroundWidth;
+    public float GroundHieght;
+    public int NumGround = 10;
+    //----------------------------------
 
     public float FloorSpeed = 1.0f;
     public float FloorSpeedUpValue = 0.5f;
@@ -48,8 +56,15 @@ public class ConfigController : MonoBehaviour
             OverPos.position,
             NumFloor
             );
+        for(int i=0;i<BrickRes.Count;++i)
+        {
+            RealBrickPath.Add("Brick/" + BrickRes[i]);
+        }
 
-        contexts.config.ReplaceBrickTypeList(BrickRes);
+        contexts.config.ReplaceGroundData(GroundWidth, GroundHieght,
+        GroundFirstPos.position, GroundOverPos.position, NumGround);
+
+        contexts.config.ReplaceBrickTypeList(RealBrickPath);
 
         contexts.config.ReplaceStartPlayerPosition(PlayerPos.position);
 

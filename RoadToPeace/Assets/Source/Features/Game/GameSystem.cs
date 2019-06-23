@@ -22,6 +22,7 @@ public class GameSystem : Feature
 
         Add(new GameDataSystem(contexts, services));
         Add(new FloorSystem(contexts, services));
+        Add(new GroundSystem(contexts, services));
         //Add(new CreateBrickSystem(contexts, services));
         Add(new InputSystem(contexts, services));
 

@@ -52,7 +52,7 @@ public class UnityView : MonoBehaviour, IView, IDestroyedListener
         }
     }
 
-    public Vector2 Position
+    public Vector3 Position
     {
         get { return _gameObject.transform.position; }
         set { _gameObject.transform.position = value; }

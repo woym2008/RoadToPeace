@@ -40,25 +40,27 @@ public static class GameComponentsLookup {
     public const int GameState = 29;
     public const int GameStateListener = 30;
     public const int GridID = 31;
-    public const int Id = 32;
-    public const int IsBrickPassed = 33;
-    public const int LastFloor = 34;
-    public const int Life = 35;
-    public const int Move = 36;
-    public const int Player = 37;
-    public const int PlayerCurFloor = 38;
-    public const int PlayerReady = 39;
-    public const int PlayerState = 40;
-    public const int Position = 41;
-    public const int Reset = 42;
-    public const int SpecialFloor = 43;
-    public const int SpecialFloorData = 44;
-    public const int Timer = 45;
-    public const int VelocityIncrement = 46;
-    public const int View = 47;
-    public const int WayOfPassBrick = 48;
+    public const int Ground = 32;
+    public const int Id = 33;
+    public const int IsBrickPassed = 34;
+    public const int LastFloor = 35;
+    public const int LastGround = 36;
+    public const int Life = 37;
+    public const int Move = 38;
+    public const int Player = 39;
+    public const int PlayerCurFloor = 40;
+    public const int PlayerReady = 41;
+    public const int PlayerState = 42;
+    public const int Position = 43;
+    public const int Reset = 44;
+    public const int SpecialFloor = 45;
+    public const int SpecialFloorData = 46;
+    public const int Timer = 47;
+    public const int VelocityIncrement = 48;
+    public const int View = 49;
+    public const int WayOfPassBrick = 50;
 
-    public const int TotalComponents = 49;
+    public const int TotalComponents = 51;
 
     public static readonly string[] componentNames = {
         "Anim",
@@ -93,9 +95,11 @@ public static class GameComponentsLookup {
         "GameState",
         "GameStateListener",
         "GridID",
+        "Ground",
         "Id",
         "IsBrickPassed",
         "LastFloor",
+        "LastGround",
         "Life",
         "Move",
         "Player",
@@ -145,9 +149,11 @@ public static class GameComponentsLookup {
         typeof(GameStateComponent),
         typeof(GameStateListenerComponent),
         typeof(GridID),
+        typeof(GroundComponent),
         typeof(IdComponent),
         typeof(IsBrickPassedComponent),
         typeof(LastFloorComponent),
+        typeof(LastGroundComponent),
         typeof(LifeComponent),
         typeof(MoveComponent),
         typeof(PlayerComponent),

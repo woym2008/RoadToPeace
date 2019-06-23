@@ -17,7 +17,7 @@ public interface IView
 {
     bool Enabled { get; set; }
     int Id { get; set; }
-    Vector2 Position { get; set; }
+    Vector3 Position { get; set; }
     Transform Transform { get; }
     int SortID { set; }
 

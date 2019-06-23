@@ -15,12 +15,13 @@ public static class ConfigComponentsLookup {
     public const int FloorBaseSpeed = 4;
     public const int FloorData = 5;
     public const int FloorSpeedUp = 6;
-    public const int PlayerData = 7;
-    public const int RoadBoundary = 8;
-    public const int RunPlayerPosition = 9;
-    public const int StartPlayerPosition = 10;
+    public const int GroundData = 7;
+    public const int PlayerData = 8;
+    public const int RoadBoundary = 9;
+    public const int RunPlayerPosition = 10;
+    public const int StartPlayerPosition = 11;
 
-    public const int TotalComponents = 11;
+    public const int TotalComponents = 12;
 
     public static readonly string[] componentNames = {
         "BrickTypeCount",
@@ -30,6 +31,7 @@ public static class ConfigComponentsLookup {
         "FloorBaseSpeed",
         "FloorData",
         "FloorSpeedUp",
+        "GroundData",
         "PlayerData",
         "RoadBoundary",
         "RunPlayerPosition",
@@ -44,6 +46,7 @@ public static class ConfigComponentsLookup {
         typeof(FloorBaseSpeedComponent),
         typeof(FloorDataComponent),
         typeof(FloorSpeedUpComponent),
+        typeof(GroundDataComponent),
         typeof(PlayerDataComponent),
         typeof(RoadBoundaryComponent),
         typeof(RunPlayerPositionComponent),

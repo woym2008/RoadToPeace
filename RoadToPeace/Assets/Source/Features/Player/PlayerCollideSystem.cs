@@ -71,8 +71,8 @@ public class PlayerCollideSystem : IExecuteSystem
                                                 _contexts.game.ReplaceLife(0);
                                             }
                                             curbrick.isBrickBroken = true;
-                                            _serivces.CreateEffectService.CreateEffect("Dust", curbrick.position.position +
-                                            new Vector3(0, floorheight * 0.5f, 0), 10);
+                                            //_serivces.CreateEffectService.CreateEffect("Dust", curbrick.position.position +
+                                            //new Vector3(0, floorheight * 0.5f, 0), 10);
                                         }
                                     }
                                     break;

@@ -96,18 +96,18 @@ public class UpdateDragSystem : IExecuteSystem
                                                 {
                                                     if (data.fingerindex == floor.drag.dragID)
                                                     {
-                                                        var dis = worldcurpos.y - floor.dragOffset.offset.y;
+                                                        var dis = worldcurpos.z - floor.dragOffset.offset.z;
                                                         if (dis > halffloorheight * 0.5f && floor.gridID.id <= 1)
                                                         {
                                                             //向上
-                                                            floor.position.position.y = floor.position.position.y + floorheight;
+                                                            floor.position.position.z = floor.position.position.z + floorheight;
                                                             floor.gridID.id++;
 
                                                         }
                                                         else if (dis < -halffloorheight * 0.5f && floor.gridID.id >= 1)
                                                         {
                                                             //向下
-                                                            floor.position.position.y = floor.position.position.y - floorheight;
+                                                            floor.position.position.z = floor.position.position.z - floorheight;
                                                             floor.gridID.id--;
                                                         }
                                                     }

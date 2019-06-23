@@ -28,7 +28,16 @@ public class UnityViewService : Service, IViewService
 
     public void LoadAsset(Contexts contexts, GameEntity entity, string assetName, int sortid = 0)
     {
-        var viewObject = GameObject.Instantiate(Resources.Load<GameObject>(string.Format("Prefabs/{0}", assetName)), _root);
+        GameObject viewObject = null;
+        try
+        {
+            viewObject = GameObject.Instantiate(Resources.Load<GameObject>(string.Format("Prefabs/{0}", assetName)), _root);
+        }
+        catch
+        {
+            Debug.LogError(string.Format("Prefabs/{0} not found!", assetName));
+        }
+        //var viewObject = GameObject.Instantiate(Resources.Load<GameObject>(string.Format("Prefabs/{0}", assetName)), _root);
         if (viewObject == null)
             throw new NullReferenceException(string.Format("Prefabs/{0} not found!", assetName));
 

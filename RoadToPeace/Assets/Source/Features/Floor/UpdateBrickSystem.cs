@@ -27,7 +27,8 @@ public class UpdateBrickSystem : IExecuteSystem
             if(entity.hasPosition && entity.brickParent.parent.hasPosition)
             {
                 entity.position.position.x = entity.brickParent.parent.position.position.x;
-                entity.position.position.y = entity.brickYOffset.value + entity.brickParent.parent.position.position.y;
+                entity.position.position.y = entity.brickParent.parent.position.position.y;
+                entity.position.position.z = entity.brickYOffset.value + entity.brickParent.parent.position.position.z;
                 if (entity.hasView)
                 {
                     entity.view.Value.Position = entity.position.position;
