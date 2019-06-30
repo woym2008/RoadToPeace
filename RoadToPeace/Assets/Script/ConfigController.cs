@@ -22,11 +22,15 @@ public class ConfigController : MonoBehaviour
     public float FloorHeight;
     public int NumFloor = 10;
     //----------------------------------
+
     public Transform GroundFirstPos;
     public Transform GroundOverPos;
     public float GroundWidth;
     public float GroundHieght;
     public int NumGround = 10;
+    //----------------------------------
+    public List<string> GroundRes = new List<string>();
+    public List<string> GroundPath = new List<string>();
     //----------------------------------
 
     public float FloorSpeed = 1.0f;
@@ -61,6 +65,12 @@ public class ConfigController : MonoBehaviour
             RealBrickPath.Add("Brick/" + BrickRes[i]);
         }
 
+        for(int i= 0; i<GroundRes.Count; ++i)
+        {
+            GroundPath.Add("Ground/" + GroundRes[i]);
+        }
+
+        contexts.config.ReplaceGroundList(GroundPath);
         contexts.config.ReplaceGroundData(GroundWidth, GroundHieght,
         GroundFirstPos.position, GroundOverPos.position, NumGround);
 

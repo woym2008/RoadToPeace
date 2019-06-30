@@ -22,6 +22,9 @@ public class FirstCreatGroundSystem : ReactiveSystem<GameEntity>
             groundEntity.isDestoryOnReset = true;            
             groundEntity.isGround = true;
             groundEntity.ReplacePosition(curpos);
+            var index = Random.Range(0, _contexts.config.groundList.groundList.Count);
+            var path = _contexts.config.groundList.groundList[index];
+            groundEntity.ReplaceAsset(path,0);
 
             if (i == (_contexts.config.groundData.numGround - 1))
             {

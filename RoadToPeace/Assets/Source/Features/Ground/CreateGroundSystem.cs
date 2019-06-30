@@ -18,12 +18,12 @@ public class CreateGroundSystem : ReactiveSystem<GameEntity>
     {
         float width = _contexts.config.groundData.groundWidth;
         Vector3 poslast = _contexts.config.groundData.overPos;
-        foreach (var floor in _groundgroup)
+        foreach (var g in _groundgroup)
         {
-            if (floor.isLastFloor)
+            if (g.isLastGround)
             {
-                poslast = floor.position.position;
-                floor.isLastGround = false;
+                poslast = g.position.position;
+                g.isLastGround = false;
                 break;
             }
         }
@@ -31,8 +31,13 @@ public class CreateGroundSystem : ReactiveSystem<GameEntity>
         GameEntity entity = _contexts.game.CreateEntity();
         entity.isGround = true;
 
+        var index = Random.Range(0, _contexts.config.groundList.groundList.Count);
+        var path = _contexts.config.groundList.groundList[index];
+        entity.ReplaceAsset(path, 0);
+
         poslast += new Vector3(width, 0, 0);
         entity.ReplacePosition(poslast);
+        entity.isLastGround = true;
         entity.isDestoryOnReset = true;
     }
 

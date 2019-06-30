@@ -31,9 +31,14 @@ public class MoveGroundSystem : IExecuteSystem
                 {
                     g.position.position.x -= _contexts.game.floorSpeed.value * Time.fixedDeltaTime;
 
+                    if (g.hasView)
+                    {
+                        g.view.Value.Position = g.position.position;
+                    }
+
                     if (g.position.position.x < _contexts.config.groundData.overPos.x)
                     {
-                        g.isFloor = false;
+                        //g.isGround = false;
                         g.isDestroyed = true;
                         //减去一个entity 再创建一个新的
                         //Debug.Log("Destory one floor");
