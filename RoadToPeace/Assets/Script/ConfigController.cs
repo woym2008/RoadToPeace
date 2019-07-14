@@ -28,6 +28,8 @@ public class ConfigController : MonoBehaviour
     public float GroundWidth;
     public float GroundHieght;
     public int NumGround = 10;
+
+    public int NumGroundRow = 2;
     //----------------------------------
     public List<string> GroundRes = new List<string>();
     public List<string> GroundPath = new List<string>();
@@ -72,7 +74,8 @@ public class ConfigController : MonoBehaviour
 
         contexts.config.ReplaceGroundList(GroundPath);
         contexts.config.ReplaceGroundData(GroundWidth, GroundHieght,
-        GroundFirstPos.position, GroundOverPos.position, NumGround);
+        GroundFirstPos.position, GroundOverPos.position, NumGround,
+            NumGroundRow);
 
         contexts.config.ReplaceBrickTypeList(RealBrickPath);
 

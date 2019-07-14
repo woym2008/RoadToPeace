@@ -41,26 +41,28 @@ public static class GameComponentsLookup {
     public const int GameStateListener = 30;
     public const int GridID = 31;
     public const int Ground = 32;
-    public const int Id = 33;
-    public const int IsBrickPassed = 34;
-    public const int LastFloor = 35;
-    public const int LastGround = 36;
-    public const int Life = 37;
-    public const int Move = 38;
-    public const int Player = 39;
-    public const int PlayerCurFloor = 40;
-    public const int PlayerReady = 41;
-    public const int PlayerState = 42;
-    public const int Position = 43;
-    public const int Reset = 44;
-    public const int SpecialFloor = 45;
-    public const int SpecialFloorData = 46;
-    public const int Timer = 47;
-    public const int VelocityIncrement = 48;
-    public const int View = 49;
-    public const int WayOfPassBrick = 50;
+    public const int GroundParent = 33;
+    public const int GroundView = 34;
+    public const int Id = 35;
+    public const int IsBrickPassed = 36;
+    public const int LastFloor = 37;
+    public const int LastGround = 38;
+    public const int Life = 39;
+    public const int Move = 40;
+    public const int Player = 41;
+    public const int PlayerCurFloor = 42;
+    public const int PlayerReady = 43;
+    public const int PlayerState = 44;
+    public const int Position = 45;
+    public const int Reset = 46;
+    public const int SpecialFloor = 47;
+    public const int SpecialFloorData = 48;
+    public const int Timer = 49;
+    public const int VelocityIncrement = 50;
+    public const int View = 51;
+    public const int WayOfPassBrick = 52;
 
-    public const int TotalComponents = 51;
+    public const int TotalComponents = 53;
 
     public static readonly string[] componentNames = {
         "Anim",
@@ -96,6 +98,8 @@ public static class GameComponentsLookup {
         "GameStateListener",
         "GridID",
         "Ground",
+        "GroundParent",
+        "GroundView",
         "Id",
         "IsBrickPassed",
         "LastFloor",
@@ -150,6 +154,8 @@ public static class GameComponentsLookup {
         typeof(GameStateListenerComponent),
         typeof(GridID),
         typeof(GroundComponent),
+        typeof(GroundParentComponent),
+        typeof(GroundViewComponent),
         typeof(IdComponent),
         typeof(IsBrickPassedComponent),
         typeof(LastFloorComponent),

@@ -17,4 +17,6 @@ public class GroundDataComponent : IComponent
     public Vector3 overPos;
     //总共路段数量
     public int numGround;
+    //几列
+    public int numRow;
 }

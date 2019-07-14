@@ -12,22 +12,22 @@ public partial class ConfigContext {
     public GroundDataComponent groundData { get { return groundDataEntity.groundData; } }
     public bool hasGroundData { get { return groundDataEntity != null; } }
 
-    public ConfigEntity SetGroundData(float newGroundWidth, float newGroundHeight, UnityEngine.Vector3 newFirstPos, UnityEngine.Vector3 newOverPos, int newNumGround) {
+    public ConfigEntity SetGroundData(float newGroundWidth, float newGroundHeight, UnityEngine.Vector3 newFirstPos, UnityEngine.Vector3 newOverPos, int newNumGround, int newNumRow) {
         if (hasGroundData) {
             throw new Entitas.EntitasException("Could not set GroundData!\n" + this + " already has an entity with GroundDataComponent!",
                 "You should check if the context already has a groundDataEntity before setting it or use context.ReplaceGroundData().");
         }
         var entity = CreateEntity();
-        entity.AddGroundData(newGroundWidth, newGroundHeight, newFirstPos, newOverPos, newNumGround);
+        entity.AddGroundData(newGroundWidth, newGroundHeight, newFirstPos, newOverPos, newNumGround, newNumRow);
         return entity;
     }
 
-    public void ReplaceGroundData(float newGroundWidth, float newGroundHeight, UnityEngine.Vector3 newFirstPos, UnityEngine.Vector3 newOverPos, int newNumGround) {
+    public void ReplaceGroundData(float newGroundWidth, float newGroundHeight, UnityEngine.Vector3 newFirstPos, UnityEngine.Vector3 newOverPos, int newNumGround, int newNumRow) {
         var entity = groundDataEntity;
         if (entity == null) {
-            entity = SetGroundData(newGroundWidth, newGroundHeight, newFirstPos, newOverPos, newNumGround);
+            entity = SetGroundData(newGroundWidth, newGroundHeight, newFirstPos, newOverPos, newNumGround, newNumRow);
         } else {
-            entity.ReplaceGroundData(newGroundWidth, newGroundHeight, newFirstPos, newOverPos, newNumGround);
+            entity.ReplaceGroundData(newGroundWidth, newGroundHeight, newFirstPos, newOverPos, newNumGround, newNumRow);
         }
     }
 
@@ -49,7 +49,7 @@ public partial class ConfigEntity {
     public GroundDataComponent groundData { get { return (GroundDataComponent)GetComponent(ConfigComponentsLookup.GroundData); } }
     public bool hasGroundData { get { return HasComponent(ConfigComponentsLookup.GroundData); } }
 
-    public void AddGroundData(float newGroundWidth, float newGroundHeight, UnityEngine.Vector3 newFirstPos, UnityEngine.Vector3 newOverPos, int newNumGround) {
+    public void AddGroundData(float newGroundWidth, float newGroundHeight, UnityEngine.Vector3 newFirstPos, UnityEngine.Vector3 newOverPos, int newNumGround, int newNumRow) {
         var index = ConfigComponentsLookup.GroundData;
         var component = (GroundDataComponent)CreateComponent(index, typeof(GroundDataComponent));
         component.groundWidth = newGroundWidth;
@@ -57,10 +57,11 @@ public partial class ConfigEntity {
         component.firstPos = newFirstPos;
         component.overPos = newOverPos;
         component.numGround = newNumGround;
+        component.numRow = newNumRow;
         AddComponent(index, component);
     }
 
-    public void ReplaceGroundData(float newGroundWidth, float newGroundHeight, UnityEngine.Vector3 newFirstPos, UnityEngine.Vector3 newOverPos, int newNumGround) {
+    public void ReplaceGroundData(float newGroundWidth, float newGroundHeight, UnityEngine.Vector3 newFirstPos, UnityEngine.Vector3 newOverPos, int newNumGround, int newNumRow) {
         var index = ConfigComponentsLookup.GroundData;
         var component = (GroundDataComponent)CreateComponent(index, typeof(GroundDataComponent));
         component.groundWidth = newGroundWidth;
@@ -68,6 +69,7 @@ public partial class ConfigEntity {
         component.firstPos = newFirstPos;
         component.overPos = newOverPos;
         component.numGround = newNumGround;
+        component.numRow = newNumRow;
         ReplaceComponent(index, component);
     }
 

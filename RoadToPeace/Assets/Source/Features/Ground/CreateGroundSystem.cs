@@ -17,6 +17,7 @@ public class CreateGroundSystem : ReactiveSystem<GameEntity>
     protected override void Execute(List<GameEntity> entities)
     {
         float width = _contexts.config.groundData.groundWidth;
+        float height = _contexts.config.groundData.groundHeight;
         Vector3 poslast = _contexts.config.groundData.overPos;
         foreach (var g in _groundgroup)
         {
@@ -31,12 +32,13 @@ public class CreateGroundSystem : ReactiveSystem<GameEntity>
         GameEntity entity = _contexts.game.CreateEntity();
         entity.isGround = true;
 
-        var index = Random.Range(0, _contexts.config.groundList.groundList.Count);
-        var path = _contexts.config.groundList.groundList[index];
-        entity.ReplaceAsset(path, 0);
+        //var index = Random.Range(0, _contexts.config.groundList.groundList.Count);
+        //var path = _contexts.config.groundList.groundList[index];
+        //entity.ReplaceAsset(path, 0);
 
-        poslast += new Vector3(width, 0, 0);
-        entity.ReplacePosition(poslast);
+        //poslast += new Vector3(width, 0, -0.5f* height);
+        //entity.ReplacePosition(poslast);
+        entity.ReplacePosition(poslast + new Vector3(width,0,0));
         entity.isLastGround = true;
         entity.isDestoryOnReset = true;
     }
