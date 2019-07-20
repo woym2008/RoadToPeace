@@ -20,7 +20,9 @@ public class BrickDataHelper
         "Trap",
         "Jump",
         "Bonfire",
-        "Firewood"
+        "Firewood",
+        "Battery",
+
     };
 
     static public int GetIndex(string typestr){

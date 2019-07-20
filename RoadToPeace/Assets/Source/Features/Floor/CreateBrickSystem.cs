@@ -115,7 +115,9 @@ public class CreateBrickSystem : ReactiveSystem<GameEntity>
             {
                 int randType = Random.Range(0, maxtype);
 
-                int passindex = Random.Range(0, 3);
+                //int randdiff = (int)Random.Range(0, entity.floorDifficulty.value);
+
+                int passindex = Random.Range(0, 3+ 5);
 
 
 

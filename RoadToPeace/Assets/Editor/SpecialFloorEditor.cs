@@ -16,6 +16,7 @@ public class EditorFloor
     {
         startpos = 0;
         floortype = 0;
+
         bricks = new EditorBrick[3];
         for(int i=0; i <bricks.Length; ++i)
         {
@@ -27,6 +28,9 @@ public class EditorFloor
 [ExecuteInEditMode]
 public class SpecialFloorEditor : EditorWindow
 {
+    public BrickTable _brickTable;
+    string _curBrickTableName;
+
     private GUIContent LoadBtn = new GUIContent("Load");
     private GUIContent SaveBtn = new GUIContent("Save");
     private GUIContent NewBtn = new GUIContent("New");
@@ -57,10 +61,20 @@ public class SpecialFloorEditor : EditorWindow
     static void Init()
     {
         GetWindow(typeof(SpecialFloorEditor));
+
+
     }
 
     private void OnGUI()
     {
+        if(_brickTable == null)
+        {
+            _brickTable = Resources.Load<BrickTable>("BrickTable/defaultscene");
+            if(_brickTable != null)
+            {
+                _curBrickTableName = _brickTable.TableName;
+            }
+        }
         GUI.BeginScrollView(new Rect(0, 0, position.width, position.height), new Vector2(0, 0), new Rect(0, 0, 200, 400));
         BeginWindows();
 
@@ -189,6 +203,7 @@ public class SpecialFloorEditor : EditorWindow
             for (int i = 0; i < _Floors.Count; ++i)
             {
                 //EditorGUI.DrawRect(new Rect(realspos_x + i* bricksize.x,startpos.y, bricksize.x, bricksize.y), new Color(1, 1, 0));
+                /*
                 if(GUI.Button(new Rect(realspos_x + i * bricksize.x, startpos.y + bricksize.y + bricksize.y * (_Floors[i].startpos), bricksize.x, bricksize.y), BrickDataHelper.type[_Floors[i].bricks[0].bricktype]))
                 {
                     _selectFloorID = i;
@@ -203,14 +218,40 @@ public class SpecialFloorEditor : EditorWindow
                 {
                     _selectFloorID = i;
                     _selectBrickID = 2;
+                }*/
+                if (GUI.Button(new Rect(realspos_x + i * bricksize.x, startpos.y + bricksize.y + bricksize.y * (_Floors[i].startpos), bricksize.x, bricksize.y), 
+                _brickTable.BrickNames[_Floors[i].bricks[0].bricktype]))
+                {
+                    _selectFloorID = i;
+                    _selectBrickID = 0;
+                }
+                if (GUI.Button(new Rect(realspos_x + i * bricksize.x, startpos.y + bricksize.y * (_Floors[i].startpos), bricksize.x, bricksize.y),
+                _brickTable.BrickNames[_Floors[i].bricks[1].bricktype]))
+                {
+                    _selectFloorID = i;
+                    _selectBrickID = 1;
+                }
+                if (GUI.Button(new Rect(realspos_x + i * bricksize.x, startpos.y - bricksize.y + bricksize.y * (_Floors[i].startpos), bricksize.x, bricksize.y),
+                _brickTable.BrickNames[_Floors[i].bricks[2].bricktype]))
+                {
+                    _selectFloorID = i;
+                    _selectBrickID = 2;
                 }
             }
         }
 
+        //bricktable
+        BrickTable temptable = null;
+        temptable = EditorGUILayout.ObjectField(_brickTable, typeof(BrickTable),false) as BrickTable;
+        if(temptable != null && _curBrickTableName != temptable.TableName)
+        {
+            _curBrickTableName = temptable.TableName;
+            _brickTable = temptable;
+        }
 
         //GUI.Button()
         _maxLevel = EditorGUILayout.IntField("Max Level", _maxLevel);
-        _minLevel = EditorGUILayout.IntField("Max Level", _minLevel);
+        _minLevel = EditorGUILayout.IntField("Mix Level", _minLevel);
         _startposoffset = EditorGUILayout.IntSlider(_startposoffset, -10, 10);
 
         EditorGUILayout.EndHorizontal();
@@ -242,7 +283,11 @@ public class SpecialFloorEditor : EditorWindow
         var curfloor = _Floors[_selectFloorID];
         var curbrick = curfloor.bricks[_selectBrickID];
 
-        curbrick.bricktype = EditorGUI.Popup(new Rect(0, 0, 100, 32), curbrick.bricktype, BrickDataHelper.type);
+        if(_brickTable != null)
+        {
+            curbrick.bricktype = EditorGUI.Popup(new Rect(0, 0, 100, 32), curbrick.bricktype, _brickTable.BrickNames);
+        }
+        //curbrick.bricktype = EditorGUI.Popup(new Rect(0, 0, 100, 32), curbrick.bricktype, BrickDataHelper.type);
 
         EditorGUILayout.EndHorizontal();
     }
@@ -271,14 +316,21 @@ public class SpecialFloorEditor : EditorWindow
             SpecialFloorData d = new SpecialFloorData();
             d.type = edata.floortype;
 
-            d.brick1_data = edata.bricks[0].bricktype == 0 ? "" : BrickDataHelper.type[edata.bricks[0].bricktype];
-            d.brick2_data = edata.bricks[1].bricktype == 0 ? "" : BrickDataHelper.type[edata.bricks[1].bricktype];
-            d.brick3_data = edata.bricks[2].bricktype == 0 ? "" : BrickDataHelper.type[edata.bricks[2].bricktype];
+            //d.brick1_data = edata.bricks[0].bricktype == 0 ? "" : BrickDataHelper.type[edata.bricks[0].bricktype];
+            //d.brick2_data = edata.bricks[1].bricktype == 0 ? "" : BrickDataHelper.type[edata.bricks[1].bricktype];
+            //d.brick3_data = edata.bricks[2].bricktype == 0 ? "" : BrickDataHelper.type[edata.bricks[2].bricktype];
+
+            d.brick1_data = edata.bricks[0].bricktype == 0 ? "" : _brickTable.BrickNames[edata.bricks[0].bricktype];
+            d.brick2_data = edata.bricks[1].bricktype == 0 ? "" : _brickTable.BrickNames[edata.bricks[1].bricktype];
+            d.brick3_data = edata.bricks[2].bricktype == 0 ? "" : _brickTable.BrickNames[edata.bricks[2].bricktype];
 
             asset.floors.Add(d);
         }
 
-        AssetDatabase.CreateAsset(asset, string.Format("Assets/Resources/FloorsDatas/{0}_{1}_{2}.asset", "SF", "Grass",filename));
+        asset.scene = _curBrickTableName;
+
+        //AssetDatabase.CreateAsset(asset, string.Format("Assets/Resources/FloorsDatas/{0}_{1}_{2}.asset", "SF", "Grass",filename));
+        AssetDatabase.CreateAsset(asset, string.Format("Assets/Resources/FloorsDatas/{0}_{1}_{2}.asset", "SF", _curBrickTableName, filename));
     }
 
     private void LoadData(string filename)
@@ -297,21 +349,35 @@ public class SpecialFloorEditor : EditorWindow
         _maxLevel = asset.maxlevel;
         _minLevel = asset.minlevel;
 
-        _Floors = new List<EditorFloor>();
-        for(int i=0; i< asset.floors.Count; ++i)
+        _curBrickTableName = asset.scene;
+        if(_curBrickTableName == "")
         {
-            var newdata = new EditorFloor();
-            newdata.floortype = asset.floors[i].type;
-            newdata.startpos = 0;
-
-            newdata.bricks[0].bricktype = BrickDataHelper.GetIndex(asset.floors[i].brick1_data);
-
-            newdata.bricks[1].bricktype = BrickDataHelper.GetIndex(asset.floors[i].brick2_data);
-
-            newdata.bricks[2].bricktype = BrickDataHelper.GetIndex(asset.floors[i].brick3_data);
-
-
-            _Floors.Add(newdata);
+            _curBrickTableName = "defaultscene";
         }
+        _brickTable = Resources.Load<BrickTable>("BrickTable/" + _curBrickTableName);
+
+        if(_brickTable != null)
+        {
+            _Floors = new List<EditorFloor>();
+            for (int i = 0; i < asset.floors.Count; ++i)
+            {
+                var newdata = new EditorFloor();
+                newdata.floortype = asset.floors[i].type;
+                newdata.startpos = 0;
+
+                //newdata.bricks[0].bricktype = BrickDataHelper.GetIndex(asset.floors[i].brick1_data);
+
+                //newdata.bricks[1].bricktype = BrickDataHelper.GetIndex(asset.floors[i].brick2_data);
+
+                //newdata.bricks[2].bricktype = BrickDataHelper.GetIndex(asset.floors[i].brick3_data);
+
+                newdata.bricks[0].bricktype = _brickTable.GetIndex(asset.floors[i].brick1_data);
+                newdata.bricks[1].bricktype = _brickTable.GetIndex(asset.floors[i].brick2_data);
+                newdata.bricks[2].bricktype = _brickTable.GetIndex(asset.floors[i].brick3_data);
+
+                _Floors.Add(newdata);
+            }
+        }
+
     }
 }
