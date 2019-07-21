@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TableName: defaultscene
   BrickNames:
-  - Normal
+  - Mech
   - Mech_Trap
   - Mech_Battery
   - Mech_Left2Right

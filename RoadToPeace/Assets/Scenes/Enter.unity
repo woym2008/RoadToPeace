@@ -7754,6 +7754,7 @@ MonoBehaviour:
   FloorWidth: 4
   FloorHeight: 4
   NumFloor: 26
+  BrickReses: {fileID: 11400000, guid: 8cb88f969f6b6403a9094511f654249f, type: 2}
   GroundFirstPos: {fileID: 1576205933}
   GroundOverPos: {fileID: 1837106277}
   GroundWidth: 12

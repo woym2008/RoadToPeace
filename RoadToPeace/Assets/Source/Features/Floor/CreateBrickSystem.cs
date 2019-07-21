@@ -48,16 +48,26 @@ public class CreateBrickSystem : ReactiveSystem<GameEntity>
             childbricks[2] = brick_down;
             entity.ReplaceFloorChild(childbricks);
 
+            var basebricktype = _contexts.config.brickTypeList.typeList[0];
+
             //定制的还是随机的
             if (entity.hasSpecialFloorData)
             {
                 var data = entity.specialFloorData.data;
+                /*
                 var ex_upstr = data.brick1_data == "" ? "" : "_";
                 var up_resstr = string.Format("{0}{1}{2}{3}", "Brick/", _contexts.config.brickTypeList.typeList[data.type], ex_upstr, data.brick1_data);
                 var ex_midstr = data.brick2_data == "" ? "" : "_";
                 var mid_resstr = string.Format("{0}{1}{2}{3}", "Brick/",_contexts.config.brickTypeList.typeList[data.type], ex_midstr, data.brick2_data);
                 var ex_downstr = data.brick3_data == "" ? "" : "_";
                 var down_resstr = string.Format("{0}{1}{2}{3}", "Brick/",_contexts.config.brickTypeList.typeList[data.type], ex_downstr, data.brick3_data);
+                */
+                var up_resstr = data.brick1_data == "" ? basebricktype : string.Format("{0}{1}", "Brick/", data.brick1_data);
+                //var up_resstr = string.Format("{0}{1}", "Brick/", ex_upstr);
+                var mid_resstr = data.brick2_data == "" ? basebricktype : string.Format("{0}{1}", "Brick/", data.brick2_data);
+                //var mid_resstr = string.Format("{0}{1}", "Brick/",ex_midstr);
+                var down_resstr = data.brick3_data == "" ? basebricktype : string.Format("{0}{1}", "Brick/", data.brick3_data);
+                //var down_resstr = string.Format("{0}{1}", "Brick/", ex_downstr);
                 //var earth_resstr = string.Format("{0}{1}_{2}", "Brick/",_contexts.config.brickTypeList.typeList[data.type], "Soil");
                 Debug.Log("up:" + up_resstr);
                 Debug.Log("mid:" + mid_resstr);
@@ -120,7 +130,6 @@ public class CreateBrickSystem : ReactiveSystem<GameEntity>
                 int passindex = Random.Range(0, 3+ 5);
 
 
-
                 string suffix = "";
                 brick_up.isBrick = true;
                 if (entity.floorDifficulty.value > 0)
@@ -135,7 +144,8 @@ public class CreateBrickSystem : ReactiveSystem<GameEntity>
                     brick_up.ReplaceWayOfPassBrick(PassBrickWay.Run);
                     suffix = "";
                 }
-                brick_up.ReplaceAsset( _contexts.config.brickTypeList.typeList[randType] + suffix, 3);
+                //brick_up.ReplaceAsset( _contexts.config.brickTypeList.typeList[randType] + suffix, 3);
+                brick_up.ReplaceAsset(basebricktype + suffix, 3);
                 brick_up.ReplaceBrickType(randType);
                 brick_up.ReplaceBrickParent(entity);
                 brick_up.ReplacePosition(new Vector3(
@@ -159,7 +169,8 @@ public class CreateBrickSystem : ReactiveSystem<GameEntity>
                     brick_mid.ReplaceWayOfPassBrick(PassBrickWay.Run);
                     suffix = "";
                 }
-                brick_mid.ReplaceAsset( _contexts.config.brickTypeList.typeList[randType] + suffix, 3);
+                //brick_mid.ReplaceAsset( _contexts.config.brickTypeList.typeList[randType] + suffix, 3);
+                brick_mid.ReplaceAsset(basebricktype + suffix, 3);
                 brick_mid.ReplaceBrickType(randType);
                 brick_mid.ReplaceBrickParent(entity);
                 brick_mid.ReplacePosition(new Vector3(
@@ -182,7 +193,8 @@ public class CreateBrickSystem : ReactiveSystem<GameEntity>
                     brick_down.ReplaceWayOfPassBrick(PassBrickWay.Run);
                     suffix = "";
                 }
-                brick_down.ReplaceAsset( _contexts.config.brickTypeList.typeList[randType] + suffix, 3);
+                //brick_down.ReplaceAsset( _contexts.config.brickTypeList.typeList[randType] + suffix, 3);
+                brick_down.ReplaceAsset(basebricktype + suffix, 3);
                 brick_down.ReplaceBrickType(randType);
                 brick_down.ReplaceBrickParent(entity);
                 brick_down.ReplacePosition(new Vector3(
