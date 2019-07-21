@@ -5981,13 +5981,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 583988413}
-  m_LocalRotation: {x: 0.39239398, y: -0, z: -0, w: 0.91979724}
+  m_LocalRotation: {x: 0.36838856, y: 0.3167774, z: -0.13514015, w: 0.8635272}
   m_LocalPosition: {x: 0, y: 36.05, z: -30.31}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 13
-  m_LocalEulerAnglesHint: {x: 46.207, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 46.207, y: 40.29, z: 0}
 --- !u!114 &583988418
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6808,6 +6808,36 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 1f52a7e5d42f78849adb74cd5d74f311, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8f103214792be3649b79fd820cbe8a2b, type: 3}
+--- !u!1 &1017908043
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1017908044}
+  m_Layer: 0
+  m_Name: GameDirectPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1017908044
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1017908043}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 24.93058, y: 3.619564, z: 4.163479}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 19
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1018960892 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 0283fa1aebd861e4a82eb03e627fae98,
@@ -7755,6 +7785,7 @@ MonoBehaviour:
   FloorHeight: 4
   NumFloor: 26
   BrickReses: {fileID: 11400000, guid: 8cb88f969f6b6403a9094511f654249f, type: 2}
+  GameDirectPoint: {fileID: 1017908044}
   GroundFirstPos: {fileID: 1576205933}
   GroundOverPos: {fileID: 1837106277}
   GroundWidth: 12

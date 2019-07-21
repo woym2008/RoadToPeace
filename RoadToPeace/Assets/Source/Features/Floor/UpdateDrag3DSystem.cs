@@ -44,6 +44,8 @@ public class UpdateDrag3DSystem : IExecuteSystem
 
                 var datas = _contexts.input.inputDatas.datas;
 
+                var gamedirTransform = _contexts.config.gameForward.point;
+
                 var firstpos = _contexts.config.groundData.firstPos;
                 if (datas != null)
                 {
@@ -63,17 +65,20 @@ public class UpdateDrag3DSystem : IExecuteSystem
                             var curray = camera.ScreenPointToRay(data.curpos);
                             var worldcurpos = curray.origin + (firstpos.z - camera.transform.position.z) * curray.direction;
 
+                            var localcurpos = gamedirTransform.worldToLocalMatrix * worldcurpos;
+
                             foreach (var floor in _allFloor)
                             {
                                 if (floor.hasPosition)
                                 {
+                                    var localfloorpos = gamedirTransform.worldToLocalMatrix * floor.position.position;
                                     switch (data.state)
                                     {
                                         case InputData.InputState.Begin:
                                             {
                                                 if (!floor.hasDrag || !floor.drag.isdrag)
                                                 {
-
+                                                    /*
                                                     if ((floor.position.position.x - 0.5f * floorwidth) < worldcurpos.x &&
                                                    (floor.position.position.x + 0.5f * floorwidth) > worldcurpos.x)
                                                     {
@@ -81,6 +86,14 @@ public class UpdateDrag3DSystem : IExecuteSystem
                                                         //floor.ReplaceDrag(true);
                                                         floor.ReplaceDrag(true, data.fingerindex);
                                                         floor.ReplaceDragOffset(worldcurpos);
+                                                    }*/
+                                                    if ((localfloorpos.x - 0.5f * floorwidth) < localcurpos.x &&
+                                                   (localfloorpos.x + 0.5f * floorwidth) > localcurpos.x)
+                                                    {
+                                                        //Debug.LogWarning("FirstClick");
+                                                        //floor.ReplaceDrag(true);
+                                                        floor.ReplaceDrag(true, data.fingerindex);
+                                                        floor.ReplaceDragOffset(localcurpos);
                                                     }
                                                 }
                                             }
@@ -104,7 +117,7 @@ public class UpdateDrag3DSystem : IExecuteSystem
                                                 {
                                                     if (data.fingerindex == floor.drag.dragID)
                                                     {
-
+                                                        /*
                                                         var dis = worldcurpos.z - floor.dragOffset.offset.z;
                                                         if (dis > halffloorheight * 0.5f && floor.gridID.id <= 1)
                                                         {
@@ -118,7 +131,23 @@ public class UpdateDrag3DSystem : IExecuteSystem
                                                             //向下
                                                             floor.position.position.z = floor.position.position.z - floorheight;
                                                             floor.gridID.id--;
+                                                        }*/
+                                                        var dis = localcurpos.z - floor.dragOffset.offset.z;
+                                     
+                                                        if (dis > halffloorheight * 0.5f && floor.gridID.id <= 1)
+                                                        {
+                                                            //向上
+                                                            localfloorpos.z = localfloorpos.z + floorheight;
+                                                            floor.gridID.id++;
+
                                                         }
+                                                        else if (dis < -halffloorheight * 0.5f && floor.gridID.id >= 1)
+                                                        {
+                                                            //向下
+                                                            localfloorpos.z = localfloorpos.z - floorheight;
+                                                            floor.gridID.id--;
+                                                        }
+                                                        floor.position.position = gamedirTransform.localToWorldMatrix * localfloorpos;
                                                     }
                                                 }
                                             }

@@ -21,8 +21,10 @@ public class ConfigController : MonoBehaviour
     public float FloorWidth;
     public float FloorHeight;
     public int NumFloor = 10;
-
+    //----------------------------------
     public BrickTable BrickReses;
+    //----------------------------------
+    public Transform GameDirectPoint;
     //----------------------------------
 
     public Transform GroundFirstPos;
@@ -57,6 +59,8 @@ public class ConfigController : MonoBehaviour
     private void Awake()
     {
         var contexts = Contexts.sharedInstance;
+        contexts.config.ReplaceGameForward(GameDirectPoint);
+
         contexts.config.ReplaceFloorData(
             FloorWidth,
             FloorHeight,
