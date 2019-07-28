@@ -55,9 +55,18 @@ public class ConfigController : MonoBehaviour
     public float PlayerJumpHeight = 1;
 
     public float DifficultLevelUpTime = 20.0f;
+    //----------------------------------
+    //boss
+    public float BossDebutTime = 4.0f;
+    //---
+    public Transform BossStartPoint;
+    public Transform BossEndPoint;
+    public float BossReadyTime = 5.0f;
+    public float BossThinkTime = 1.0f;
+    public float BossHp = 10.0f;
 
-
-
+    public List<string> BossNames = new List<string>();
+    //----------------------------------
     private void Awake()
     {
         var contexts = Contexts.sharedInstance;
@@ -121,6 +130,18 @@ public class ConfigController : MonoBehaviour
         contexts.config.ReplaceDifficultLevelup(DifficultLevelUpTime);
 
         contexts.config.ReplaceFloorSpeedUp(FloorSpeedUpValue);
+        //------------------------------------------------------
+        contexts.config.ReplaceBossDebutTime(BossDebutTime);
+
+        contexts.config.ReplaceBossData(
+        BossStartPoint.position,
+        BossEndPoint.position,
+        BossHp,
+        BossReadyTime,
+        BossThinkTime
+            );
+
+        contexts.config.ReplaceBossNames(BossNames);
     }
     private void Start()
     {

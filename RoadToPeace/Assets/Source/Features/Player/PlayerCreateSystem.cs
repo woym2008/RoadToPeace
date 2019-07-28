@@ -23,5 +23,7 @@ public class PlayerCreateSystem : IInitializeSystem
         var id = _services.Idservice.GetNext();
 
         _services.CreatePlayerService.CreatePlayer(id, _contexts.config.startPlayerPosition.value);
+
+        //
     }
 }

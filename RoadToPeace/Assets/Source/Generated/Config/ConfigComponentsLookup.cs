@@ -8,26 +8,32 @@
 //------------------------------------------------------------------------------
 public static class ConfigComponentsLookup {
 
-    public const int BrickTable = 0;
-    public const int BrickTypeCount = 1;
-    public const int BrickTypeList = 2;
-    public const int CameraPos = 3;
-    public const int DifficultLevelup = 4;
-    public const int FloorBaseSpeed = 5;
-    public const int FloorData = 6;
-    public const int FloorSpeedUp = 7;
-    public const int GameForward = 8;
-    public const int GroundData = 9;
-    public const int GroundList = 10;
-    public const int NormalBrickTypeList = 11;
-    public const int PlayerData = 12;
-    public const int RoadBoundary = 13;
-    public const int RunPlayerPosition = 14;
-    public const int StartPlayerPosition = 15;
+    public const int BossData = 0;
+    public const int BossDebutTime = 1;
+    public const int BossNames = 2;
+    public const int BrickTable = 3;
+    public const int BrickTypeCount = 4;
+    public const int BrickTypeList = 5;
+    public const int CameraPos = 6;
+    public const int DifficultLevelup = 7;
+    public const int FloorBaseSpeed = 8;
+    public const int FloorData = 9;
+    public const int FloorSpeedUp = 10;
+    public const int GameForward = 11;
+    public const int GroundData = 12;
+    public const int GroundList = 13;
+    public const int NormalBrickTypeList = 14;
+    public const int PlayerData = 15;
+    public const int RoadBoundary = 16;
+    public const int RunPlayerPosition = 17;
+    public const int StartPlayerPosition = 18;
 
-    public const int TotalComponents = 16;
+    public const int TotalComponents = 19;
 
     public static readonly string[] componentNames = {
+        "BossData",
+        "BossDebutTime",
+        "BossNames",
         "BrickTable",
         "BrickTypeCount",
         "BrickTypeList",
@@ -47,6 +53,9 @@ public static class ConfigComponentsLookup {
     };
 
     public static readonly System.Type[] componentTypes = {
+        typeof(BossDataComponent),
+        typeof(BossDebutTimeComponent),
+        typeof(BossNamesComponent),
         typeof(BrickTableComponent),
         typeof(BrickTypeCountComponent),
         typeof(BrickTypeListComponent),
