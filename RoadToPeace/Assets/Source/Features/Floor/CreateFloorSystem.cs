@@ -31,12 +31,15 @@ public class CreateFloorSystem : ReactiveSystem<GameEntity>
         float width = _contexts.config.floorData.floorWidth;
         //Debug.LogWarning("Execute width" + width);
         Vector3 poslast = _contexts.config.floorData.overPos;
+
+        GameEntity oldlastfloor = null;
         foreach (var floor in _gamegroup)
         {
             if (floor.isLastFloor)
             {
                 poslast = floor.position.position;
                 floor.isLastFloor = false;
+                oldlastfloor = floor;
                 break;
             }
         }
@@ -61,6 +64,17 @@ public class CreateFloorSystem : ReactiveSystem<GameEntity>
             //难度应该是逐渐上升的 这个值控制难度
             entity.ReplaceFloorDifficulty(1);
             entity.isDestoryOnReset = true;
+
+            if (oldlastfloor != null)
+            {
+                GameEntity brotherleft = null; 
+                if(oldlastfloor.hasFloorBrother)
+                {
+                    brotherleft = oldlastfloor.floorBrother.Left;
+                }
+                oldlastfloor.ReplaceFloorBrother(brotherleft, entity);
+                entity.ReplaceFloorBrother(oldlastfloor, null);
+            }
         }
         else
         {
@@ -84,6 +98,18 @@ public class CreateFloorSystem : ReactiveSystem<GameEntity>
                 entity.ReplaceGridID(1); //临时这么写 这个应该也是配置出来的
                 entity.ReplaceSpecialFloorData(data);
                 entity.isDestoryOnReset = true;
+
+                if (oldlastfloor != null)
+                {
+                    GameEntity brotherleft = null;
+                    if (oldlastfloor.hasFloorBrother)
+                    {
+                        brotherleft = oldlastfloor.floorBrother.Left;
+                    }
+                    oldlastfloor.ReplaceFloorBrother(brotherleft, entity);
+                    entity.ReplaceFloorBrother(oldlastfloor,null);
+                }
+                oldlastfloor = entity;
             }
         }
 

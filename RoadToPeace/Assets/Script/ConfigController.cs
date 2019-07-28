@@ -16,6 +16,8 @@ public class ConfigController : MonoBehaviour
 {
     public List<string> BrickRes = new List<string>();
     public List<string> RealBrickPath = new List<string>();
+    public List<string> NormalBrickRes = new List<string>();
+    public List<string> NormalBrickPath = new List<string>();
     public Transform FirstPos;
     public Transform OverPos;
     public float FloorWidth;
@@ -77,6 +79,11 @@ public class ConfigController : MonoBehaviour
         {
             RealBrickPath.Add("Brick/" + BrickReses.BrickNames[i]);
         }
+        for (int i = 0; i < BrickReses.NormalBrickNames.Length; ++i)
+        {
+            NormalBrickPath.Add("Brick/" + BrickReses.NormalBrickNames[i]);
+        }
+
 
         for (int i= 0; i<GroundRes.Count; ++i)
         {
@@ -89,6 +96,7 @@ public class ConfigController : MonoBehaviour
             NumGroundRow);
 
         contexts.config.ReplaceBrickTypeList(RealBrickPath);
+        contexts.config.ReplaceNormalBrickTypeList(NormalBrickPath);
 
         contexts.config.ReplaceStartPlayerPosition(PlayerPos.position);
 
@@ -96,6 +104,7 @@ public class ConfigController : MonoBehaviour
 
         //contexts.config.ReplaceBrickTypeCount(BrickRes.Count);
         contexts.config.ReplaceBrickTypeCount(BrickReses.BrickNames.Length);
+        contexts.config.ReplaceBrickTable(BrickReses);
 
         contexts.config.ReplaceCameraPos(CameraRunningPos.position, CameraTitlePos.position);
 

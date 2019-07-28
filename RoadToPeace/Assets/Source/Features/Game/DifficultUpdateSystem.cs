@@ -11,7 +11,8 @@ public class DifficultUpdataSystem : IExecuteSystem
     }
     public void Execute()
     {
-        if(
+
+        if (
         !_contexts.game.hasGameState || 
         _contexts.game.gameState.state != GameState.Running)
         {
@@ -25,7 +26,15 @@ public class DifficultUpdataSystem : IExecuteSystem
         var curspeed = _contexts.game.floorSpeed.value;
         var target = _contexts.game.floorSpeed.targetvalue;
 
-        curuptime += Time.deltaTime;
+        //临时写法
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            _contexts.game.ReplaceDifficulty(999);
+        }
+        //临时写法结束
+
+        //先暂时取消难度控制
+        //curuptime += Time.deltaTime;
 
         int newlevel = (int)(curuptime / leveluptime);
         if(newlevel != level)
@@ -41,9 +50,9 @@ public class DifficultUpdataSystem : IExecuteSystem
         if ((target - curspeed) > accuracy)
         {
             curspeed = Mathf.Lerp(curspeed, target, Time.deltaTime);
-            _contexts.game.ReplaceFloorSpeed(curspeed, target);
+            //_contexts.game.ReplaceFloorSpeed(curspeed, target);
         }
 
-        _contexts.game.ReplaceDifficultCountDown(curuptime);
+        //_contexts.game.ReplaceDifficultCountDown(curuptime);
     }
 }

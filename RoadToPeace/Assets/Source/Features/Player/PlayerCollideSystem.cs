@@ -70,7 +70,8 @@ public class PlayerCollideSystem : IExecuteSystem
                                             {
                                                 _contexts.game.ReplaceLife(0);
                                             }
-                                            curbrick.isBrickBroken = true;
+                                            //curbrick.isBrickBroken = true;
+                                            curbrick.ReplaceBrickBroken(-1);
                                             //_serivces.CreateEffectService.CreateEffect("Dust", curbrick.position.position +
                                             //new Vector3(0, floorheight * 0.5f, 0), 10);
                                         }

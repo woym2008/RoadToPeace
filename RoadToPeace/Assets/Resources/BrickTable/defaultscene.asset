@@ -22,3 +22,11 @@ MonoBehaviour:
   - Mech_Up2Right
   - Mech_Left2Up
   - Mech_Down2Right
+  - Mech_MissileHead
+  - Mech_MissileMiddle
+  - Mech_MissileTail
+  - Mech_MissileLaunched
+  NormalBrickNames:
+  - Mech
+  - Mech_Trap
+  - Mech_Battery

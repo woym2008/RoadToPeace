@@ -7779,6 +7779,8 @@ MonoBehaviour:
   BrickRes:
   - Brick_Mech_1
   RealBrickPath: []
+  NormalBrickRes: []
+  NormalBrickPath: []
   FirstPos: {fileID: 1585121924}
   OverPos: {fileID: 1759052870}
   FloorWidth: 4

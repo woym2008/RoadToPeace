@@ -15,54 +15,58 @@ public static class GameComponentsLookup {
     public const int BrickBroken = 4;
     public const int Brick = 5;
     public const int BrickData = 6;
-    public const int BrickParent = 7;
-    public const int BrickType = 8;
-    public const int BrickYOffset = 9;
-    public const int Collision = 10;
-    public const int DestoryOnReset = 11;
-    public const int Destroyed = 12;
-    public const int DestroyedListener = 13;
-    public const int DifficultCountDown = 14;
-    public const int Difficulty = 15;
-    public const int Drag = 16;
-    public const int DragFloor = 17;
-    public const int DragOffset = 18;
-    public const int FloorChild = 19;
-    public const int Floor = 20;
-    public const int FloorDifficulty = 21;
-    public const int FloorSpeed = 22;
-    public const int GameCamera = 23;
-    public const int GameOver = 24;
-    public const int GameReady = 25;
-    public const int GameReadyListener = 26;
-    public const int GameStart = 27;
-    public const int GameStartListener = 28;
-    public const int GameState = 29;
-    public const int GameStateListener = 30;
-    public const int GridID = 31;
-    public const int Ground = 32;
-    public const int GroundParent = 33;
-    public const int GroundView = 34;
-    public const int Id = 35;
-    public const int IsBrickPassed = 36;
-    public const int LastFloor = 37;
-    public const int LastGround = 38;
-    public const int Life = 39;
-    public const int Move = 40;
-    public const int Player = 41;
-    public const int PlayerCurFloor = 42;
-    public const int PlayerReady = 43;
-    public const int PlayerState = 44;
-    public const int Position = 45;
-    public const int Reset = 46;
-    public const int SpecialFloor = 47;
-    public const int SpecialFloorData = 48;
-    public const int Timer = 49;
-    public const int VelocityIncrement = 50;
-    public const int View = 51;
-    public const int WayOfPassBrick = 52;
+    public const int BrickIndex = 7;
+    public const int BrickName = 8;
+    public const int BrickParent = 9;
+    public const int BrickType = 10;
+    public const int BrickYOffset = 11;
+    public const int Collision = 12;
+    public const int DestoryOnReset = 13;
+    public const int Destroyed = 14;
+    public const int DestroyedListener = 15;
+    public const int DifficultCountDown = 16;
+    public const int Difficulty = 17;
+    public const int Drag = 18;
+    public const int DragFloor = 19;
+    public const int DragOffset = 20;
+    public const int FloorBrother = 21;
+    public const int FloorChild = 22;
+    public const int Floor = 23;
+    public const int FloorDifficulty = 24;
+    public const int FloorSpeed = 25;
+    public const int GameCamera = 26;
+    public const int GameOver = 27;
+    public const int GameReady = 28;
+    public const int GameReadyListener = 29;
+    public const int GameStart = 30;
+    public const int GameStartListener = 31;
+    public const int GameState = 32;
+    public const int GameStateListener = 33;
+    public const int GridID = 34;
+    public const int Ground = 35;
+    public const int GroundParent = 36;
+    public const int GroundView = 37;
+    public const int Id = 38;
+    public const int IsBrickPassed = 39;
+    public const int LastFloor = 40;
+    public const int LastGround = 41;
+    public const int Life = 42;
+    public const int Missile = 43;
+    public const int Move = 44;
+    public const int Player = 45;
+    public const int PlayerCurFloor = 46;
+    public const int PlayerReady = 47;
+    public const int PlayerState = 48;
+    public const int Position = 49;
+    public const int Reset = 50;
+    public const int SpecialFloor = 51;
+    public const int SpecialFloorData = 52;
+    public const int Timer = 53;
+    public const int VelocityIncrement = 54;
+    public const int View = 55;
+    public const int WayOfPassBrick = 56;
 
-    public const int TotalComponents = 53;
+    public const int TotalComponents = 57;
 
     public static readonly string[] componentNames = {
         "Anim",
@@ -72,6 +76,8 @@ public static class GameComponentsLookup {
         "BrickBroken",
         "Brick",
         "BrickData",
+        "BrickIndex",
+        "BrickName",
         "BrickParent",
         "BrickType",
         "BrickYOffset",
@@ -84,6 +90,7 @@ public static class GameComponentsLookup {
         "Drag",
         "DragFloor",
         "DragOffset",
+        "FloorBrother",
         "FloorChild",
         "Floor",
         "FloorDifficulty",
@@ -105,6 +112,7 @@ public static class GameComponentsLookup {
         "LastFloor",
         "LastGround",
         "Life",
+        "Missile",
         "Move",
         "Player",
         "PlayerCurFloor",
@@ -128,6 +136,8 @@ public static class GameComponentsLookup {
         typeof(BrickBrokenComponent),
         typeof(BrickComponent),
         typeof(BrickDataComponent),
+        typeof(BrickIndexComponent),
+        typeof(BrickNameComponent),
         typeof(BrickParentComponent),
         typeof(BrickTypeComponent),
         typeof(BrickYOffsetComponent),
@@ -140,6 +150,7 @@ public static class GameComponentsLookup {
         typeof(DragComponent),
         typeof(DragFloorComponent),
         typeof(DragOffsetComponent),
+        typeof(FloorBrotherComponent),
         typeof(FloorChildComponent),
         typeof(FloorComponent),
         typeof(FloorDifficultyComponent),
@@ -161,6 +172,7 @@ public static class GameComponentsLookup {
         typeof(LastFloorComponent),
         typeof(LastGroundComponent),
         typeof(LifeComponent),
+        typeof(MissileComponent),
         typeof(MoveComponent),
         typeof(PlayerComponent),
         typeof(PlayerCurFloorComponent),

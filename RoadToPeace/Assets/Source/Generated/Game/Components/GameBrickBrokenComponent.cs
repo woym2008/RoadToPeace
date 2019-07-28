@@ -8,25 +8,25 @@
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    static readonly BrickBrokenComponent brickBrokenComponent = new BrickBrokenComponent();
+    public BrickBrokenComponent brickBroken { get { return (BrickBrokenComponent)GetComponent(GameComponentsLookup.BrickBroken); } }
+    public bool hasBrickBroken { get { return HasComponent(GameComponentsLookup.BrickBroken); } }
 
-    public bool isBrickBroken {
-        get { return HasComponent(GameComponentsLookup.BrickBroken); }
-        set {
-            if (value != isBrickBroken) {
-                var index = GameComponentsLookup.BrickBroken;
-                if (value) {
-                    var componentPool = GetComponentPool(index);
-                    var component = componentPool.Count > 0
-                            ? componentPool.Pop()
-                            : brickBrokenComponent;
+    public void AddBrickBroken(int newNewbricktype) {
+        var index = GameComponentsLookup.BrickBroken;
+        var component = (BrickBrokenComponent)CreateComponent(index, typeof(BrickBrokenComponent));
+        component.newbricktype = newNewbricktype;
+        AddComponent(index, component);
+    }
 
-                    AddComponent(index, component);
-                } else {
-                    RemoveComponent(index);
-                }
-            }
-        }
+    public void ReplaceBrickBroken(int newNewbricktype) {
+        var index = GameComponentsLookup.BrickBroken;
+        var component = (BrickBrokenComponent)CreateComponent(index, typeof(BrickBrokenComponent));
+        component.newbricktype = newNewbricktype;
+        ReplaceComponent(index, component);
+    }
+
+    public void RemoveBrickBroken() {
+        RemoveComponent(GameComponentsLookup.BrickBroken);
     }
 }
 

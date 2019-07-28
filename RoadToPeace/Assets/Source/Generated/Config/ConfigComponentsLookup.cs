@@ -8,24 +8,27 @@
 //------------------------------------------------------------------------------
 public static class ConfigComponentsLookup {
 
-    public const int BrickTypeCount = 0;
-    public const int BrickTypeList = 1;
-    public const int CameraPos = 2;
-    public const int DifficultLevelup = 3;
-    public const int FloorBaseSpeed = 4;
-    public const int FloorData = 5;
-    public const int FloorSpeedUp = 6;
-    public const int GameForward = 7;
-    public const int GroundData = 8;
-    public const int GroundList = 9;
-    public const int PlayerData = 10;
-    public const int RoadBoundary = 11;
-    public const int RunPlayerPosition = 12;
-    public const int StartPlayerPosition = 13;
+    public const int BrickTable = 0;
+    public const int BrickTypeCount = 1;
+    public const int BrickTypeList = 2;
+    public const int CameraPos = 3;
+    public const int DifficultLevelup = 4;
+    public const int FloorBaseSpeed = 5;
+    public const int FloorData = 6;
+    public const int FloorSpeedUp = 7;
+    public const int GameForward = 8;
+    public const int GroundData = 9;
+    public const int GroundList = 10;
+    public const int NormalBrickTypeList = 11;
+    public const int PlayerData = 12;
+    public const int RoadBoundary = 13;
+    public const int RunPlayerPosition = 14;
+    public const int StartPlayerPosition = 15;
 
-    public const int TotalComponents = 14;
+    public const int TotalComponents = 16;
 
     public static readonly string[] componentNames = {
+        "BrickTable",
         "BrickTypeCount",
         "BrickTypeList",
         "CameraPos",
@@ -36,6 +39,7 @@ public static class ConfigComponentsLookup {
         "GameForward",
         "GroundData",
         "GroundList",
+        "NormalBrickTypeList",
         "PlayerData",
         "RoadBoundary",
         "RunPlayerPosition",
@@ -43,6 +47,7 @@ public static class ConfigComponentsLookup {
     };
 
     public static readonly System.Type[] componentTypes = {
+        typeof(BrickTableComponent),
         typeof(BrickTypeCountComponent),
         typeof(BrickTypeListComponent),
         typeof(CameraPosComponent),
@@ -53,6 +58,7 @@ public static class ConfigComponentsLookup {
         typeof(GameForwardComponent),
         typeof(GroundDataComponent),
         typeof(GroundListComponent),
+        typeof(NormalBrickTypeListComponent),
         typeof(PlayerDataComponent),
         typeof(RoadBoundaryComponent),
         typeof(RunPlayerPositionComponent),

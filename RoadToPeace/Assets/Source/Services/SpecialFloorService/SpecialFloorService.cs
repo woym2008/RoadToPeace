@@ -25,6 +25,20 @@ public class SpecialFloorService : Service
         return finddatas.ToArray();
     }
 
+    public ISpecialFloor[] GetBossFloorData(int level, string bossname = "")
+    {
+        List<ISpecialFloor> finddatas = new List<ISpecialFloor>();
+        foreach (var data in _specialFloorsRes)
+        {
+            if (data.GetMinLevel() == level && data.bossfight && data.bossname == bossname)
+            {
+                finddatas.Add(data);
+            }
+        }
+
+        return finddatas.ToArray();
+    }
+
     public void LoadData()
     {
         _specialFloorsRes = new List<SpecialFloorsDataScriptable>();

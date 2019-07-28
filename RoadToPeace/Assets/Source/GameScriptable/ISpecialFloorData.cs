@@ -17,4 +17,5 @@ public interface ISpecialFloor
     int GetMaxLevel();
     int GetMinLevel();
     string GetScene();//用去区分哪个场景使用这个块
+    BrickTable GetBrickTable();
 }

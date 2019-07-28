@@ -25,7 +25,7 @@ public class CreateBrickSystem : ReactiveSystem<GameEntity>
     protected override void Execute(List<GameEntity> entities)
     {
         //var maxtype = _contexts.config.brickTypeCount.value;
-        var maxtype = _contexts.config.brickTypeList.typeList.Count;
+        var maxnormaltype = _contexts.config.normalBrickTypeList.typeList.Count;
 
         foreach (var entity in entities)
         {
@@ -85,6 +85,8 @@ public class CreateBrickSystem : ReactiveSystem<GameEntity>
                 brick_up.ReplaceBrickYOffset(_contexts.config.floorData.floorHeight);
                 //brick_up.isIsBrickPassed = !checkIsTrap(data.brick1_data);
                 brick_up.ReplaceWayOfPassBrick(CheckPassWay(data.brick1_data));
+                brick_up.ReplaceBrickIndex(0);
+                brick_up.ReplaceBrickName(data.brick1_data);
 
                 brick_mid.ReplaceAsset(mid_resstr, 3);
                 brick_mid.ReplaceBrickType(data.type);
@@ -97,6 +99,8 @@ public class CreateBrickSystem : ReactiveSystem<GameEntity>
                 brick_mid.ReplaceBrickYOffset(0);
                 //brick_mid.isIsBrickPassed = !checkIsTrap(data.brick2_data);
                 brick_mid.ReplaceWayOfPassBrick(CheckPassWay(data.brick2_data));
+                brick_mid.ReplaceBrickIndex(1);
+                brick_mid.ReplaceBrickName(data.brick2_data);
 
                 brick_down.ReplaceAsset(down_resstr, 3);
                 brick_down.ReplaceBrickType(data.type);
@@ -109,6 +113,8 @@ public class CreateBrickSystem : ReactiveSystem<GameEntity>
                 brick_down.ReplaceBrickYOffset(-_contexts.config.floorData.floorHeight);
                 //brick_down.isIsBrickPassed = !checkIsTrap(data.brick3_data);
                 brick_down.ReplaceWayOfPassBrick(CheckPassWay(data.brick3_data));
+                brick_down.ReplaceBrickIndex(2);
+                brick_down.ReplaceBrickName(data.brick3_data);
                 /*
                 brick_earth.ReplaceAsset(earth_resstr, 3);
                 brick_earth.ReplaceBrickParent(entity);
@@ -119,16 +125,16 @@ public class CreateBrickSystem : ReactiveSystem<GameEntity>
                     ));
 
                 brick_earth.ReplaceBrickYOffset(-_contexts.config.floorData.floorHeight * 2.0f);
-                */               
+                */
             }
             else
             {
-                int randType = Random.Range(0, maxtype);
+                int randType = Random.Range(0, maxnormaltype);
 
                 //int randdiff = (int)Random.Range(0, entity.floorDifficulty.value);
 
                 int passindex = Random.Range(0, 3+ 5);
-
+                string basebrickname = _contexts.config.brickTable.table.GetBrickName(0);
 
                 string suffix = "";
                 brick_up.isBrick = true;
@@ -154,7 +160,8 @@ public class CreateBrickSystem : ReactiveSystem<GameEntity>
                     entity.position.position.z + _contexts.config.floorData.floorHeight
                     ));
                 brick_up.ReplaceBrickYOffset(_contexts.config.floorData.floorHeight);
-
+                brick_up.ReplaceBrickIndex(0);
+                brick_up.ReplaceBrickName(basebrickname + suffix);
 
                 brick_mid.isBrick = true;
                 if (entity.floorDifficulty.value > 0)
@@ -179,6 +186,8 @@ public class CreateBrickSystem : ReactiveSystem<GameEntity>
                     entity.position.position.z
                     ));
                 brick_mid.ReplaceBrickYOffset(0);
+                brick_mid.ReplaceBrickIndex(1);
+                brick_mid.ReplaceBrickName(basebrickname + suffix);
 
                 brick_down.isBrick = true;
                 if (entity.floorDifficulty.value > 0)
@@ -203,6 +212,8 @@ public class CreateBrickSystem : ReactiveSystem<GameEntity>
                     entity.position.position.z - _contexts.config.floorData.floorHeight
                     ));
                 brick_down.ReplaceBrickYOffset(-_contexts.config.floorData.floorHeight);
+                brick_down.ReplaceBrickIndex(2);
+                brick_down.ReplaceBrickName(basebrickname + suffix);
                 /*
                 //brick_up.addbr
                 /brick_earth.isBrick = true;

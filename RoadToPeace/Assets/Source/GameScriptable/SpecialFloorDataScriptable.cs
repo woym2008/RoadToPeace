@@ -7,6 +7,8 @@ public class SpecialFloorsDataScriptable : ScriptableObject, ISpecialFloor
 {
     public int minlevel;
     public int maxlevel;
+    public bool bossfight;
+    public string bossname;
     public List<SpecialFloorData> floors;
     public string scene;
 
@@ -28,5 +30,23 @@ public class SpecialFloorsDataScriptable : ScriptableObject, ISpecialFloor
     public string GetScene()
     {
         return scene;
+    }
+
+    private BrickTable _table = null;
+    private string _bricktablename;
+    const string tablepathbase = "BrickTable/";
+    public void SetBrickTableName(string name)
+    {
+        _bricktablename = name;
+    }
+    public BrickTable GetBrickTable()
+    {
+        if(_table == null)
+        {
+            var tablepath = tablepathbase + _bricktablename;
+            _table = Resources.Load<BrickTable>(tablepath);
+        }
+
+        return _table;
     }
 }
