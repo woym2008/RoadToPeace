@@ -22,7 +22,17 @@ ModelImporter:
     4300000: Capsule002
     4300002: Object009
     4300004: Object008
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: 03 - Default
+    second: {fileID: 2100000, guid: c901d516d23766a44b5dfc0326d3d5b3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: 04 - Default
+    second: {fileID: 2100000, guid: 5d4e59cb7408a7d4fbe2d3e167e0fda2, type: 2}
   materials:
     importMaterials: 1
     materialName: 0

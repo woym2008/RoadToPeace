@@ -49,7 +49,17 @@ ModelImporter:
     11100000: //RootNode
     13700000: Line001
     2186277476908879412: ImportLogs
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: body
+    second: {fileID: 2100000, guid: 01d40c59e7355c6439aad7cc4c8bdd4c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: legs
+    second: {fileID: 2100000, guid: 05d5bb0f18e3f794fb4f20200c92bd61, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
@@ -131,7 +141,7 @@ ModelImporter:
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
     useFileScale: 1
-    previousCalculatedGlobalScale: 0.06
+    previousCalculatedGlobalScale: 0.049999997
     hasPreviousCalculatedGlobalScale: 1
   tangentSpace:
     normalSmoothAngle: 60
@@ -159,7 +169,7 @@ ModelImporter:
       scale: {x: 1, y: 1, z: 1}
     - name: RobotWalk_Bip01
       parentName: RobotWalk(Clone)
-      position: {x: -0.010505332, y: 3.215629, z: 0.000000052597457}
+      position: {x: -0.008754442, y: 2.6796908, z: 0.000000043831214}
       rotation: {x: -0.50000036, y: 0.49999967, z: 0.49999967, w: 0.50000036}
       scale: {x: 0.99999994, y: 0.99999994, z: 1}
     - name: RobotWalk_Bip01 Pelvis
