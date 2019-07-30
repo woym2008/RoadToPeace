@@ -56,15 +56,22 @@ public class UpdateDrag3DSystem : IExecuteSystem
                             //var worldpos = camera.ScreenToWorldPoint(data.startpos);
                             var startray = camera.ScreenPointToRay(data.startpos);
                             RaycastHit starthit;
-                            if(Physics.Raycast(startray, out starthit, 1 << layInput))
+                            
+                            if(!Physics.Raycast(startray, out starthit, 1 << layInput))
                             {
-                                Debug.Log(starthit.collider.gameObject.name);
+                                continue;
                             }
+                            /*
                             var worldpos = startray.origin + (firstpos.z - camera.transform.position.z) * startray.direction;
                             //var worldcurpos = camera.ScreenToWorldPoint(data.curpos);
                             var curray = camera.ScreenPointToRay(data.curpos);
                             var worldcurpos = curray.origin + (firstpos.z - camera.transform.position.z) * curray.direction;
+                            */
+                            var camtopoint = Vector3.Distance(new Vector3(starthit.point.x, starthit.point.y-2, starthit.point.z), camera.transform.position);
+                            var worldpos = camera.ScreenToWorldPoint(new Vector3(data.startpos.x, data.startpos.y, camtopoint));
+                            var worldcurpos = camera.ScreenToWorldPoint(new Vector3(data.curpos.x, data.curpos.y, camtopoint));
 
+                            var localpos = gamedirTransform.worldToLocalMatrix * worldpos;
                             var localcurpos = gamedirTransform.worldToLocalMatrix * worldcurpos;
 
                             foreach (var floor in _allFloor)
@@ -87,13 +94,13 @@ public class UpdateDrag3DSystem : IExecuteSystem
                                                         floor.ReplaceDrag(true, data.fingerindex);
                                                         floor.ReplaceDragOffset(worldcurpos);
                                                     }*/
-                                                    if ((localfloorpos.x - 0.5f * floorwidth) < localcurpos.x &&
-                                                   (localfloorpos.x + 0.5f * floorwidth) > localcurpos.x)
+                                                    if ((localfloorpos.x - 0f * floorwidth) < localpos.x &&
+                                                   (localfloorpos.x + 1f * floorwidth) > localpos.x)
                                                     {
                                                         //Debug.LogWarning("FirstClick");
                                                         //floor.ReplaceDrag(true);
                                                         floor.ReplaceDrag(true, data.fingerindex);
-                                                        floor.ReplaceDragOffset(localcurpos);
+                                                        floor.ReplaceDragOffset(localpos);
                                                     }
                                                 }
                                             }

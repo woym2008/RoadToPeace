@@ -6052,13 +6052,13 @@ GameObject:
   - component: {fileID: 449636781}
   - component: {fileID: 449636780}
   - component: {fileID: 449636779}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: InputPlane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!64 &449636779
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -6080,7 +6080,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 449636778}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -6126,7 +6126,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 449636778}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 90.2, y: 0, z: 0}
+  m_LocalPosition: {x: 90.2, y: 2, z: 0}
   m_LocalScale: {x: 16, y: 1, z: 4}
   m_Children: []
   m_Father: {fileID: 0}
@@ -6731,7 +6731,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 583988413}
   m_LocalRotation: {x: 0.36838856, y: 0.3167774, z: -0.13514015, w: 0.8635272}
-  m_LocalPosition: {x: 0, y: 36.05, z: -24.33}
+  m_LocalPosition: {x: 0, y: 18, z: -24.33}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -6915,7 +6915,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 652174699}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 48.4, y: 8, z: -11.9}
+  m_LocalPosition: {x: 48.4, y: 18, z: -11.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -8805,7 +8805,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1536950269}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 36.5, z: -24.33}
+  m_LocalPosition: {x: 0, y: 18, z: -24.33}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -9254,8 +9254,8 @@ MonoBehaviour:
   PlayerJumpHeight: 4
   DifficultLevelUpTime: 20
   BossDebutTime: 4
-  BossStartPoint: {fileID: 0}
-  BossEndPoint: {fileID: 0}
+  BossStartPoint: {fileID: 372401755}
+  BossEndPoint: {fileID: 903051577}
   BossReadyTime: 5
   BossThinkTime: 1
   BossHp: 10
