@@ -13,6 +13,9 @@ public class BossFightUpdateSystem : IExecuteSystem
 
     public void Execute()
     {
-        throw new System.NotImplementedException();
+        if(_contexts.game.bossState.state == BossState.Fighting)
+        {
+
+        }
     }
 }

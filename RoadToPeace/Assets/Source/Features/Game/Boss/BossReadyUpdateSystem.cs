@@ -20,6 +20,9 @@ public class BossReadyUpdateSystem : IExecuteSystem
             {
                 countdown = 0;
                 _contexts.game.ReplaceBossState(BossState.Debut);
+
+                //var boss = _contexts.game.CreateEntity();
+                //boss.isBoss = true;
             }
             _contexts.game.ReplaceBossDebutCountDown(countdown);
 

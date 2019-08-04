@@ -38,6 +38,8 @@ public class GameSystem : Feature
 
         //Add(new PlayerFirstMoveSystem(contexts, services));
         Add(new PlayerSystem(contexts, services));
+
+        Add(new BossSystem(contexts, services));
         
         Add(new GameEventSystems(contexts));
 

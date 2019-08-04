@@ -11,6 +11,7 @@ public class BossComponent : IComponent
 
 public enum BossState
 {
+    Null,
     Ready,
     Debut,
     Fighting,
