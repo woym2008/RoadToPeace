@@ -23,6 +23,8 @@ public class StartBtnController : MonoBehaviour
         if(Contexts.sharedInstance.game.hasGameState)
         {
             Contexts.sharedInstance.game.ReplaceGameState(GameState.Start);
+
+            Contexts.sharedInstance.game.ReplaceBossState(BossState.Ready);
         }
 
         _btn.gameObject.SetActive(false);

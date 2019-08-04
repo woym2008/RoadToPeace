@@ -22,6 +22,6 @@ public class CreateBossService : Service
         e.AddPosition(position);
         e.ReplaceLife(1);
         //e.ReplaceBossState(BossState.Ready);
-        _contexts.game.ReplaceBossState(BossState.Ready);
+        //_contexts.game.ReplaceBossState(BossState.Ready);
     }
 }

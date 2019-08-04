@@ -37,6 +37,8 @@ public class BossDebutUpdateSystem : IExecuteSystem
             {
                 var newpos = Vector3.Lerp(_startpos, _fightpos, t);
                 b.ReplacePosition(newpos);
+                if(b.hasView)
+                    b.view.Value.Position = b.position.position;
             }
         }
     }

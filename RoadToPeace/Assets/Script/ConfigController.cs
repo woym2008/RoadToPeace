@@ -142,6 +142,10 @@ public class ConfigController : MonoBehaviour
             );
 
         contexts.config.ReplaceBossNames(BossNames);
+
+        //contexts.config.ReplaceBossDebutTime(BossDebutTime);
+
+        contexts.game.ReplaceBossState(BossState.Null);
     }
     private void Start()
     {
