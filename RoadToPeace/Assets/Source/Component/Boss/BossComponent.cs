@@ -51,8 +51,29 @@ public class BossHugeLazer : IComponent
 }
 
 [Game]
+public class LazerTowerComponent : IComponent
+{
+
+}
+[Game]
+public class ObjectParentComponent : IComponent
+{
+    public GameEntity parent;
+}
+
+[Game]
 public class BossCreateFloorComponent : IComponent
 {
 
 }
 
+[Game]
+public class IsLazerTowerFloorComponent : IComponent
+{
+    
+}
+[Game]
+public class IsBlockLazerFloorComponent : IComponent
+{
+
+}

@@ -28,8 +28,10 @@ public static class ConfigComponentsLookup {
     public const int RoadBoundary = 17;
     public const int RunPlayerPosition = 18;
     public const int StartPlayerPosition = 19;
+    public const int WallData = 20;
+    public const int WallList = 21;
 
-    public const int TotalComponents = 20;
+    public const int TotalComponents = 22;
 
     public static readonly string[] componentNames = {
         "BossData",
@@ -51,7 +53,9 @@ public static class ConfigComponentsLookup {
         "PlayerData",
         "RoadBoundary",
         "RunPlayerPosition",
-        "StartPlayerPosition"
+        "StartPlayerPosition",
+        "WallData",
+        "WallList"
     };
 
     public static readonly System.Type[] componentTypes = {
@@ -74,6 +78,8 @@ public static class ConfigComponentsLookup {
         typeof(PlayerDataComponent),
         typeof(RoadBoundaryComponent),
         typeof(RunPlayerPositionComponent),
-        typeof(StartPlayerPositionComponent)
+        typeof(StartPlayerPositionComponent),
+        typeof(WallDataComponent),
+        typeof(WallListComponent)
     };
 }

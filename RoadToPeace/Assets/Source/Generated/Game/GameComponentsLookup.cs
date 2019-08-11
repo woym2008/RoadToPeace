@@ -53,27 +53,31 @@ public static class GameComponentsLookup {
     public const int GroundParent = 42;
     public const int GroundView = 43;
     public const int Id = 44;
-    public const int IsBrickPassed = 45;
-    public const int LastFloor = 46;
-    public const int LastGround = 47;
-    public const int Life = 48;
-    public const int Missile = 49;
-    public const int Move = 50;
-    public const int Player = 51;
-    public const int PlayerCurFloor = 52;
-    public const int PlayerReady = 53;
-    public const int PlayerState = 54;
-    public const int Position = 55;
-    public const int Reset = 56;
-    public const int SpecialFloor = 57;
-    public const int SpecialFloorData = 58;
-    public const int Timer = 59;
-    public const int VelocityIncrement = 60;
-    public const int View = 61;
-    public const int WaitAddFloorCount = 62;
-    public const int WayOfPassBrick = 63;
+    public const int IsBlockLazerFloor = 45;
+    public const int IsBrickPassed = 46;
+    public const int IsLazerTowerFloor = 47;
+    public const int LastFloor = 48;
+    public const int LastGround = 49;
+    public const int LazerTower = 50;
+    public const int Life = 51;
+    public const int Missile = 52;
+    public const int Move = 53;
+    public const int ObjectParent = 54;
+    public const int Player = 55;
+    public const int PlayerCurFloor = 56;
+    public const int PlayerReady = 57;
+    public const int PlayerState = 58;
+    public const int Position = 59;
+    public const int Reset = 60;
+    public const int SpecialFloor = 61;
+    public const int SpecialFloorData = 62;
+    public const int Timer = 63;
+    public const int VelocityIncrement = 64;
+    public const int View = 65;
+    public const int WaitAddFloorCount = 66;
+    public const int WayOfPassBrick = 67;
 
-    public const int TotalComponents = 64;
+    public const int TotalComponents = 68;
 
     public static readonly string[] componentNames = {
         "Anim",
@@ -121,12 +125,16 @@ public static class GameComponentsLookup {
         "GroundParent",
         "GroundView",
         "Id",
+        "IsBlockLazerFloor",
         "IsBrickPassed",
+        "IsLazerTowerFloor",
         "LastFloor",
         "LastGround",
+        "LazerTower",
         "Life",
         "Missile",
         "Move",
+        "ObjectParent",
         "Player",
         "PlayerCurFloor",
         "PlayerReady",
@@ -188,12 +196,16 @@ public static class GameComponentsLookup {
         typeof(GroundParentComponent),
         typeof(GroundViewComponent),
         typeof(IdComponent),
+        typeof(IsBlockLazerFloorComponent),
         typeof(IsBrickPassedComponent),
+        typeof(IsLazerTowerFloorComponent),
         typeof(LastFloorComponent),
         typeof(LastGroundComponent),
+        typeof(LazerTowerComponent),
         typeof(LifeComponent),
         typeof(MissileComponent),
         typeof(MoveComponent),
+        typeof(ObjectParentComponent),
         typeof(PlayerComponent),
         typeof(PlayerCurFloorComponent),
         typeof(PlayerReady),

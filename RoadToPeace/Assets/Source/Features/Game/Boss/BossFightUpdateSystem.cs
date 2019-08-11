@@ -203,13 +203,19 @@ public class BossThrowTowerEnterSystem : ReactiveSystem<GameEntity>
 
     protected override void Execute(List<GameEntity> entities)
     {
-        foreach (var e in entities)
+        //创建多少个tower 就是创建多少个floor
+        //中间可以隔着个floor
+        //目前写死5个
+        for(int i=0; i<5; ++i)
         {
-            //e.ReplaceBossState(BossState.Debut);
+            var entityTower = _contexts.game.CreateEntity();
+            entityTower.isBossCreateFloor = true;
+            entityTower.isIsLazerTowerFloor = true;
 
-            //计时结束 记得remove 计时属性
-            //e.RemoveHugeLazerUpdateData();
+            var entityEmpty = _contexts.game.CreateEntity();
+            entityEmpty.isBossCreateFloor = true;
         }
+
     }
 
     protected override bool Filter(GameEntity entity)
@@ -245,6 +251,10 @@ public class BossHugeLazerEnterSystem : ReactiveSystem<GameEntity>
         var bossentity = _contexts.game.GetGroup(GameMatcher.Boss).GetSingleEntity();
         var startpoint = bossentity.view.Value.Transform.GetComponent<LazerShipController>().HugeLazerStartPoint;
         e.ReplacePosition(startpoint.position);
+
+        var blocklazerfloor = _contexts.game.CreateEntity();
+        blocklazerfloor.isBossCreateFloor = true;
+        blocklazerfloor.isIsBlockLazerFloor = true;
     }
 
     protected override bool Filter(GameEntity entity)
@@ -255,5 +265,97 @@ public class BossHugeLazerEnterSystem : ReactiveSystem<GameEntity>
     protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
     {
         return context.CreateCollector(GameMatcher.BossState);
+    }
+}
+
+public class TowerInitSystem : ReactiveSystem<GameEntity>
+{
+    Contexts _contexts;
+    Services _services;
+    public TowerInitSystem(Contexts contexts, Services services) :
+        base(contexts.game)
+    {
+        ;
+    }
+    protected override void Execute(List<GameEntity> entities)
+    {
+        foreach(var e in entities)
+        {
+            e.AddAsset("Boss/Skill/Lazer_Tower",0);
+
+        }
+    }
+
+    protected override bool Filter(GameEntity entity)
+    {
+        return true;
+    }
+
+    protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
+    {
+        return context.CreateCollector(GameMatcher.LazerTower.Added());
+    }
+}
+
+public class TowerUpdateSystem : IExecuteSystem
+{
+    Contexts _contexts;
+    Services _services;
+
+    IGroup<GameEntity> _towers;
+
+    float _distance;
+
+    public TowerUpdateSystem(Contexts contexts, Services services)
+    {
+        _contexts = contexts;
+        _services = services;
+
+        _towers = _contexts.game.GetGroup(GameMatcher.AllOf(GameMatcher.LazerTower,GameMatcher.View));
+
+        _distance = _contexts.config.groundData.groundHeight;
+    }
+    public void Execute()
+    {
+        foreach(var e in _towers)
+        {
+            var floor = e.objectParent;
+
+            e.view.Value.Position = floor.parent.position.position + new Vector3(0, 0, _distance);
+        }
+    }
+}
+public class OnDeleteTowerFloorSystem : ReactiveSystem<GameEntity>
+{
+    Contexts _contexts;
+    IGroup<GameEntity> _towers;
+    public OnDeleteTowerFloorSystem(Contexts contexts) :
+        base(contexts.game)
+    {
+        _contexts = contexts;
+        _towers = _contexts.game.GetGroup(GameMatcher.LazerTower);
+    }
+    protected override void Execute(List<GameEntity> entities)
+    {
+        foreach(var floor in entities)
+        { 
+            foreach(var tower in _towers)
+            {
+                if(tower.objectParent.parent == floor)
+                {
+                    tower.isDestroyed = true;
+                }
+            }
+        }
+    }
+
+    protected override bool Filter(GameEntity entity)
+    {
+        return true;
+    }
+
+    protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
+    {
+        return context.CreateCollector(GameMatcher.IsLazerTowerFloor.Removed());
     }
 }
