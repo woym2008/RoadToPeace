@@ -104,6 +104,7 @@ public class ConfigController : MonoBehaviour
         GroundFirstPos.position, GroundOverPos.position, NumGround,
             NumGroundRow);
 
+        contexts.config.ReplaceBrickResBase("Brick/");
         contexts.config.ReplaceBrickTypeList(RealBrickPath);
         contexts.config.ReplaceNormalBrickTypeList(NormalBrickPath);
 

@@ -30,7 +30,7 @@ public class BossDebutUpdateSystem : IExecuteSystem
             _curtime += Time.deltaTime;
             if(_curtime >= _flytime)
             {
-                _contexts.game.ReplaceBossState(BossState.Fighting);
+                _contexts.game.ReplaceBossState(BossState.HugeLazer);
             }
             float t = Mathf.Min(_curtime / _flytime, 1);
             foreach(var b in _boss)

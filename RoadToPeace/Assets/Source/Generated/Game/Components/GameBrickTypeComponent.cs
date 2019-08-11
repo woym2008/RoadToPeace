@@ -11,14 +11,14 @@ public partial class GameEntity {
     public BrickTypeComponent brickType { get { return (BrickTypeComponent)GetComponent(GameComponentsLookup.BrickType); } }
     public bool hasBrickType { get { return HasComponent(GameComponentsLookup.BrickType); } }
 
-    public void AddBrickType(int newValue) {
+    public void AddBrickType(string newValue) {
         var index = GameComponentsLookup.BrickType;
         var component = (BrickTypeComponent)CreateComponent(index, typeof(BrickTypeComponent));
         component.value = newValue;
         AddComponent(index, component);
     }
 
-    public void ReplaceBrickType(int newValue) {
+    public void ReplaceBrickType(string newValue) {
         var index = GameComponentsLookup.BrickType;
         var component = (BrickTypeComponent)CreateComponent(index, typeof(BrickTypeComponent));
         component.value = newValue;

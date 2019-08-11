@@ -6,11 +6,14 @@ using System.Collections.Generic;
 public class LifeChangeSystem : ReactiveSystem<GameEntity>
 {
     readonly GameContext _gameContext;
+
+    IGroup<GameEntity> _player;
+
     public LifeChangeSystem(Contexts contexts)
         : base(contexts.game)
     {
         _gameContext = contexts.game;
-
+        _player = _gameContext.GetGroup(GameMatcher.Player);
     }
     protected override bool Filter(GameEntity entity)
     {
@@ -24,7 +27,8 @@ public class LifeChangeSystem : ReactiveSystem<GameEntity>
 
     protected override void Execute(List<GameEntity> entities)
     {
-        if (_gameContext.hasGameState && (_gameContext.gameState.state == GameState.Running) && _gameContext.hasLife)
+        var playerentity = _player.GetSingleEntity();
+        if (_gameContext.hasGameState && (_gameContext.gameState.state == GameState.Running) && playerentity.hasLife)
         {
             _gameContext.ReplaceGameState(GameState.GameOver);
 

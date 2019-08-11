@@ -75,7 +75,7 @@ public class CreateBrickSystem : ReactiveSystem<GameEntity>
                 //Debug.Log("earth:" + earth_resstr);
 
                 brick_up.ReplaceAsset(up_resstr, 3);
-                brick_up.ReplaceBrickType(data.type);
+                brick_up.ReplaceBrickType(data.brick1_data);
                 brick_up.ReplaceBrickParent(entity);
                 brick_up.ReplacePosition(new Vector3(
                     entity.position.position.x,
@@ -89,7 +89,7 @@ public class CreateBrickSystem : ReactiveSystem<GameEntity>
                 brick_up.ReplaceBrickName(data.brick1_data);
 
                 brick_mid.ReplaceAsset(mid_resstr, 3);
-                brick_mid.ReplaceBrickType(data.type);
+                brick_mid.ReplaceBrickType(data.brick2_data);
                 brick_mid.ReplaceBrickParent(entity);
                 brick_mid.ReplacePosition(new Vector3(
                     entity.position.position.x,
@@ -103,7 +103,7 @@ public class CreateBrickSystem : ReactiveSystem<GameEntity>
                 brick_mid.ReplaceBrickName(data.brick2_data);
 
                 brick_down.ReplaceAsset(down_resstr, 3);
-                brick_down.ReplaceBrickType(data.type);
+                brick_down.ReplaceBrickType(data.brick3_data);
                 brick_down.ReplaceBrickParent(entity);
                 brick_down.ReplacePosition(new Vector3(
                     entity.position.position.x,
@@ -129,11 +129,13 @@ public class CreateBrickSystem : ReactiveSystem<GameEntity>
             }
             else
             {
-                int randType = Random.Range(0, maxnormaltype);
-
+                var basestr = _contexts.config.brickResBase.basestr;
+                var type = entity.floorType.type;
+                //int randType = Random.Range(0, maxnormaltype);
+                int randindex = Random.Range(0,3);
                 //int randdiff = (int)Random.Range(0, entity.floorDifficulty.value);
 
-                int passindex = Random.Range(0, 3+ 5);
+                //int passindex = Random.Range(0, 3+ 5);
                 string basebrickname = _contexts.config.brickTable.table.GetBrickName(0);
 
                 string suffix = "";
@@ -141,18 +143,18 @@ public class CreateBrickSystem : ReactiveSystem<GameEntity>
                 if (entity.floorDifficulty.value > 0)
                 {
                     //brick_up.isIsBrickPassed = (passindex == 0) ? false : true;
-                    suffix = (passindex == 0) ? "_Trap" : "";
+                    suffix = (randindex == 0) ? type : basebrickname;
                     brick_up.ReplaceWayOfPassBrick(CheckPassWay(suffix));
                 }
                 else
                 {
                     //brick_up.isIsBrickPassed = true;
                     brick_up.ReplaceWayOfPassBrick(PassBrickWay.Run);
-                    suffix = "";
+                    suffix = basebrickname;
                 }
                 //brick_up.ReplaceAsset( _contexts.config.brickTypeList.typeList[randType] + suffix, 3);
-                brick_up.ReplaceAsset(basebricktype + suffix, 3);
-                brick_up.ReplaceBrickType(randType);
+                brick_up.ReplaceAsset(basestr + suffix, 3);
+                brick_up.ReplaceBrickType(suffix);
                 brick_up.ReplaceBrickParent(entity);
                 brick_up.ReplacePosition(new Vector3(
                     entity.position.position.x,
@@ -161,24 +163,24 @@ public class CreateBrickSystem : ReactiveSystem<GameEntity>
                     ));
                 brick_up.ReplaceBrickYOffset(_contexts.config.floorData.floorHeight);
                 brick_up.ReplaceBrickIndex(0);
-                brick_up.ReplaceBrickName(basebrickname + suffix);
+                brick_up.ReplaceBrickName(suffix);
 
                 brick_mid.isBrick = true;
                 if (entity.floorDifficulty.value > 0)
                 {
                     //brick_mid.isIsBrickPassed = (passindex == 1) ? false : true;
-                    suffix = (passindex == 1) ? "_Trap" : "";
+                    suffix = (randindex == 1) ? type : basebrickname;
                     brick_mid.ReplaceWayOfPassBrick(CheckPassWay(suffix));
                 }
                 else
                 {
                     //brick_mid.isIsBrickPassed = true;
                     brick_mid.ReplaceWayOfPassBrick(PassBrickWay.Run);
-                    suffix = "";
+                    suffix = basebrickname;
                 }
                 //brick_mid.ReplaceAsset( _contexts.config.brickTypeList.typeList[randType] + suffix, 3);
-                brick_mid.ReplaceAsset(basebricktype + suffix, 3);
-                brick_mid.ReplaceBrickType(randType);
+                brick_mid.ReplaceAsset(basestr + suffix, 3);
+                brick_mid.ReplaceBrickType(suffix);
                 brick_mid.ReplaceBrickParent(entity);
                 brick_mid.ReplacePosition(new Vector3(
                     entity.position.position.x,
@@ -193,18 +195,18 @@ public class CreateBrickSystem : ReactiveSystem<GameEntity>
                 if (entity.floorDifficulty.value > 0)
                 {
                     //brick_down.isIsBrickPassed = (passindex == 2) ? false : true;
-                    suffix = (passindex == 2) ? "_Trap" : "";
+                    suffix = (randindex == 2) ? type : basebrickname;
                     brick_down.ReplaceWayOfPassBrick(CheckPassWay(suffix));
                 }
                 else
                 {
                     //brick_down.isIsBrickPassed = true;
                     brick_down.ReplaceWayOfPassBrick(PassBrickWay.Run);
-                    suffix = "";
+                    suffix = basebrickname;
                 }
                 //brick_down.ReplaceAsset( _contexts.config.brickTypeList.typeList[randType] + suffix, 3);
-                brick_down.ReplaceAsset(basebricktype + suffix, 3);
-                brick_down.ReplaceBrickType(randType);
+                brick_down.ReplaceAsset(basestr + suffix, 3);
+                brick_down.ReplaceBrickType(suffix);
                 brick_down.ReplaceBrickParent(entity);
                 brick_down.ReplacePosition(new Vector3(
                     entity.position.position.x,
@@ -250,13 +252,13 @@ public class CreateBrickSystem : ReactiveSystem<GameEntity>
     {
         switch(name)
         {
-            case "_Jump":
+            case "Mech_Jump":
                 return PassBrickWay.Jump;
                 break;
-            case "_Trap":
+            case "Mech_Trap":
                 return PassBrickWay.Collision;
                 break;
-            case "_Electrocution":
+            case "Mech_Electrocution":
                 return PassBrickWay.Electrocution;
                 break;
             case "Jump":

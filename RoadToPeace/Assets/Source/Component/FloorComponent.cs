@@ -11,8 +11,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Entitas;
+using Entitas.CodeGeneration.Attributes;
 
 [Game]
 public class FloorComponent : IComponent
 {
+}
+
+[Game, Unique]
+public class WaitAddFloorCount : IComponent
+{
+    public int count;
+}
+
+[Game]
+public class FloorTypeComponent : IComponent
+{
+    public string type;
 }

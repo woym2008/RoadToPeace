@@ -75,6 +75,14 @@ public class CreateFloorSystem : ReactiveSystem<GameEntity>
                 oldlastfloor.ReplaceFloorBrother(brotherleft, entity);
                 entity.ReplaceFloorBrother(oldlastfloor, null);
             }
+
+            //对于不是特殊格子的，随机一个格子类型
+            var numtype = _contexts.config.brickTable.table.NormalBrickNames.Length;
+            var randindex = UnityEngine.Random.Range(0, numtype);
+            string basebrickname = _contexts.config.brickTable.table.GetBrickName(0);
+
+            var brickname = _contexts.config.brickTable.table.NormalBrickNames[randindex];
+            entity.ReplaceFloorType(brickname);
         }
         else
         {
@@ -117,7 +125,13 @@ public class CreateFloorSystem : ReactiveSystem<GameEntity>
 
     protected override bool Filter(GameEntity entity)
     {
-        return (_contexts.game.gameState.state == GameState.Running) && (_gamegroup.count <= _contexts.config.floorData.numFloor);
+        bool ret = true;
+        if(_contexts.game.waitAddFloorCount.count > 0)
+        {
+            _contexts.game.waitAddFloorCount.count--;
+            ret = false;
+        }
+        return (_contexts.game.gameState.state == GameState.Running) && (_gamegroup.count <= _contexts.config.floorData.numFloor) && ret;
     }
 
     protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
