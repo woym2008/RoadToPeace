@@ -17,6 +17,8 @@ public class ShipBossCreateFloorSystem : ReactiveSystem<GameEntity>
     {
         _contexts = contents;
         _services = services;
+
+        _gamegroup = _contexts.game.GetGroup(GameMatcher.Floor);
     }
     protected override void Execute(List<GameEntity> entities)
     {
