@@ -16,5 +16,5 @@ using Entitas.CodeGeneration.Attributes;
 [Game]
 public class BrickTypeComponent : IComponent
 {
-    public int value;
+    public string value;
 }

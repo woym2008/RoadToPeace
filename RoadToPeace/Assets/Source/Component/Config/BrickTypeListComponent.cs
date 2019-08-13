@@ -19,3 +19,9 @@ public class BrickTypeListComponent : IComponent
 {
     public List<string> typeList;
 }
+
+[Config,Unique]
+public class BrickResBaseComponent : IComponent
+{
+    public string basestr;
+}

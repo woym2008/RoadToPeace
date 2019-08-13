@@ -14,7 +14,7 @@ using Entitas;
 using Entitas.CodeGeneration.Attributes;
 
 [Game]
-[Unique]
+//[Unique]
 public class LifeComponent : IComponent
 {
     public int lifeValue;

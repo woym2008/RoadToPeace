@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5734324313418646349}
   - component: {fileID: 5734324313417646477}
   - component: {fileID: 1895107660716273924}
+  - component: {fileID: 4896514593313150332}
   m_Layer: 0
   m_Name: Iron_3
   m_TagString: Untagged
@@ -80,6 +81,18 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!114 &1895107660716273924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5734324313415720781}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72672c0f962a59a4b8d1ebd106c92d6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4896514593313150332
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

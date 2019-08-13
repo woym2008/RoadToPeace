@@ -21,11 +21,11 @@ public class BrickBrokenSystem : ReactiveSystem<GameEntity>
             {
                 if (brick.hasAsset && brick.hasBrickType)
                 {
-                    var basestr = bricklist[brick.brickType.value];
+                    //var basestr = bricklist[brick.brickType.value];
 
                     //撞坏后应该有毁坏后的样子 资源应该加个比如说“_broken”的后缀
                     //不过目前暂时就撞成最初的样子就行
-                    brick.ReplaceAsset(basestr, brick.asset.sortid);
+                    //brick.ReplaceAsset(basestr, brick.asset.sortid);
                 }
             }
             else

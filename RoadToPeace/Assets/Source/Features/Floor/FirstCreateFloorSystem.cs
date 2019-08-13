@@ -26,7 +26,9 @@ public class FirstCreateFloorSystem : ReactiveSystem<GameEntity>
     {
         var curpos = _contexts.config.floorData.firstPos;
 
-        for(int i = 0; i < _contexts.config.floorData.numFloor; ++i)
+        _contexts.game.ReplaceWaitAddFloorCount(0);
+
+        for (int i = 0; i < _contexts.config.floorData.numFloor; ++i)
         {
             var floorEntity = _contexts.game.CreateEntity();
             floorEntity.isDestoryOnReset = true;
@@ -45,7 +47,9 @@ public class FirstCreateFloorSystem : ReactiveSystem<GameEntity>
                 0,
                 0
                 );
-
+                
+            string basebrickname = _contexts.config.brickTable.table.GetBrickName(0);
+            floorEntity.ReplaceFloorType(basebrickname);
             //Debug.Log("width: " + curpos);
         }
     }

@@ -11,29 +11,33 @@ public static class ConfigComponentsLookup {
     public const int BossData = 0;
     public const int BossDebutTime = 1;
     public const int BossNames = 2;
-    public const int BrickTable = 3;
-    public const int BrickTypeCount = 4;
-    public const int BrickTypeList = 5;
-    public const int CameraPos = 6;
-    public const int DifficultLevelup = 7;
-    public const int FloorBaseSpeed = 8;
-    public const int FloorData = 9;
-    public const int FloorSpeedUp = 10;
-    public const int GameForward = 11;
-    public const int GroundData = 12;
-    public const int GroundList = 13;
-    public const int NormalBrickTypeList = 14;
-    public const int PlayerData = 15;
-    public const int RoadBoundary = 16;
-    public const int RunPlayerPosition = 17;
-    public const int StartPlayerPosition = 18;
+    public const int BrickResBase = 3;
+    public const int BrickTable = 4;
+    public const int BrickTypeCount = 5;
+    public const int BrickTypeList = 6;
+    public const int CameraPos = 7;
+    public const int DifficultLevelup = 8;
+    public const int FloorBaseSpeed = 9;
+    public const int FloorData = 10;
+    public const int FloorSpeedUp = 11;
+    public const int GameForward = 12;
+    public const int GroundData = 13;
+    public const int GroundList = 14;
+    public const int NormalBrickTypeList = 15;
+    public const int PlayerData = 16;
+    public const int RoadBoundary = 17;
+    public const int RunPlayerPosition = 18;
+    public const int StartPlayerPosition = 19;
+    public const int WallData = 20;
+    public const int WallList = 21;
 
-    public const int TotalComponents = 19;
+    public const int TotalComponents = 22;
 
     public static readonly string[] componentNames = {
         "BossData",
         "BossDebutTime",
         "BossNames",
+        "BrickResBase",
         "BrickTable",
         "BrickTypeCount",
         "BrickTypeList",
@@ -49,13 +53,16 @@ public static class ConfigComponentsLookup {
         "PlayerData",
         "RoadBoundary",
         "RunPlayerPosition",
-        "StartPlayerPosition"
+        "StartPlayerPosition",
+        "WallData",
+        "WallList"
     };
 
     public static readonly System.Type[] componentTypes = {
         typeof(BossDataComponent),
         typeof(BossDebutTimeComponent),
         typeof(BossNamesComponent),
+        typeof(BrickResBaseComponent),
         typeof(BrickTableComponent),
         typeof(BrickTypeCountComponent),
         typeof(BrickTypeListComponent),
@@ -71,6 +78,8 @@ public static class ConfigComponentsLookup {
         typeof(PlayerDataComponent),
         typeof(RoadBoundaryComponent),
         typeof(RunPlayerPositionComponent),
-        typeof(StartPlayerPositionComponent)
+        typeof(StartPlayerPositionComponent),
+        typeof(WallDataComponent),
+        typeof(WallListComponent)
     };
 }

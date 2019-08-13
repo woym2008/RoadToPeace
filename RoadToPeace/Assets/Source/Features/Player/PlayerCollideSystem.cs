@@ -66,9 +66,13 @@ public class PlayerCollideSystem : IExecuteSystem
                                     {
                                         if (player.playerState.state == PlayerGameState.Run)
                                         {
-                                            if (_contexts.game.hasLife)
+                                            //if (_contexts.game.hasLife)
+                                            //{
+                                            //    _contexts.game.ReplaceLife(0);
+                                            //}
+                                            if(player.hasLife)
                                             {
-                                                _contexts.game.ReplaceLife(0);
+                                                player.ReplaceLife(0);
                                             }
                                             //curbrick.isBrickBroken = true;
                                             curbrick.ReplaceBrickBroken(-1);

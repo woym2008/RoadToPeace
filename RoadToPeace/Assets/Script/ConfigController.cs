@@ -40,6 +40,10 @@ public class ConfigController : MonoBehaviour
     public List<string> GroundRes = new List<string>();
     public List<string> GroundPath = new List<string>();
     //----------------------------------
+    //public float Wall
+    public List<GameObject> WallRes = new List<GameObject>();
+    public List<string> WallPath = new List<string>();
+    //----------------------------------
 
     public float FloorSpeed = 1.0f;
     public float FloorSpeedUpValue = 0.5f;
@@ -104,6 +108,15 @@ public class ConfigController : MonoBehaviour
         GroundFirstPos.position, GroundOverPos.position, NumGround,
             NumGroundRow);
 
+        for(int i=0; i< WallRes.Count;++i)
+        {
+            WallPath.Add("Wall/" + WallRes[i].name);
+        }
+
+        contexts.config.ReplaceWallList(WallPath);
+        contexts.config.ReplaceWallData(GroundWidth);
+
+        contexts.config.ReplaceBrickResBase("Brick/");
         contexts.config.ReplaceBrickTypeList(RealBrickPath);
         contexts.config.ReplaceNormalBrickTypeList(NormalBrickPath);
 
