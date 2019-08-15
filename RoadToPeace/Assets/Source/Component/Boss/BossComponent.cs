@@ -77,3 +77,16 @@ public class IsBlockLazerFloorComponent : IComponent
 {
 
 }
+
+[Game]
+public class BossThinkingComponent : IComponent
+{
+    public int bossAttackType;
+}
+
+//boss状态间传递参数用的
+[Game]
+public class BossFightParamComponent : IComponent
+{
+
+}
