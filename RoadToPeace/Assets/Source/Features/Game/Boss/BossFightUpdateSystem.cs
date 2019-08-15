@@ -474,8 +474,8 @@ public class TowerUpdateSystem : IExecuteSystem
         foreach(var e in _towers)
         {
             var floor = e.objectParent;
-
-            e.view.Value.Position = floor.parent.position.position + new Vector3(0, 0, _distance);
+            if(floor.parent.hasPosition)
+                e.view.Value.Position =  new Vector3(floor.parent.position.position.x, floor.parent.position.position.y,  _distance);
         }
     }
 }
