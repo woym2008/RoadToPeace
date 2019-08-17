@@ -40,6 +40,8 @@ public class GameSystem : Feature
         Add(new PlayerSystem(contexts, services));
 
         Add(new BossSystem(contexts, services));
+
+        Add(new TimerSystem(contexts));
         
         Add(new GameEventSystems(contexts));
 

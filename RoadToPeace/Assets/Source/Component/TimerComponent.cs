@@ -12,6 +12,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Entitas;
 
+[Game]
+//计时器属性
 public class TimerComponent : IComponent
 {
     public float passedTime;

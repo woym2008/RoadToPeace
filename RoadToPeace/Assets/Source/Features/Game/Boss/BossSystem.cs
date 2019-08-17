@@ -15,6 +15,8 @@ public class BossSystem : Feature
         Add(new BossHugeLazerUpdateSystem(contexts));
         Add(new BossThrowTowerEnterSystem(contexts));
         Add(new BossThrowTowerUpdateSystem(contexts));
+        Add(new BossThinkEnterSystem(contexts));
+        Add(new BossThinkUpdateSystem(contexts));
 
         Add(new ShipBossCreateFloorSystem(contexts, services));
         Add(new TowerInitSystem(contexts, services));
