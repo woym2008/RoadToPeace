@@ -346,14 +346,23 @@ public class BossThrowTowerEnterSystem : ReactiveSystem<GameEntity>
 {
     Contexts _contexts;
 
+    IGroup<GameEntity> _floors;
+
+    int numtolast = 10;
+    int numtower = 3;
+
     public BossThrowTowerEnterSystem(Contexts contexts) :
         base(contexts.game)
     {
         _contexts = contexts;
+
+        _floors = _contexts.game.GetGroup(GameMatcher.Floor);
     }
 
     protected override void Execute(List<GameEntity> entities)
     {
+        /*
+        //在新的floor上创建tower       
         //创建多少个tower 就是创建多少个floor
         //中间可以隔着个floor
         //目前写死5个
@@ -366,6 +375,51 @@ public class BossThrowTowerEnterSystem : ReactiveSystem<GameEntity>
             var entityEmpty = _contexts.game.CreateEntity();
             entityEmpty.isBossCreateFloor = true;
         }
+        */
+
+        //直接在现有的floor上创建tower
+        //find lastest
+        GameEntity findfloor = null;
+        foreach(var f in _floors)
+        {
+            if(f.isLastFloor)
+            {
+                findfloor = f;
+                break;
+            }
+        }
+
+        if(findfloor != null)
+        {
+            for(int i=0;i<numtolast; ++ i)
+            {
+                Debug.Log(i);
+                if(findfloor.hasFloorBrother)
+                {
+                    findfloor = findfloor.floorBrother.Left;
+                }
+
+            }
+
+
+            for(int i=0;i<numtower; ++i)
+            {
+                if(findfloor != null && findfloor.hasFloorBrother && findfloor.floorBrother.Right != null)
+                {
+                    findfloor.isIsLazerTowerFloor = true;
+
+                    var towerEntity = _contexts.game.CreateEntity();
+                    towerEntity.AddObjectParent(findfloor);
+                    towerEntity.isLazerTower = true;
+                    findfloor.AddChild(towerEntity);
+
+                    findfloor = findfloor.floorBrother.Right;
+                    if(findfloor.hasFloorBrother)
+                        findfloor = findfloor.floorBrother.Right;
+                }
+            }
+        }
+        //----------------
         var e = _contexts.game.CreateEntity();
         e.isBossFightParam = true;
         e.AddTimer(0);
@@ -429,13 +483,25 @@ public class TowerInitSystem : ReactiveSystem<GameEntity>
     public TowerInitSystem(Contexts contexts, Services services) :
         base(contexts.game)
     {
-        ;
+        _contexts = contexts;
     }
     protected override void Execute(List<GameEntity> entities)
     {
+        var height = _contexts.config.bossData.lazertowerheight;
+
         foreach(var e in entities)
         {
             e.AddAsset("Boss/Skill/Lazer_Tower",0);
+            e.AddHp(1);
+            e.AddPosition(new Vector3(0, height, 0));
+
+            var effectEntity = _contexts.game.CreateEntity();
+            e.AddChild(effectEntity);
+            effectEntity.AddAsset("Boss/Effect/Spark",0);
+
+            effectEntity.AddPosition(new Vector3(0, height, 0));
+            //effectEntity.isBossTowerEffect = true;
+            //需要给effect加个名字 下面update的时候找到他
 
         }
     }
@@ -475,7 +541,41 @@ public class TowerUpdateSystem : IExecuteSystem
         {
             var floor = e.objectParent;
             if(floor.parent.hasPosition)
-                e.view.Value.Position =  new Vector3(floor.parent.position.position.x, floor.parent.position.position.y,  _distance);
+            {
+                e.view.Value.Position = new Vector3(floor.parent.position.position.x, e.position.position.y, _distance);
+                if(e.hasChild && e.child.value.hasPosition)
+                {
+                    e.child.value.position.position = e.view.Value.Position;
+                    if(e.child.value.hasView)
+                    {
+                        e.child.value.view.Value.Position = e.view.Value.Position;
+                    }
+                }
+            }
+
+            //判读是否击毁
+            if (floor.parent.gridID.id == 2)
+            {
+                e.hp.hp -= Time.deltaTime;
+                if(e.hp.hp <= 0)
+                {
+                    e.isDestroyed = true;
+                }
+
+                if (e.hasChild && e.child.value.hasView && !e.child.value.view.Value.Enabled)
+                {
+                    e.child.value.view.Value.Enabled = true;
+                }
+            }
+            else
+            {
+                if (e.hasChild && e.child.value.hasView && e.child.value.view.Value.Enabled)
+                {
+                    e.child.value.view.Value.Enabled = false;
+                }
+            }
+
+            //激光判定
         }
     }
 }

@@ -28,6 +28,7 @@ public class FirstCreateFloorSystem : ReactiveSystem<GameEntity>
 
         _contexts.game.ReplaceWaitAddFloorCount(0);
 
+        GameEntity tempoldfloor = null;
         for (int i = 0; i < _contexts.config.floorData.numFloor; ++i)
         {
             var floorEntity = _contexts.game.CreateEntity();
@@ -42,6 +43,12 @@ public class FirstCreateFloorSystem : ReactiveSystem<GameEntity>
                 floorEntity.isLastFloor = true;
             }
 
+            floorEntity.ReplaceFloorBrother(tempoldfloor,null);
+            if(tempoldfloor != null)
+            {
+                tempoldfloor.ReplaceFloorBrother(tempoldfloor.floorBrother.Left,floorEntity);
+            }
+
             curpos = curpos + new Vector3(
                 _contexts.config.floorData.floorWidth,
                 0,
@@ -51,6 +58,8 @@ public class FirstCreateFloorSystem : ReactiveSystem<GameEntity>
             string basebrickname = _contexts.config.brickTable.table.GetBrickName(0);
             floorEntity.ReplaceFloorType(basebrickname);
             //Debug.Log("width: " + curpos);
+
+            tempoldfloor = floorEntity;
         }
     }
 

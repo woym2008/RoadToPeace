@@ -90,3 +90,9 @@ public class BossFightParamComponent : IComponent
 {
 
 }
+
+[Game]
+public class BossTowerEffectComponent : IComponent
+{
+
+}
