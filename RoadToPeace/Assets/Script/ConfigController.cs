@@ -68,6 +68,8 @@ public class ConfigController : MonoBehaviour
     public float BossReadyTime = 5.0f;
     public float BossThinkTime = 1.0f;
     public float BossHp = 10.0f;
+    //---
+    public float BossLazerTowerHeight = -4.6f;
 
     public List<string> BossNames = new List<string>();
     //----------------------------------
@@ -151,7 +153,8 @@ public class ConfigController : MonoBehaviour
         BossEndPoint.position,
         BossHp,
         BossReadyTime,
-        BossThinkTime
+        BossThinkTime,
+        BossLazerTowerHeight
             );
 
         contexts.config.ReplaceBossNames(BossNames);

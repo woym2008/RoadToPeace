@@ -15,6 +15,7 @@ public class BossDataComponent : IComponent
     public float readytime;
     public float thinktime;
 
+    public float lazertowerheight;
 }
 
 [Config,Unique]

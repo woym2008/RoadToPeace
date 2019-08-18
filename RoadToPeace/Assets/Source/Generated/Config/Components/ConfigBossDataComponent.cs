@@ -12,22 +12,22 @@ public partial class ConfigContext {
     public BossDataComponent bossData { get { return bossDataEntity.bossData; } }
     public bool hasBossData { get { return bossDataEntity != null; } }
 
-    public ConfigEntity SetBossData(UnityEngine.Vector3 newStartpos, UnityEngine.Vector3 newFightpos, float newBosshp, float newReadytime, float newThinktime) {
+    public ConfigEntity SetBossData(UnityEngine.Vector3 newStartpos, UnityEngine.Vector3 newFightpos, float newBosshp, float newReadytime, float newThinktime, float newLazertowerheight) {
         if (hasBossData) {
             throw new Entitas.EntitasException("Could not set BossData!\n" + this + " already has an entity with BossDataComponent!",
                 "You should check if the context already has a bossDataEntity before setting it or use context.ReplaceBossData().");
         }
         var entity = CreateEntity();
-        entity.AddBossData(newStartpos, newFightpos, newBosshp, newReadytime, newThinktime);
+        entity.AddBossData(newStartpos, newFightpos, newBosshp, newReadytime, newThinktime, newLazertowerheight);
         return entity;
     }
 
-    public void ReplaceBossData(UnityEngine.Vector3 newStartpos, UnityEngine.Vector3 newFightpos, float newBosshp, float newReadytime, float newThinktime) {
+    public void ReplaceBossData(UnityEngine.Vector3 newStartpos, UnityEngine.Vector3 newFightpos, float newBosshp, float newReadytime, float newThinktime, float newLazertowerheight) {
         var entity = bossDataEntity;
         if (entity == null) {
-            entity = SetBossData(newStartpos, newFightpos, newBosshp, newReadytime, newThinktime);
+            entity = SetBossData(newStartpos, newFightpos, newBosshp, newReadytime, newThinktime, newLazertowerheight);
         } else {
-            entity.ReplaceBossData(newStartpos, newFightpos, newBosshp, newReadytime, newThinktime);
+            entity.ReplaceBossData(newStartpos, newFightpos, newBosshp, newReadytime, newThinktime, newLazertowerheight);
         }
     }
 
@@ -49,7 +49,7 @@ public partial class ConfigEntity {
     public BossDataComponent bossData { get { return (BossDataComponent)GetComponent(ConfigComponentsLookup.BossData); } }
     public bool hasBossData { get { return HasComponent(ConfigComponentsLookup.BossData); } }
 
-    public void AddBossData(UnityEngine.Vector3 newStartpos, UnityEngine.Vector3 newFightpos, float newBosshp, float newReadytime, float newThinktime) {
+    public void AddBossData(UnityEngine.Vector3 newStartpos, UnityEngine.Vector3 newFightpos, float newBosshp, float newReadytime, float newThinktime, float newLazertowerheight) {
         var index = ConfigComponentsLookup.BossData;
         var component = (BossDataComponent)CreateComponent(index, typeof(BossDataComponent));
         component.startpos = newStartpos;
@@ -57,10 +57,11 @@ public partial class ConfigEntity {
         component.bosshp = newBosshp;
         component.readytime = newReadytime;
         component.thinktime = newThinktime;
+        component.lazertowerheight = newLazertowerheight;
         AddComponent(index, component);
     }
 
-    public void ReplaceBossData(UnityEngine.Vector3 newStartpos, UnityEngine.Vector3 newFightpos, float newBosshp, float newReadytime, float newThinktime) {
+    public void ReplaceBossData(UnityEngine.Vector3 newStartpos, UnityEngine.Vector3 newFightpos, float newBosshp, float newReadytime, float newThinktime, float newLazertowerheight) {
         var index = ConfigComponentsLookup.BossData;
         var component = (BossDataComponent)CreateComponent(index, typeof(BossDataComponent));
         component.startpos = newStartpos;
@@ -68,6 +69,7 @@ public partial class ConfigEntity {
         component.bosshp = newBosshp;
         component.readytime = newReadytime;
         component.thinktime = newThinktime;
+        component.lazertowerheight = newLazertowerheight;
         ReplaceComponent(index, component);
     }
 

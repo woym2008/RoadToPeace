@@ -33,6 +33,10 @@ public class DestroySystem : IExecuteSystem
             {
                 e.RemoveFloorChild();
             }
+            if(e.hasChild)
+            {
+                e.isDestroyed = true;
+            }
             e.Destroy();
         }
     }
