@@ -11,14 +11,14 @@ public partial class GameEntity {
     public LifeComponent life { get { return (LifeComponent)GetComponent(GameComponentsLookup.Life); } }
     public bool hasLife { get { return HasComponent(GameComponentsLookup.Life); } }
 
-    public void AddLife(int newLifeValue) {
+    public void AddLife(float newLifeValue) {
         var index = GameComponentsLookup.Life;
         var component = (LifeComponent)CreateComponent(index, typeof(LifeComponent));
         component.lifeValue = newLifeValue;
         AddComponent(index, component);
     }
 
-    public void ReplaceLife(int newLifeValue) {
+    public void ReplaceLife(float newLifeValue) {
         var index = GameComponentsLookup.Life;
         var component = (LifeComponent)CreateComponent(index, typeof(LifeComponent));
         component.lifeValue = newLifeValue;

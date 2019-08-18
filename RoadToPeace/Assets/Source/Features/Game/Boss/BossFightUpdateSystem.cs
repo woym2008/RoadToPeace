@@ -37,6 +37,12 @@ public class BossThinkEnterSystem : ReactiveSystem<GameEntity>
 
         int randtype = UnityEngine.Random.Range(0, 2);
         bossthinking.AddBossThinking(randtype);
+
+
+        //在开始思考的时候放置一组missile 可能不太对 但先放在这
+        var missilefloorentity = _contexts.game.CreateEntity();
+        missilefloorentity.isCreateMissileFloor = true;
+        missilefloorentity.isBossCreateFloor = true;
     }
 
     protected override bool Filter(GameEntity entity)
@@ -153,6 +159,10 @@ public class BossHugeLazerUpdateSystem : IExecuteSystem
 
         if (_contexts.game.bossState.state == BossState.HugeLazer)
         {
+            bool isLazerHitPlayer = false;
+
+            var player = _contexts.game.playerEntity;
+
             //更新激光射击到到位置
             var lazer = _hugelazer.GetSingleEntity();
             if(lazer == null || !lazer.hasTimer)
@@ -165,26 +175,26 @@ public class BossHugeLazerUpdateSystem : IExecuteSystem
             if(_lazerstate == 0)
             {
                 _lazerstate = 1;
-                Debug.LogWarning("ready");
+                //Debug.LogWarning("ready");
             }
             //蓄力完成 发射
             if (passedtime > _accumulateTime && _lazerstate == 1)
             {
                 _lazerstate = 2;
 
-                Debug.LogWarning("fire");
+                //Debug.LogWarning("fire");
             }
             //发射完成 开始减弱
             if (passedtime > (_accumulateTime + _launchTime) && _lazerstate == 2)
             {
                 _lazerstate = 3;
 
-                Debug.LogWarning("reduce");
+                //Debug.LogWarning("reduce");
             }
             //状态完成
             if (passedtime > (_accumulateTime + _launchTime + _reduceTime) && _lazerstate == 3)
             {
-                Debug.LogWarning("finish");
+                //Debug.LogWarning("finish");
 
                 _lazerstate = 0;
 
@@ -280,10 +290,24 @@ public class BossHugeLazerUpdateSystem : IExecuteSystem
                                 //updis = Vector3.Distance(lastbrick_up.position.position, bosscontroller.HugeLazerStartPoint.position);
                                 updis = Mathf.Abs(lastbrick_up.position.position.x - bosscontroller.HugeLazerStartPoint.position.x);
                             }
+                            //中间的比较特殊，因为是人走的地方，要判断人和阻挡物谁在前
                             if (lastbrick_middle != null)
                             {
+                                var finalx = lastbrick_middle.position.position.x;
+                                if (player.position.position.x > lastbrick_middle.position.position.x)
+                                {
+                                    finalx = player.position.position.x;
+
+                                    //走到了这里 说明主角被大激光打中了
+                                    isLazerHitPlayer = true;
+                                }
                                 //middledis = Vector3.Distance(lastbrick_middle.position.position, bosscontroller.HugeLazerStartPoint.position);
-                                middledis = Mathf.Abs(lastbrick_middle.position.position.x - bosscontroller.HugeLazerStartPoint.position.x);
+                                middledis = Mathf.Abs(finalx - bosscontroller.HugeLazerStartPoint.position.x);
+                            }
+                            else
+                            {
+                                middledis = Mathf.Abs(player.position.position.x - bosscontroller.HugeLazerStartPoint.position.x);
+                                isLazerHitPlayer = true;
                             }
                             if (lastbrick_down != null)
                             {
@@ -314,6 +338,7 @@ public class BossHugeLazerUpdateSystem : IExecuteSystem
                             }
                             else
                             {
+
                                 float up_t = updis / hlc.maxlength;
                                 float middle_t = middledis / hlc.maxlength;
                                 float down_t = downdis / hlc.maxlength;
@@ -337,7 +362,14 @@ public class BossHugeLazerUpdateSystem : IExecuteSystem
                     break;
             }
 
-
+            //处理主角受到打击
+            if(isLazerHitPlayer)
+            {
+                if(player.hasLife)
+                {
+                    player.ReplaceLife(player.life.lifeValue - 0.02f);
+                }
+            }
         }
     }
 }
@@ -575,7 +607,25 @@ public class TowerUpdateSystem : IExecuteSystem
                 }
             }
 
+            //对block，顺便判断下激光能打到第几个brick
+
+
             //激光判定
+            //对主角
+            var player = _contexts.game.playerEntity;
+            var halffloorwidth = _contexts.config.floorData.floorWidth * 0.5f;
+            if (player.position.position.x > (floor.parent.position.position.x - halffloorwidth) &&
+                        player.position.position.x < (floor.parent.position.position.x + halffloorwidth))
+            {
+                //暂时写成 激光打中这个floor 就击中了player
+
+                if (player.hasLife)
+                {
+                    player.ReplaceLife(player.life.lifeValue - 0.01f);
+                }
+            }
+
+
         }
     }
 }

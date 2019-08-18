@@ -12,6 +12,8 @@ public class ShipBossCreateFloorSystem : ReactiveSystem<GameEntity>
 
     private IGroup<GameEntity> _gamegroup;
 
+    private IGroup<GameEntity> _specialfloors;
+
     public ShipBossCreateFloorSystem(Contexts contents, Services services):
         base(contents.game)
     {
@@ -19,81 +21,95 @@ public class ShipBossCreateFloorSystem : ReactiveSystem<GameEntity>
         _services = services;
 
         _gamegroup = _contexts.game.GetGroup(GameMatcher.Floor);
+        _specialfloors = _contexts.game.GetGroup(GameMatcher.SpecialFloor);
     }
     protected override void Execute(List<GameEntity> entities)
     {
         foreach(var entity in entities)
         {
-            _contexts.game.waitAddFloorCount.count++;
-            Vector3 poslast = _contexts.config.floorData.overPos;
-
-            float width = _contexts.config.floorData.floorWidth;
-
-            GameEntity oldlastfloor = null;
-            foreach (var floor in _gamegroup)
+            //创建missile
+            //if(entity.isCreateMissileFloor)
+            //{
+                 
+            //}
+            //创建block
+            //else
             {
-                if (floor.isLastFloor)
+                var floorentity = _contexts.game.CreateEntity();
+
+                _contexts.game.waitAddFloorCount.count++;
+                Vector3 poslast = _contexts.config.floorData.overPos;
+
+                float width = _contexts.config.floorData.floorWidth;
+
+                GameEntity oldlastfloor = null;
+                foreach (var floor in _gamegroup)
                 {
-                    poslast = floor.position.position;
-                    floor.isLastFloor = false;
-                    oldlastfloor = floor;
-                    break;
+                    if (floor.isLastFloor)
+                    {
+                        poslast = floor.position.position;
+                        floor.isLastFloor = false;
+                        oldlastfloor = floor;
+                        break;
+                    }
                 }
-            }
 
-            //GameEntity entity = _contexts.game.CreateEntity();
-            entity.isFloor = true;
-            entity.isLastFloor = true;
-            entity.ReplacePosition(new Vector3(
-                poslast.x + width,
-                poslast.y,
-                poslast.z
-                ));
-            entity.ReplaceGridID(1);
+                //GameEntity entity = _contexts.game.CreateEntity();
+                floorentity.isFloor = true;
+                floorentity.isLastFloor = true;
+                floorentity.ReplacePosition(new Vector3(
+                    poslast.x + width,
+                    poslast.y,
+                    poslast.z
+                    ));
+                floorentity.ReplaceGridID(1);
 
-            entity.ReplaceFloorDifficulty(1);
-            entity.isDestoryOnReset = true;
+                floorentity.ReplaceFloorDifficulty(1);
+                floorentity.isDestoryOnReset = true;
 
-            if (oldlastfloor != null)
-            {
-                GameEntity brotherleft = null;
-                if (oldlastfloor.hasFloorBrother)
+                if (oldlastfloor != null)
                 {
-                    brotherleft = oldlastfloor.floorBrother.Left;
+                    GameEntity brotherleft = null;
+                    if (oldlastfloor.hasFloorBrother)
+                    {
+                        brotherleft = oldlastfloor.floorBrother.Left;
+                    }
+                    oldlastfloor.ReplaceFloorBrother(brotherleft, floorentity);
+                    floorentity.ReplaceFloorBrother(oldlastfloor, null);
                 }
-                oldlastfloor.ReplaceFloorBrother(brotherleft, entity);
-                entity.ReplaceFloorBrother(oldlastfloor, null);
-            }
 
-            //对于不是特殊格子的，随机一个格子类型
-            //var numtype = _contexts.config.brickTable.table.NormalBrickNames.Length;
-            //var randindex = UnityEngine.Random.Range(1, numtype);
+                //对于不是特殊格子的，随机一个格子类型
+                //var numtype = _contexts.config.brickTable.table.NormalBrickNames.Length;
+                //var randindex = UnityEngine.Random.Range(1, numtype);
 
-            //var brickname = _contexts.config.brickTable.table.NormalBrickNames[randindex];
-            if(entity.isIsLazerTowerFloor)
-            {
-                bool isblock = UnityEngine.Random.Range(0, 100) > 90;
-                if(isblock)
+                //var brickname = _contexts.config.brickTable.table.NormalBrickNames[randindex];
+                if (floorentity.isIsLazerTowerFloor)
                 {
-                    entity.ReplaceFloorType("Mech_Block");
+                    bool isblock = UnityEngine.Random.Range(0, 100) > 90;
+                    if (isblock)
+                    {
+                        floorentity.ReplaceFloorType("Mech_Block");
+                    }
+                    else
+                    {
+                        floorentity.ReplaceFloorType("Mech");
+                    }
+
+                    var towerEntity = _contexts.game.CreateEntity();
+                    towerEntity.AddObjectParent(floorentity);
+                    towerEntity.isLazerTower = true;
+                }
+                else if (floorentity.isIsBlockLazerFloor)
+                {
+                    floorentity.ReplaceFloorType("Mech_Battery");
                 }
                 else
                 {
-                    entity.ReplaceFloorType("Mech");
+                    floorentity.ReplaceFloorType("Mech");
                 }
+            }
 
-                var towerEntity = _contexts.game.CreateEntity();
-                towerEntity.AddObjectParent(entity);
-                towerEntity.isLazerTower = true;
-            }
-            else if(entity.isIsBlockLazerFloor)
-            {
-                entity.ReplaceFloorType("Mech_Battery");
-            }
-            else
-            {
-                entity.ReplaceFloorType("Mech");
-            }
+            entity.isDestroyed = true;
         }
 
     }

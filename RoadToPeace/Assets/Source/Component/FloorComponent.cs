@@ -29,3 +29,9 @@ public class FloorTypeComponent : IComponent
 {
     public string type;
 }
+
+[Game,Unique]
+public class FloorCountComponent : IComponent
+{
+    public int value;
+}

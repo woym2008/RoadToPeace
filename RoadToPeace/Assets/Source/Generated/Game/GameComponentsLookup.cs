@@ -15,76 +15,79 @@ public static class GameComponentsLookup {
     public const int Boss = 4;
     public const int BossCreateFloor = 5;
     public const int BossDebutCountDown = 6;
-    public const int BossFightParam = 7;
-    public const int BossHugeLazer = 8;
-    public const int BossState = 9;
-    public const int BossThinking = 10;
-    public const int BossTowerEffect = 11;
-    public const int BrickBroken = 12;
-    public const int Brick = 13;
-    public const int BrickData = 14;
-    public const int BrickIndex = 15;
-    public const int BrickName = 16;
-    public const int BrickParent = 17;
-    public const int BrickType = 18;
-    public const int BrickYOffset = 19;
-    public const int Child = 20;
-    public const int Collision = 21;
-    public const int DestoryOnReset = 22;
-    public const int Destroyed = 23;
-    public const int DestroyedListener = 24;
-    public const int DifficultCountDown = 25;
-    public const int Difficulty = 26;
-    public const int Drag = 27;
-    public const int DragFloor = 28;
-    public const int DragOffset = 29;
-    public const int EffecetCtrl = 30;
-    public const int Effect = 31;
-    public const int FloorBrother = 32;
-    public const int FloorChild = 33;
-    public const int Floor = 34;
-    public const int FloorDifficulty = 35;
-    public const int FloorSpeed = 36;
-    public const int FloorType = 37;
-    public const int GameCamera = 38;
-    public const int GameOver = 39;
-    public const int GameReady = 40;
-    public const int GameReadyListener = 41;
-    public const int GameStart = 42;
-    public const int GameStartListener = 43;
-    public const int GameState = 44;
-    public const int GameStateListener = 45;
-    public const int GridID = 46;
-    public const int Ground = 47;
-    public const int GroundParent = 48;
-    public const int GroundView = 49;
-    public const int Hp = 50;
-    public const int Id = 51;
-    public const int IsBlockLazerFloor = 52;
-    public const int IsBrickPassed = 53;
-    public const int IsLazerTowerFloor = 54;
-    public const int LastFloor = 55;
-    public const int LastGround = 56;
-    public const int LazerTower = 57;
-    public const int Life = 58;
-    public const int Missile = 59;
-    public const int Move = 60;
-    public const int ObjectParent = 61;
-    public const int Player = 62;
-    public const int PlayerCurFloor = 63;
-    public const int PlayerReady = 64;
-    public const int PlayerState = 65;
-    public const int Position = 66;
-    public const int Reset = 67;
-    public const int SpecialFloor = 68;
-    public const int SpecialFloorData = 69;
-    public const int Timer = 70;
-    public const int VelocityIncrement = 71;
-    public const int View = 72;
-    public const int WaitAddFloorCount = 73;
-    public const int WayOfPassBrick = 74;
+    public const int BossFighting = 7;
+    public const int BossFightParam = 8;
+    public const int BossHugeLazer = 9;
+    public const int BossState = 10;
+    public const int BossThinking = 11;
+    public const int BossTowerEffect = 12;
+    public const int BrickBroken = 13;
+    public const int Brick = 14;
+    public const int BrickData = 15;
+    public const int BrickIndex = 16;
+    public const int BrickName = 17;
+    public const int BrickParent = 18;
+    public const int BrickType = 19;
+    public const int BrickYOffset = 20;
+    public const int Child = 21;
+    public const int Collision = 22;
+    public const int CreateMissileFloor = 23;
+    public const int DestoryOnReset = 24;
+    public const int Destroyed = 25;
+    public const int DestroyedListener = 26;
+    public const int DifficultCountDown = 27;
+    public const int Difficulty = 28;
+    public const int Drag = 29;
+    public const int DragFloor = 30;
+    public const int DragOffset = 31;
+    public const int EffecetCtrl = 32;
+    public const int Effect = 33;
+    public const int FloorBrother = 34;
+    public const int FloorChild = 35;
+    public const int Floor = 36;
+    public const int FloorCount = 37;
+    public const int FloorDifficulty = 38;
+    public const int FloorSpeed = 39;
+    public const int FloorType = 40;
+    public const int GameCamera = 41;
+    public const int GameOver = 42;
+    public const int GameReady = 43;
+    public const int GameReadyListener = 44;
+    public const int GameStart = 45;
+    public const int GameStartListener = 46;
+    public const int GameState = 47;
+    public const int GameStateListener = 48;
+    public const int GridID = 49;
+    public const int Ground = 50;
+    public const int GroundParent = 51;
+    public const int GroundView = 52;
+    public const int Hp = 53;
+    public const int Id = 54;
+    public const int IsBlockLazerFloor = 55;
+    public const int IsBrickPassed = 56;
+    public const int IsLazerTowerFloor = 57;
+    public const int LastFloor = 58;
+    public const int LastGround = 59;
+    public const int LazerTower = 60;
+    public const int Life = 61;
+    public const int Missile = 62;
+    public const int Move = 63;
+    public const int ObjectParent = 64;
+    public const int Player = 65;
+    public const int PlayerCurFloor = 66;
+    public const int PlayerReady = 67;
+    public const int PlayerState = 68;
+    public const int Position = 69;
+    public const int Reset = 70;
+    public const int SpecialFloor = 71;
+    public const int SpecialFloorData = 72;
+    public const int Timer = 73;
+    public const int VelocityIncrement = 74;
+    public const int View = 75;
+    public const int WaitAddFloorCount = 76;
+    public const int WayOfPassBrick = 77;
 
-    public const int TotalComponents = 75;
+    public const int TotalComponents = 78;
 
     public static readonly string[] componentNames = {
         "Anim",
@@ -94,6 +97,7 @@ public static class GameComponentsLookup {
         "Boss",
         "BossCreateFloor",
         "BossDebutCountDown",
+        "BossFighting",
         "BossFightParam",
         "BossHugeLazer",
         "BossState",
@@ -109,6 +113,7 @@ public static class GameComponentsLookup {
         "BrickYOffset",
         "Child",
         "Collision",
+        "CreateMissileFloor",
         "DestoryOnReset",
         "Destroyed",
         "DestroyedListener",
@@ -122,6 +127,7 @@ public static class GameComponentsLookup {
         "FloorBrother",
         "FloorChild",
         "Floor",
+        "FloorCount",
         "FloorDifficulty",
         "FloorSpeed",
         "FloorType",
@@ -172,6 +178,7 @@ public static class GameComponentsLookup {
         typeof(BossComponent),
         typeof(BossCreateFloorComponent),
         typeof(BossDebutCountDownComponent),
+        typeof(BossFighting),
         typeof(BossFightParamComponent),
         typeof(BossHugeLazer),
         typeof(BossStateComponent),
@@ -187,6 +194,7 @@ public static class GameComponentsLookup {
         typeof(BrickYOffsetComponent),
         typeof(ChildComponent),
         typeof(CollisionComponent),
+        typeof(CreateMissileFloorComponent),
         typeof(DestoryOnResetComponent),
         typeof(DestroyedComponent),
         typeof(DestroyedListenerComponent),
@@ -200,6 +208,7 @@ public static class GameComponentsLookup {
         typeof(FloorBrotherComponent),
         typeof(FloorChildComponent),
         typeof(FloorComponent),
+        typeof(FloorCountComponent),
         typeof(FloorDifficultyComponent),
         typeof(FloorSpeedComponent),
         typeof(FloorTypeComponent),

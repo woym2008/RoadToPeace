@@ -17,5 +17,5 @@ using Entitas.CodeGeneration.Attributes;
 //[Unique]
 public class LifeComponent : IComponent
 {
-    public int lifeValue;
+    public float lifeValue;
 }

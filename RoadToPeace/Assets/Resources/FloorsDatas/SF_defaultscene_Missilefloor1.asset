@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SpecialFloorsDataScriptable
   minlevel: 999
   maxlevel: 999
-  bossfight: 0
-  bossname: 
+  bossfight: 1
+  bossname: LazerShip
   floors:
   - type: 0
     brick1_data: 

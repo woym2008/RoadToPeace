@@ -28,7 +28,7 @@ public class LifeChangeSystem : ReactiveSystem<GameEntity>
     protected override void Execute(List<GameEntity> entities)
     {
         var playerentity = _player.GetSingleEntity();
-        if (_gameContext.hasGameState && (_gameContext.gameState.state == GameState.Running) && playerentity.hasLife)
+        if (_gameContext.hasGameState && (_gameContext.gameState.state == GameState.Running) && playerentity.hasLife && _gameContext.playerEntity.life.lifeValue<=0.0f)
         {
             _gameContext.ReplaceGameState(GameState.GameOver);
 

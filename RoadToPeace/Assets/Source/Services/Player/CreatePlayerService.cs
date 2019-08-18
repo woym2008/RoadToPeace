@@ -28,7 +28,7 @@ public class CreatePlayerService : Service
         e.AddId(id);
         e.AddAsset("Player",3);
         e.AddPosition(position);
-        e.ReplaceLife(1);
+        e.ReplaceLife(10);
         e.ReplacePlayerState(PlayerGameState.Wait);
     }
 }

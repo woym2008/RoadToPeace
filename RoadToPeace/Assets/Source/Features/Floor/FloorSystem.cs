@@ -32,5 +32,7 @@ public class FloorSystem : Feature
         //--------------------
 
         Add(new SpecialFloorUpdate(contexts, services));
+
+        Add(new FloorProcessSystem(contexts));
     }
 }

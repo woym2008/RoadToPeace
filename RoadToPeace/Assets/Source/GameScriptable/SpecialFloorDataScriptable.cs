@@ -49,4 +49,9 @@ public class SpecialFloorsDataScriptable : ScriptableObject, ISpecialFloor
 
         return _table;
     }
+
+    public override string ToString()
+    {
+        return "bossname" + bossname + " bricktablename" + _bricktablename;
+    }
 }

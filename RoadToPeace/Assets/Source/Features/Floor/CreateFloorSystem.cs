@@ -49,6 +49,9 @@ public class CreateFloorSystem : ReactiveSystem<GameEntity>
         //普通格子还是特殊 目前暂时使用70%】
         //应该在Config有个值控制普通格子概率
         var isnormal = UnityEngine.Random.Range(0.0f,1.0f);
+        //应该区分下boss出现前和出现后阶段
+
+
         if(isnormal < 0.7f || _specialfloors.count == 0)
         {
             GameEntity entity = _contexts.game.CreateEntity();

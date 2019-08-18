@@ -9,6 +9,13 @@ public class BossComponent : IComponent
 {
 }
 
+//这个用来标示现在已经进入了boss战
+[Game,Unique]
+public class BossFighting : IComponent
+{
+
+}
+
 public enum BossState
 {
     Null,
@@ -74,6 +81,11 @@ public class IsLazerTowerFloorComponent : IComponent
 }
 [Game]
 public class IsBlockLazerFloorComponent : IComponent
+{
+
+}
+[Game]
+public class CreateMissileFloorComponent : IComponent
 {
 
 }

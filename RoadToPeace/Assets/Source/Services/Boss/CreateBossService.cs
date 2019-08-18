@@ -20,7 +20,7 @@ public class CreateBossService : Service
         e.AddId(id);
         e.AddAsset(bosspathbase + bossname, 3);
         e.AddPosition(position);
-        e.ReplaceLife(1);
+        e.ReplaceLife(10);
         //e.ReplaceBossState(BossState.Ready);
         //_contexts.game.ReplaceBossState(BossState.Ready);
     }

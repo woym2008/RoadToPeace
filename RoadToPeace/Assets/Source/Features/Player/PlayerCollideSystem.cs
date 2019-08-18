@@ -72,7 +72,7 @@ public class PlayerCollideSystem : IExecuteSystem
                                             //}
                                             if(player.hasLife)
                                             {
-                                                player.ReplaceLife(0);
+                                                player.ReplaceLife(player.life.lifeValue - 1);
                                             }
                                             //curbrick.isBrickBroken = true;
                                             curbrick.ReplaceBrickBroken(-1);
