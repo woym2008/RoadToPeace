@@ -47,44 +47,48 @@ public class PlayerCollideSystem : IExecuteSystem
 
                         var childs = floor.floorChild.childs;
                         var curbrick = childs[gridid];
-                        var type = curbrick.brickType;
-                        //var ispassed = curbrick.isIsBrickPassed;
-                        if(curbrick.hasWayOfPassBrick)
+                        if(curbrick.hasBrickType)
                         {
-                            var passway = curbrick.wayOfPassBrick.value;
-                            switch(passway)
+                            var type = curbrick.brickType;
+                            //var ispassed = curbrick.isIsBrickPassed;
+                            if (curbrick.hasWayOfPassBrick)
                             {
-                                case PassBrickWay.Jump:
-                                    {
-                                        if (player.playerState.state == PlayerGameState.Run)
+                                var passway = curbrick.wayOfPassBrick.value;
+                                switch (passway)
+                                {
+                                    case PassBrickWay.Jump:
                                         {
-                                            player.ReplacePlayerState(PlayerGameState.JumpUp);
-                                        }
-                                    }
-                                    break;
-                                case PassBrickWay.Collision:
-                                    {
-                                        if (player.playerState.state == PlayerGameState.Run)
-                                        {
-                                            //if (_contexts.game.hasLife)
-                                            //{
-                                            //    _contexts.game.ReplaceLife(0);
-                                            //}
-                                            if(player.hasLife)
+                                            if (player.playerState.state == PlayerGameState.Run)
                                             {
-                                                player.ReplaceLife(player.life.lifeValue - 1);
+                                                player.ReplacePlayerState(PlayerGameState.JumpUp);
                                             }
-                                            //curbrick.isBrickBroken = true;
-                                            curbrick.ReplaceBrickBroken(-1);
-                                            //_serivces.CreateEffectService.CreateEffect("Dust", curbrick.position.position +
-                                            //new Vector3(0, floorheight * 0.5f, 0), 10);
                                         }
-                                    }
-                                    break;
+                                        break;
+                                    case PassBrickWay.Collision:
+                                        {
+                                            if (player.playerState.state == PlayerGameState.Run)
+                                            {
+                                                //if (_contexts.game.hasLife)
+                                                //{
+                                                //    _contexts.game.ReplaceLife(0);
+                                                //}
+                                                if (player.hasLife)
+                                                {
+                                                    player.ReplaceLife(player.life.lifeValue - 1);
+                                                }
+                                                //curbrick.isBrickBroken = true;
+                                                curbrick.ReplaceBrickBroken(-1);
+                                                //_serivces.CreateEffectService.CreateEffect("Dust", curbrick.position.position +
+                                                //new Vector3(0, floorheight * 0.5f, 0), 10);
+                                            }
+                                        }
+                                        break;
+                                }
                             }
+
+                            player.ReplacePlayerCurFloor(floor, gridid);
                         }
 
-                        player.ReplacePlayerCurFloor(floor, gridid);
 
                         break;
                     }

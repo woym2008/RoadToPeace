@@ -114,3 +114,9 @@ public class BossTowerEffectComponent : IComponent
 {
 
 }
+
+[Game]
+public class AntiBossMissileComponent : IComponent
+{
+    public float power;
+}

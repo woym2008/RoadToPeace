@@ -24,7 +24,7 @@ public class UpdateBrickSystem : IExecuteSystem
     {
         foreach(var entity in _entityGroup)
         {
-            if(entity.hasPosition && entity.brickParent.parent.hasPosition)
+            if(entity.hasPosition && entity.hasBrickParent && entity.brickParent.parent.hasPosition)
             {
                 entity.position.position.x = entity.brickParent.parent.position.position.x;
                 entity.position.position.y = entity.brickParent.parent.position.position.y;

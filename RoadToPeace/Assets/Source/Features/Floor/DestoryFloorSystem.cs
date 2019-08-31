@@ -26,7 +26,26 @@ public class DestoryFloorSystem : ReactiveSystem<GameEntity>
     {
         foreach(var entity in entities)
         {
-            foreach(var brickentity in _entityGroup)
+            /*
+            if(entity.hasFloorChild)
+            {
+                if(entity.floorChild.childs != null)
+                {
+                    foreach(var brick in entity.floorChild.childs)
+                    {
+                        if(brick != null && brick.isEnabled)
+                        {
+                            brick.isDestroyed = true;
+                            brick.RemoveBrickParent();
+                        }
+
+                    }
+                    entity.RemoveFloorChild();
+                }
+            }
+            */
+            /*
+            foreach (var brickentity in _entityGroup)
             {
                 if(brickentity.brickParent.parent == entity)
                 {
@@ -35,6 +54,7 @@ public class DestoryFloorSystem : ReactiveSystem<GameEntity>
                     brickentity.isDestroyed = true;
                 }
             }
+            */
 
             //entity.RemoveFloorChild();
         }

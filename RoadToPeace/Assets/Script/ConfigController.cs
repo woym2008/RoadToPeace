@@ -61,7 +61,7 @@ public class ConfigController : MonoBehaviour
     public float DifficultLevelUpTime = 20.0f;
     //----------------------------------
     //boss
-    public float BossDebutTime = 4.0f;
+    public float BossDebutTime = 10.0f;
     //---
     public Transform BossStartPoint;
     public Transform BossEndPoint;

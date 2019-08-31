@@ -31,11 +31,26 @@ public class DestroySystem : IExecuteSystem
             //Debug.Log(e);
             if(e.hasFloorChild)
             {
+                foreach (var brick in e.floorChild.childs)
+                {
+                    if (brick != null && brick.isEnabled)
+                    {
+                        if(brick.hasBrickParent)
+                        {
+                            brick.RemoveBrickParent();
+                        }
+
+                        brick.isDestroyed = true;
+
+                    }
+
+                }
                 e.RemoveFloorChild();
             }
             if(e.hasChild)
             {
                 e.isDestroyed = true;
+                e.RemoveChild();
             }
             e.Destroy();
         }

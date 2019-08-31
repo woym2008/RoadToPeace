@@ -270,6 +270,9 @@ public class CreateBrickSystem : ReactiveSystem<GameEntity>
             case "Electrocution":
                 return PassBrickWay.Electrocution;
                 break;
+            case "Mech_Battery":
+                return PassBrickWay.AirCollision;
+                break;
         }
 
         return PassBrickWay.Run;

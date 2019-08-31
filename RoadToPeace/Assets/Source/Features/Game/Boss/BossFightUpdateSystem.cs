@@ -24,19 +24,23 @@ public class BossFightUpdateSystem : IExecuteSystem
 public class BossThinkEnterSystem : ReactiveSystem<GameEntity>
 {
     Contexts _contexts;
+
+    IGroup<GameEntity> _boss;
     public BossThinkEnterSystem(Contexts contexts)
         : base(contexts.game)
     {
         _contexts = contexts;
+        _boss = contexts.game.GetGroup(GameMatcher.Boss);
     }
 
     protected override void Execute(List<GameEntity> entities)
     {
-        var bossthinking = _contexts.game.CreateEntity();
-        bossthinking.AddTimer(0);
+        var boss = _boss.GetSingleEntity();
+        //var bossthinking = _contexts.game.CreateEntity();
+        boss.AddTimer(0);
 
         int randtype = UnityEngine.Random.Range(0, 2);
-        bossthinking.AddBossThinking(randtype);
+        boss.AddBossThinking(randtype);
 
 
         //在开始思考的时候放置一组missile 可能不太对 但先放在这
@@ -77,7 +81,6 @@ public class BossThinkUpdateSystem : IExecuteSystem
             {
                 if(thinkentity.timer.passedTime > _thinktime)
                 {
-                    thinkentity.isDestroyed = true;
 
                     switch(thinkentity.bossThinking.bossAttackType)
                     {
@@ -94,6 +97,9 @@ public class BossThinkUpdateSystem : IExecuteSystem
                             }
                             break;
                     }
+                    thinkentity.RemoveBossThinking();
+                    thinkentity.RemoveTimer();
+
                 }
             }
         }
@@ -233,6 +239,10 @@ public class BossHugeLazerUpdateSystem : IExecuteSystem
                             foreach (var b in _blockbricks)
                             {
                                 var floor = b.brickParent.parent;
+                                if(!floor.hasPosition)
+                                {
+                                    continue;
+                                }
                                 var xoffset = floor.position.position.x;
                                 if (xoffset > hlc.transform.position.x)
                                 {
@@ -371,6 +381,35 @@ public class BossHugeLazerUpdateSystem : IExecuteSystem
                 }
             }
         }
+    }
+}
+//--------------------------------------------------------------------------
+public class BossDieSystem : ReactiveSystem<GameEntity>
+{
+    Contexts _contexts;
+    public BossDieSystem(Contexts contexts) :
+        base(contexts.game)
+    {
+        _contexts = contexts;
+    }
+
+    protected override void Execute(List<GameEntity> entities)
+    {
+        var boss = entities.SingleEntity();
+
+        _contexts.game.ReplaceBossState(BossState.Ready);
+
+        _contexts.game.ReplaceBossDebutCountDown(10);
+    }
+
+    protected override bool Filter(GameEntity entity)
+    {
+        return (entity.life.lifeValue <= 0);
+    }
+
+    protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
+    {
+        return context.CreateCollector(GameMatcher.AllOf(GameMatcher.Boss,GameMatcher.Life));
     }
 }
 //--------------------------------------------------------------------------
@@ -532,11 +571,11 @@ public class TowerInitSystem : ReactiveSystem<GameEntity>
             e.AddHp(1);
             e.AddPosition(new Vector3(0, height, 0));
 
-            var effectEntity = _contexts.game.CreateEntity();
-            e.AddChild(effectEntity);
-            effectEntity.AddAsset("Boss/Effect/Spark",0);
+            //var effectEntity = _contexts.game.CreateEntity();
+            //e.AddChild(effectEntity);
+            //effectEntity.AddAsset("Boss/Effect/Spark",0);
 
-            effectEntity.AddPosition(new Vector3(0, height, 0));
+            //effectEntity.AddPosition(new Vector3(0, height, 0));
             //effectEntity.isBossTowerEffect = true;
             //需要给effect加个名字 下面update的时候找到他
 
@@ -666,5 +705,104 @@ public class OnDeleteTowerFloorSystem : ReactiveSystem<GameEntity>
     protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
     {
         return context.CreateCollector(GameMatcher.IsLazerTowerFloor.Removed());
+    }
+}
+
+public class AntiBossMissileSystem : IExecuteSystem
+{
+    IGroup<GameEntity> _missiles;
+    Contexts _contexts;
+    private IGroup<GameEntity> _floors;
+    private IGroup<GameEntity> _boss;
+
+    Vector3 _speed = new Vector3(3,0,0);
+    float _bossedgeoffset = 2;
+    public AntiBossMissileSystem(Contexts contexts)
+    {
+        _contexts = contexts;
+
+        _missiles = _contexts.game.GetGroup(GameMatcher.AntiBossMissile);
+
+        _floors = _contexts.game.GetGroup(GameMatcher.Floor);
+
+        _boss = _contexts.game.GetGroup(GameMatcher.Boss);
+    }
+
+    public void Execute()
+    {
+        var halffloorwidth = _contexts.config.floorData.floorWidth * 0.5f;
+        var floorheight = _contexts.config.floorData.floorHeight;
+
+        foreach (var missile in _missiles)
+        {
+            missile.position.position += _speed * Time.deltaTime;
+
+            if (missile.hasView)
+            {
+                missile.view.Value.Transform.position = missile.position.position;
+
+
+                foreach (var floor in _floors)
+                {
+                    if (floor.hasPosition)
+                    {
+                        #region collide floor
+                        if (missile.position.position.x > (floor.position.position.x - halffloorwidth) &&
+                            missile.position.position.x < (floor.position.position.x + halffloorwidth))
+                        {
+                            //enter this floor
+                            var gridid = floor.gridID.id;
+
+                            if (missile.hasPlayerCurFloor)
+                            {
+                                var missilefloor = missile.playerCurFloor.curFloor;
+                                if (missilefloor == floor && gridid == missilefloor.gridID.id)
+                                {
+                                    break;
+                                }
+                            }
+
+                            var childs = floor.floorChild.childs;
+                            var curbrick = childs[gridid];
+                            //var type = curbrick.brickType;
+                            //var ispassed = curbrick.isIsBrickPassed;
+                            if (curbrick.hasWayOfPassBrick && curbrick.wayOfPassBrick.value == PassBrickWay.AirCollision)
+                            {
+                                //导弹爆炸
+                                //释放爆炸特效
+                                //
+                                missile.isDestroyed = true;
+                            }
+
+                            missile.ReplacePlayerCurFloor(floor, gridid);
+
+                        }
+                        #endregion
+
+                        #region collide boss
+                        var boss = _boss.GetSingleEntity();
+                        if(boss != null)
+                        {
+                            var bosspos = boss.position.position;
+                            if (missile.position.position.x > (bosspos.x - _bossedgeoffset))
+                            {
+                                if (missile.position.position.x < (bosspos.x + _bossedgeoffset))
+                                {
+                                    //击中boss 之所以加个这个，是因为可能出现导弹开始时候就拼好了的情况，就不要打中boss了
+                                    //释放爆炸特效
+                                    //boss掉血
+                                    boss.ReplaceLife(boss.life.lifeValue - missile.antiBossMissile.power);
+                                }
+                                missile.isDestroyed = true;
+                            }
+                        }
+                        #endregion
+
+                        break;
+                    }
+
+                }
+            }
+        }
     }
 }

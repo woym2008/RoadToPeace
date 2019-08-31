@@ -9,6 +9,9 @@ public class UpdateMissileBrickSystem : IExecuteSystem
     IGroup<GameEntity> _missilebricks;
     BrickTable _table;
     int _launchedID = -1;
+
+    Vector3 _missileoffset = new Vector3(0,9.5f,0);
+
     public UpdateMissileBrickSystem(Contexts contexts, Services services)
     {
         _contexts = contexts;
@@ -29,7 +32,8 @@ public class UpdateMissileBrickSystem : IExecuteSystem
             {
                 var premissile = missile.missile.preMissileBrick;
                 var postmissle = missile.missile.postMissileBrick;
-                if (premissile != null && postmissle!= null)
+                if (premissile != null && postmissle!= null &&
+                premissile.hasBrickParent && postmissle.hasBrickParent)
                 {
                     var middileid = missile.brickParent.parent.gridID.id - missile.brickIndex.index;
                     var headid = premissile.brickParent.parent.gridID.id - premissile.brickIndex.index;
@@ -49,6 +53,11 @@ public class UpdateMissileBrickSystem : IExecuteSystem
                         premissile.RemoveMissile();
                         postmissle.RemoveMissile();
                         //改变完直接跳过这帧
+
+                        var antibossmissile = _contexts.game.CreateEntity();
+                        antibossmissile.AddAntiBossMissile(1);
+                        antibossmissile.AddPosition(postmissle.position.position + _missileoffset);
+                        antibossmissile.AddAsset("Boss/AntiBossRocket", 0);
 
                         Debug.Log("Fire Missile!!!!!!!");
                         break;

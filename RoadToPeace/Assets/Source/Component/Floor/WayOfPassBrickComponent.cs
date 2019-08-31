@@ -12,6 +12,9 @@ public enum PassBrickWay
     Collision,
     //电死
     Electrocution,
+    //空中阻挡
+    AirCollision,
+
 }
 
 public class WayOfPassBrickComponent : IComponent
