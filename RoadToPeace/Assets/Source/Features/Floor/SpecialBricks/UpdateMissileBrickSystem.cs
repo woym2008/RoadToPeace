@@ -32,8 +32,8 @@ public class UpdateMissileBrickSystem : IExecuteSystem
                 if (premissile != null && postmissle!= null)
                 {
                     var middileid = missile.brickParent.parent.gridID.id - missile.brickIndex.index;
-                    var headid = premissile.brickParent.parent.gridID.id - missile.brickIndex.index;
-                    var tailid = postmissle.brickParent.parent.gridID.id - missile.brickIndex.index;
+                    var headid = premissile.brickParent.parent.gridID.id - premissile.brickIndex.index;
+                    var tailid = postmissle.brickParent.parent.gridID.id - postmissle.brickIndex.index;
 
                     if((middileid == headid)&&(middileid == tailid))
                     {
@@ -44,7 +44,13 @@ public class UpdateMissileBrickSystem : IExecuteSystem
                         missile.ReplaceBrickBroken(_launchedID);
                         premissile.ReplaceBrickBroken(_launchedID);
                         postmissle.ReplaceBrickBroken(_launchedID);
+
+                        missile.RemoveMissile();
+                        premissile.RemoveMissile();
+                        postmissle.RemoveMissile();
                         //改变完直接跳过这帧
+
+                        Debug.Log("Fire Missile!!!!!!!");
                         break;
                     }
                 }

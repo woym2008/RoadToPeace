@@ -75,6 +75,9 @@ public class CreateMissileBrickSystem : ReactiveSystem<GameEntity>
             premissile,
             null
                 );
+            Debug.Log("Create Missile " + brickname);
+            Debug.Log("missilepos " + missilepos);
+
         }
 
     }

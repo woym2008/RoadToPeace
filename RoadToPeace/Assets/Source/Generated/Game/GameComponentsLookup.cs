@@ -71,23 +71,24 @@ public static class GameComponentsLookup {
     public const int LazerTower = 60;
     public const int Life = 61;
     public const int Missile = 62;
-    public const int Move = 63;
-    public const int ObjectParent = 64;
-    public const int Player = 65;
-    public const int PlayerCurFloor = 66;
-    public const int PlayerReady = 67;
-    public const int PlayerState = 68;
-    public const int Position = 69;
-    public const int Reset = 70;
-    public const int SpecialFloor = 71;
-    public const int SpecialFloorData = 72;
-    public const int Timer = 73;
-    public const int VelocityIncrement = 74;
-    public const int View = 75;
-    public const int WaitAddFloorCount = 76;
-    public const int WayOfPassBrick = 77;
+    public const int MissileFloor = 63;
+    public const int Move = 64;
+    public const int ObjectParent = 65;
+    public const int Player = 66;
+    public const int PlayerCurFloor = 67;
+    public const int PlayerReady = 68;
+    public const int PlayerState = 69;
+    public const int Position = 70;
+    public const int Reset = 71;
+    public const int SpecialFloor = 72;
+    public const int SpecialFloorData = 73;
+    public const int Timer = 74;
+    public const int VelocityIncrement = 75;
+    public const int View = 76;
+    public const int WaitAddFloorCount = 77;
+    public const int WayOfPassBrick = 78;
 
-    public const int TotalComponents = 78;
+    public const int TotalComponents = 79;
 
     public static readonly string[] componentNames = {
         "Anim",
@@ -153,6 +154,7 @@ public static class GameComponentsLookup {
         "LazerTower",
         "Life",
         "Missile",
+        "MissileFloor",
         "Move",
         "ObjectParent",
         "Player",
@@ -234,6 +236,7 @@ public static class GameComponentsLookup {
         typeof(LazerTowerComponent),
         typeof(LifeComponent),
         typeof(MissileComponent),
+        typeof(MissileFloorComponent),
         typeof(MoveComponent),
         typeof(ObjectParentComponent),
         typeof(PlayerComponent),

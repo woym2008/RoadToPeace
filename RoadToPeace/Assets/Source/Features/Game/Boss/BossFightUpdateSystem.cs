@@ -495,6 +495,11 @@ public class BossHugeLazerEnterSystem : ReactiveSystem<GameEntity>
         var blocklazerfloor = _contexts.game.CreateEntity();
         blocklazerfloor.isBossCreateFloor = true;
         blocklazerfloor.isIsBlockLazerFloor = true;
+
+
+        var missilefloor = _contexts.game.CreateEntity();
+        missilefloor.isBossCreateFloor = true;
+        missilefloor.isMissileFloor = true;
     }
 
     protected override bool Filter(GameEntity entity)

@@ -83,7 +83,7 @@ public class ShipBossCreateFloorSystem : ReactiveSystem<GameEntity>
                 //var randindex = UnityEngine.Random.Range(1, numtype);
 
                 //var brickname = _contexts.config.brickTable.table.NormalBrickNames[randindex];
-                if (floorentity.isIsLazerTowerFloor)
+                if (entity.isIsLazerTowerFloor)
                 {
                     bool isblock = UnityEngine.Random.Range(0, 100) > 90;
                     if (isblock)
@@ -99,9 +99,54 @@ public class ShipBossCreateFloorSystem : ReactiveSystem<GameEntity>
                     towerEntity.AddObjectParent(floorentity);
                     towerEntity.isLazerTower = true;
                 }
-                else if (floorentity.isIsBlockLazerFloor)
+                else if (entity.isIsBlockLazerFloor)
                 {
                     floorentity.ReplaceFloorType("Mech_Battery");
+                }
+                else if(entity.isMissileFloor)
+                {
+                    var missilefloor_2 = _contexts.game.CreateEntity();
+                    var missilefloor_3 = _contexts.game.CreateEntity();
+
+                    floorentity.ReplaceFloorType("Mech_MissileHead");
+                    floorentity.isLastFloor = false;
+                    GameEntity brotherleft = null;
+                    if (floorentity.hasFloorBrother)
+                    {
+                        brotherleft = floorentity.floorBrother.Left;
+                    }
+                    floorentity.ReplaceFloorBrother(brotherleft, missilefloor_2);
+                    missilefloor_2.ReplaceFloorBrother(floorentity, missilefloor_3);
+                    missilefloor_3.ReplaceFloorBrother(missilefloor_2, null);
+
+                    missilefloor_2.isFloor = true;
+                    missilefloor_2.ReplacePosition(new Vector3(
+                        poslast.x + width*2,
+                        poslast.y,
+                        poslast.z
+                        ));
+                    missilefloor_2.ReplaceGridID(1);
+
+                    missilefloor_2.ReplaceFloorDifficulty(1);
+                    missilefloor_2.isDestoryOnReset = true;
+
+
+                    missilefloor_2.ReplaceFloorType("Mech_MissileMiddle");
+
+
+                    missilefloor_3.isFloor = true;
+                    missilefloor_3.isLastFloor = true;
+                    missilefloor_3.ReplacePosition(new Vector3(
+                        poslast.x + width * 3,
+                        poslast.y,
+                        poslast.z
+                        ));
+                    missilefloor_3.ReplaceGridID(1);
+
+                    missilefloor_3.ReplaceFloorDifficulty(1);
+                    missilefloor_3.isDestoryOnReset = true;
+                    missilefloor_3.ReplaceFloorType("Mech_MissileTail");
+                    missilefloor_3.isLastFloor = true;
                 }
                 else
                 {

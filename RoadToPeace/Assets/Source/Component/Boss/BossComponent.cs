@@ -75,6 +75,12 @@ public class BossCreateFloorComponent : IComponent
 }
 
 [Game]
+public class MissileFloorComponent : IComponent
+{
+
+}
+
+[Game]
 public class IsLazerTowerFloorComponent : IComponent
 {
     

@@ -189,7 +189,7 @@ public class CreateBrickSystem : ReactiveSystem<GameEntity>
                     ));
                 brick_mid.ReplaceBrickYOffset(0);
                 brick_mid.ReplaceBrickIndex(1);
-                brick_mid.ReplaceBrickName(basebrickname + suffix);
+                brick_mid.ReplaceBrickName(suffix);
 
                 brick_down.isBrick = true;
                 if (entity.floorDifficulty.value > 0)
@@ -215,7 +215,7 @@ public class CreateBrickSystem : ReactiveSystem<GameEntity>
                     ));
                 brick_down.ReplaceBrickYOffset(-_contexts.config.floorData.floorHeight);
                 brick_down.ReplaceBrickIndex(2);
-                brick_down.ReplaceBrickName(basebrickname + suffix);
+                brick_down.ReplaceBrickName(suffix);
                 /*
                 //brick_up.addbr
                 /brick_earth.isBrick = true;
