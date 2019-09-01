@@ -9606,9 +9606,6 @@ MonoBehaviour:
   NumGround: 26
   NumGroundRow: 5
   GroundRes:
-  - floorBase
-  - floorBase_left
-  - floorBase_right
   - Iron_1
   - Iron_2
   - Iron_3
