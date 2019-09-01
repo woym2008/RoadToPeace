@@ -120,3 +120,9 @@ public class AntiBossMissileComponent : IComponent
 {
     public float power;
 }
+
+[Game]
+public class HugeLazerSparkComponent : IComponent
+{
+    public string markstr;
+}

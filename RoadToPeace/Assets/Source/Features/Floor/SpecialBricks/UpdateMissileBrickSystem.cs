@@ -33,7 +33,7 @@ public class UpdateMissileBrickSystem : IExecuteSystem
                 var premissile = missile.missile.preMissileBrick;
                 var postmissle = missile.missile.postMissileBrick;
                 if (premissile != null && postmissle!= null &&
-                premissile.hasBrickParent && postmissle.hasBrickParent)
+                premissile.hasBrickParent && postmissle.hasBrickParent  )
                 {
                     var middileid = missile.brickParent.parent.gridID.id - missile.brickIndex.index;
                     var headid = premissile.brickParent.parent.gridID.id - premissile.brickIndex.index;

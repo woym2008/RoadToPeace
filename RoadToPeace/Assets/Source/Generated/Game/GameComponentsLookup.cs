@@ -63,33 +63,34 @@ public static class GameComponentsLookup {
     public const int GroundParent = 52;
     public const int GroundView = 53;
     public const int Hp = 54;
-    public const int Id = 55;
-    public const int IsBlockLazerFloor = 56;
-    public const int IsBrickPassed = 57;
-    public const int IsLazerTowerFloor = 58;
-    public const int LastFloor = 59;
-    public const int LastGround = 60;
-    public const int LazerTower = 61;
-    public const int Life = 62;
-    public const int Missile = 63;
-    public const int MissileFloor = 64;
-    public const int Move = 65;
-    public const int ObjectParent = 66;
-    public const int Player = 67;
-    public const int PlayerCurFloor = 68;
-    public const int PlayerReady = 69;
-    public const int PlayerState = 70;
-    public const int Position = 71;
-    public const int Reset = 72;
-    public const int SpecialFloor = 73;
-    public const int SpecialFloorData = 74;
-    public const int Timer = 75;
-    public const int VelocityIncrement = 76;
-    public const int View = 77;
-    public const int WaitAddFloorCount = 78;
-    public const int WayOfPassBrick = 79;
+    public const int HugeLazerSpark = 55;
+    public const int Id = 56;
+    public const int IsBlockLazerFloor = 57;
+    public const int IsBrickPassed = 58;
+    public const int IsLazerTowerFloor = 59;
+    public const int LastFloor = 60;
+    public const int LastGround = 61;
+    public const int LazerTower = 62;
+    public const int Life = 63;
+    public const int Missile = 64;
+    public const int MissileFloor = 65;
+    public const int Move = 66;
+    public const int ObjectParent = 67;
+    public const int Player = 68;
+    public const int PlayerCurFloor = 69;
+    public const int PlayerReady = 70;
+    public const int PlayerState = 71;
+    public const int Position = 72;
+    public const int Reset = 73;
+    public const int SpecialFloor = 74;
+    public const int SpecialFloorData = 75;
+    public const int Timer = 76;
+    public const int VelocityIncrement = 77;
+    public const int View = 78;
+    public const int WaitAddFloorCount = 79;
+    public const int WayOfPassBrick = 80;
 
-    public const int TotalComponents = 80;
+    public const int TotalComponents = 81;
 
     public static readonly string[] componentNames = {
         "Anim",
@@ -147,6 +148,7 @@ public static class GameComponentsLookup {
         "GroundParent",
         "GroundView",
         "Hp",
+        "HugeLazerSpark",
         "Id",
         "IsBlockLazerFloor",
         "IsBrickPassed",
@@ -230,6 +232,7 @@ public static class GameComponentsLookup {
         typeof(GroundParentComponent),
         typeof(GroundViewComponent),
         typeof(HpComponent),
+        typeof(HugeLazerSparkComponent),
         typeof(IdComponent),
         typeof(IsBlockLazerFloorComponent),
         typeof(IsBrickPassedComponent),

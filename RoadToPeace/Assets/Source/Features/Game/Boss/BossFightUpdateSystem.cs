@@ -135,254 +135,7 @@ public class BossThrowTowerUpdateSystem : IExecuteSystem
         }
     }
 }
-public class BossHugeLazerUpdateSystem : IExecuteSystem
-{
-    Contexts _contexts;
 
-    float _accumulateTime = 3;
-    float _launchTime = 2;
-    float _reduceTime = 1;
-
-    float _maxlength = 0;
-     
-    int _lazerstate = 0;//0 finish 1 accumulate  2 launch  3reduce
-
-    IGroup<GameEntity> _blockbricks;
-    IGroup<GameEntity> _hugelazer;
-    IGroup<GameEntity> _boss;
-
-    public BossHugeLazerUpdateSystem(Contexts contexts)
-    {
-        _contexts = contexts;
-
-        _blockbricks = contexts.game.GetGroup(GameMatcher.AllOf(GameMatcher.BrickType, GameMatcher.BrickYOffset, GameMatcher.Position, GameMatcher.BrickParent));
-        _hugelazer = contexts.game.GetGroup(GameMatcher.BossHugeLazer);
-        _boss = _contexts.game.GetGroup(GameMatcher.Boss);
-    }
-
-    public void Execute()
-    {
-
-        if (_contexts.game.bossState.state == BossState.HugeLazer)
-        {
-            bool isLazerHitPlayer = false;
-
-            var player = _contexts.game.playerEntity;
-
-            //更新激光射击到到位置
-            var lazer = _hugelazer.GetSingleEntity();
-            if(lazer == null || !lazer.hasTimer)
-            {
-                return;
-            }
-            var passedtime = lazer.timer.passedTime;
-
-            //开始蓄力
-            if(_lazerstate == 0)
-            {
-                _lazerstate = 1;
-                //Debug.LogWarning("ready");
-            }
-            //蓄力完成 发射
-            if (passedtime > _accumulateTime && _lazerstate == 1)
-            {
-                _lazerstate = 2;
-
-                //Debug.LogWarning("fire");
-            }
-            //发射完成 开始减弱
-            if (passedtime > (_accumulateTime + _launchTime) && _lazerstate == 2)
-            {
-                _lazerstate = 3;
-
-                //Debug.LogWarning("reduce");
-            }
-            //状态完成
-            if (passedtime > (_accumulateTime + _launchTime + _reduceTime) && _lazerstate == 3)
-            {
-                //Debug.LogWarning("finish");
-
-                _lazerstate = 0;
-
-                lazer.isDestroyed = true;
-
-                _contexts.game.ReplaceBossState(BossState.Thinging);
-            }
-
-            switch(_lazerstate)
-            {
-                case 1:
-                    if (lazer.hasView)
-                    {
-                        var hlc = _hugelazer.GetSingleEntity().view.Value.Transform.GetComponent<HugeLazerController>();
-                        hlc.SetUpLazerLength(0);
-                        hlc.SetMiddleLazerLength(0);
-                        hlc.SetDownLazerLength(0);
-                    }
-                    break;
-                case 2:
-                    {
-                        if (lazer.hasView)
-                        {
-                            GameEntity lastbrick_up = null;
-                            GameEntity lastbrick_middle = null;
-                            GameEntity lastbrick_down = null;
-
-                            float tempup_xoffset = -999;
-                            float tempmiddle_xoffset = -999;
-                            float tempdown_xoffset = -999;
-
-                            var hlc = _hugelazer.GetSingleEntity().view.Value.Transform.GetComponent<HugeLazerController>();
-                            var bossentity = _boss.GetSingleEntity();
-                            var bosscontroller = bossentity.view.Value.Transform.GetComponent<LazerShipController>();
-
-                            foreach (var b in _blockbricks)
-                            {
-                                var floor = b.brickParent.parent;
-                                if(!floor.hasPosition)
-                                {
-                                    continue;
-                                }
-                                var xoffset = floor.position.position.x;
-                                if (xoffset > hlc.transform.position.x)
-                                {
-                                    continue;
-                                }
-                                if (b.brickType.value == "Mech")
-                                {
-                                    continue;
-                                }
-
-                                //gridid 是上下移动的位置 brickindex是brick在floor中的位置
-                                //-1 ~ 1之间的数是中间三行
-                                var index = floor.gridID.id - b.brickIndex.index;
-
-                                switch (index)
-                                {
-                                    //上面
-                                    case 1:
-                                        {
-                                            if (tempup_xoffset < xoffset)
-                                            {
-                                                tempup_xoffset = xoffset;
-                                                lastbrick_up = b;
-                                            }
-                                        }
-                                        break;
-                                    //中间
-                                    case 0:
-                                        {
-                                            if (tempmiddle_xoffset < xoffset)
-                                            {
-                                                tempmiddle_xoffset = xoffset;
-                                                lastbrick_middle = b;
-                                            }
-                                        }
-                                        break;
-                                    //下面
-                                    case -1:
-                                        {
-                                            if (tempdown_xoffset < xoffset)
-                                            {
-                                                tempdown_xoffset = xoffset;
-                                                lastbrick_down = b;
-                                            }
-                                        }
-                                        break;
-                                }
-                            }
-
-                            var updis = hlc.maxlength;
-                            var middledis = hlc.maxlength;
-                            var downdis = hlc.maxlength;
-                            if (lastbrick_up != null)
-                            {
-                                //updis = Vector3.Distance(lastbrick_up.position.position, bosscontroller.HugeLazerStartPoint.position);
-                                updis = Mathf.Abs(lastbrick_up.position.position.x - bosscontroller.HugeLazerStartPoint.position.x);
-                            }
-                            //中间的比较特殊，因为是人走的地方，要判断人和阻挡物谁在前
-                            if (lastbrick_middle != null)
-                            {
-                                var finalx = lastbrick_middle.position.position.x;
-                                if (player.position.position.x > lastbrick_middle.position.position.x)
-                                {
-                                    finalx = player.position.position.x;
-
-                                    //走到了这里 说明主角被大激光打中了
-                                    isLazerHitPlayer = true;
-                                }
-                                //middledis = Vector3.Distance(lastbrick_middle.position.position, bosscontroller.HugeLazerStartPoint.position);
-                                middledis = Mathf.Abs(finalx - bosscontroller.HugeLazerStartPoint.position.x);
-                            }
-                            else
-                            {
-                                middledis = Mathf.Abs(player.position.position.x - bosscontroller.HugeLazerStartPoint.position.x);
-                                isLazerHitPlayer = true;
-                            }
-                            if (lastbrick_down != null)
-                            {
-                                //downdis = Vector3.Distance(lastbrick_down.position.position, bosscontroller.HugeLazerStartPoint.position);
-                                downdis = Mathf.Abs(lastbrick_down.position.position.x - bosscontroller.HugeLazerStartPoint.position.x);
-                            }
-
-                            var lazerdata = lazer.bossHugeLazer;
-                            lazer.view.Value.Position = lazer.position.position;
-                            if (lazerdata.tomaxtime < lazerdata.maxtime)
-                            {
-                                lazerdata.tomaxtime += Time.deltaTime;
-                                float t = lazerdata.tomaxtime / lazerdata.maxtime;
-
-                                float up_t = updis / hlc.maxlength;
-                                float middle_t = middledis / hlc.maxlength;
-                                float down_t = downdis / hlc.maxlength;
-                                up_t = Mathf.Min(up_t, t);
-                                middle_t = Mathf.Min(middle_t, t);
-                                down_t = Mathf.Min(down_t, t);
-
-                                hlc.SetUpLazerLength(up_t);
-                                hlc.SetMiddleLazerLength(middle_t);
-                                hlc.SetDownLazerLength(down_t);
-                                //需要算起点到最后一个brick与起点到终点的比值
-
-                                //再取这个值和t的最小者最为传入的t
-                            }
-                            else
-                            {
-
-                                float up_t = updis / hlc.maxlength;
-                                float middle_t = middledis / hlc.maxlength;
-                                float down_t = downdis / hlc.maxlength;
-                                up_t = Mathf.Min(up_t, 1);
-                                middle_t = Mathf.Min(middle_t, 1);
-                                down_t = Mathf.Min(down_t, 1);
-
-                                hlc.SetUpLazerLength(up_t);
-                                hlc.SetMiddleLazerLength(middle_t);
-                                hlc.SetDownLazerLength(down_t);
-                            }
-                            //------------------------------------
-                            //------------------------------------
-                        }
-                    }
-                    break;
-                case 3:
-                    {
-
-                    }
-                    break;
-            }
-
-            //处理主角受到打击
-            if(isLazerHitPlayer)
-            {
-                if(player.hasLife)
-                {
-                    player.ReplaceLife(player.life.lifeValue - 0.02f);
-                }
-            }
-        }
-    }
-}
 //--------------------------------------------------------------------------
 public class BossDieSystem : ReactiveSystem<GameEntity>
 {
@@ -539,6 +292,17 @@ public class BossHugeLazerEnterSystem : ReactiveSystem<GameEntity>
         var missilefloor = _contexts.game.CreateEntity();
         missilefloor.isBossCreateFloor = true;
         missilefloor.isMissileFloor = true;
+        //------------------
+
+        var e_spark_up = _contexts.game.CreateEntity();
+        var e_spark_middle = _contexts.game.CreateEntity();
+        var e_spark_down = _contexts.game.CreateEntity();
+        e_spark_up.AddHugeLazerSpark("up");
+        e_spark_middle.AddHugeLazerSpark("middle");
+        e_spark_down.AddHugeLazerSpark("down");
+        e_spark_up.AddAsset("Boss/Effect/ElectricalSparks", 0);
+        e_spark_middle.AddAsset("Boss/Effect/ElectricalSparks", 0);
+        e_spark_down.AddAsset("Boss/Effect/ElectricalSparks", 0);
     }
 
     protected override bool Filter(GameEntity entity)
@@ -551,6 +315,347 @@ public class BossHugeLazerEnterSystem : ReactiveSystem<GameEntity>
         return context.CreateCollector(GameMatcher.BossState);
     }
 }
+public class BossHugeLazerUpdateSystem : IExecuteSystem
+{
+    Contexts _contexts;
+
+    float _accumulateTime = 3;
+    float _launchTime = 2;
+    float _reduceTime = 1;
+
+    float _maxlength = 0;
+
+    int _lazerstate = 0;//0 finish 1 accumulate  2 launch  3reduce
+
+    IGroup<GameEntity> _blockbricks;
+    IGroup<GameEntity> _hugelazer;
+    IGroup<GameEntity> _boss;
+
+    IGroup<GameEntity> _effects;
+
+    public BossHugeLazerUpdateSystem(Contexts contexts)
+    {
+        _contexts = contexts;
+
+        _blockbricks = contexts.game.GetGroup(GameMatcher.AllOf(GameMatcher.BrickType, GameMatcher.BrickYOffset, GameMatcher.Position, GameMatcher.BrickParent));
+        _hugelazer = contexts.game.GetGroup(GameMatcher.BossHugeLazer);
+        _boss = _contexts.game.GetGroup(GameMatcher.Boss);
+        _effects = _contexts.game.GetGroup(GameMatcher.HugeLazerSpark);
+    }
+
+    public void Execute()
+    {
+
+        if (_contexts.game.bossState.state == BossState.HugeLazer)
+        {
+            bool isLazerHitPlayer = false;
+
+            var player = _contexts.game.playerEntity;
+
+            //更新激光射击到到位置
+            var lazer = _hugelazer.GetSingleEntity();
+            if (lazer == null || !lazer.hasTimer)
+            {
+                return;
+            }
+            var passedtime = lazer.timer.passedTime;
+
+            //开始蓄力
+            if (_lazerstate == 0)
+            {
+                _lazerstate = 1;
+                //Debug.LogWarning("ready");
+            }
+            //蓄力完成 发射
+            if (passedtime > _accumulateTime && _lazerstate == 1)
+            {
+                _lazerstate = 2;
+
+                //Debug.LogWarning("fire");
+            }
+            //发射完成 开始减弱
+            if (passedtime > (_accumulateTime + _launchTime) && _lazerstate == 2)
+            {
+                _lazerstate = 3;
+
+                //Debug.LogWarning("reduce");
+            }
+            //状态完成
+            if (passedtime > (_accumulateTime + _launchTime + _reduceTime) && _lazerstate == 3)
+            {
+                //Debug.LogWarning("finish");
+
+                _lazerstate = 0;
+
+                lazer.isDestroyed = true;
+
+                _contexts.game.ReplaceBossState(BossState.Thinging);
+            }
+
+            switch (_lazerstate)
+            {
+                case 1:
+                    if (lazer.hasView)
+                    {
+                        var hlc = _hugelazer.GetSingleEntity().view.Value.Transform.GetComponent<HugeLazerController>();
+                        hlc.SetUpLazerLength(0);
+                        hlc.SetMiddleLazerLength(0);
+                        hlc.SetDownLazerLength(0);
+
+                        foreach (var e in _effects)
+                        {
+                            e.ReplacePosition(new Vector3(999, 999, 999));
+                        }
+                    }
+                    break;
+                case 2:
+                    {
+                        if (lazer.hasView)
+                        {
+                            GameEntity lastbrick_up = null;
+                            GameEntity lastbrick_middle = null;
+                            GameEntity lastbrick_down = null;
+
+                            float tempup_xoffset = -999;
+                            float tempmiddle_xoffset = -999;
+                            float tempdown_xoffset = -999;
+
+                            var hlc = _hugelazer.GetSingleEntity().view.Value.Transform.GetComponent<HugeLazerController>();
+                            var bossentity = _boss.GetSingleEntity();
+                            var bosscontroller = bossentity.view.Value.Transform.GetComponent<LazerShipController>();
+
+                            GameEntity upeffect = null;
+                            GameEntity middleeffect = null;
+                            GameEntity downeffect = null;
+                            foreach (var e in _effects)
+                            {
+                                if (e.hugeLazerSpark.markstr == "up")
+                                {
+                                    upeffect = e;
+                                }
+                                if (e.hugeLazerSpark.markstr == "middle")
+                                {
+                                    middleeffect = e;
+                                }
+                                if (e.hugeLazerSpark.markstr == "down")
+                                {
+                                    downeffect = e;
+                                }
+                            }
+
+                            foreach (var b in _blockbricks)
+                            {
+                                var floor = b.brickParent.parent;
+                                if (!floor.hasPosition)
+                                {
+                                    continue;
+                                }
+                                var xoffset = floor.position.position.x;
+                                if (xoffset > hlc.transform.position.x)
+                                {
+                                    continue;
+                                }
+                                if (b.brickType.value == "Mech")
+                                {
+                                    continue;
+                                }
+
+                                //gridid 是上下移动的位置 brickindex是brick在floor中的位置
+                                //-1 ~ 1之间的数是中间三行
+                                var index = floor.gridID.id - b.brickIndex.index;
+
+                                switch (index)
+                                {
+                                    //上面
+                                    case 1:
+                                        {
+                                            if (tempup_xoffset < xoffset)
+                                            {
+                                                tempup_xoffset = xoffset;
+                                                lastbrick_up = b;
+                                            }
+                                        }
+                                        break;
+                                    //中间
+                                    case 0:
+                                        {
+                                            if (tempmiddle_xoffset < xoffset)
+                                            {
+                                                tempmiddle_xoffset = xoffset;
+                                                lastbrick_middle = b;
+                                            }
+                                        }
+                                        break;
+                                    //下面
+                                    case -1:
+                                        {
+                                            if (tempdown_xoffset < xoffset)
+                                            {
+                                                tempdown_xoffset = xoffset;
+                                                lastbrick_down = b;
+                                            }
+                                        }
+                                        break;
+                                }
+                            }
+
+                            var updis = hlc.maxlength;
+                            var middledis = hlc.maxlength;
+                            var downdis = hlc.maxlength;
+                            if (lastbrick_up != null)
+                            {
+                                //updis = Vector3.Distance(lastbrick_up.position.position, bosscontroller.HugeLazerStartPoint.position);
+                                updis = Mathf.Abs(lastbrick_up.position.position.x - bosscontroller.HugeLazerStartPoint.position.x);
+
+                                if (upeffect != null)
+                                {
+                                    upeffect.ReplacePosition(lastbrick_up.position.position);
+                                }
+                            }
+                            else
+                            {
+                                if (upeffect != null)
+                                {
+                                    upeffect.ReplacePosition(new Vector3(999, 999, 999));
+                                }
+                            }
+                            //中间的比较特殊，因为是人走的地方，要判断人和阻挡物谁在前
+                            if (lastbrick_middle != null)
+                            {
+                                var finalx = lastbrick_middle.position.position.x;
+                                if (player.position.position.x > lastbrick_middle.position.position.x)
+                                {
+                                    finalx = player.position.position.x;
+
+                                    //走到了这里 说明主角被大激光打中了
+                                    isLazerHitPlayer = true;
+
+                                    if (middleeffect != null)
+                                    {
+                                        middleeffect.ReplacePosition(player.position.position);
+                                    }
+                                }
+                                else
+                                {
+                                    if (middleeffect != null)
+                                    {
+                                        middleeffect.ReplacePosition(lastbrick_middle.position.position);
+                                    }
+                                }
+                                //middledis = Vector3.Distance(lastbrick_middle.position.position, bosscontroller.HugeLazerStartPoint.position);
+                                middledis = Mathf.Abs(finalx - bosscontroller.HugeLazerStartPoint.position.x);
+                            }
+                            else
+                            {
+                                middledis = Mathf.Abs(player.position.position.x - bosscontroller.HugeLazerStartPoint.position.x);
+                                isLazerHitPlayer = true;
+
+                                if (middleeffect != null)
+                                {
+                                    middleeffect.ReplacePosition(player.position.position);
+                                }
+                            }
+                            if (lastbrick_down != null)
+                            {
+                                //downdis = Vector3.Distance(lastbrick_down.position.position, bosscontroller.HugeLazerStartPoint.position);
+                                downdis = Mathf.Abs(lastbrick_down.position.position.x - bosscontroller.HugeLazerStartPoint.position.x);
+                                if (downeffect != null)
+                                {
+                                    downeffect.ReplacePosition(lastbrick_down.position.position);
+                                }
+                            }
+                            else
+                            {
+                                if (downeffect != null)
+                                {
+                                    downeffect.ReplacePosition(new Vector3(999, 999, 999));
+                                }
+                            }
+
+                            var lazerdata = lazer.bossHugeLazer;
+                            lazer.view.Value.Position = lazer.position.position;
+                            if (lazerdata.tomaxtime < lazerdata.maxtime)
+                            {
+                                lazerdata.tomaxtime += Time.deltaTime;
+                                float t = lazerdata.tomaxtime / lazerdata.maxtime;
+
+                                float up_t = updis / hlc.maxlength;
+                                float middle_t = middledis / hlc.maxlength;
+                                float down_t = downdis / hlc.maxlength;
+                                up_t = Mathf.Min(up_t, t);
+                                middle_t = Mathf.Min(middle_t, t);
+                                down_t = Mathf.Min(down_t, t);
+
+                                hlc.SetUpLazerLength(up_t);
+                                hlc.SetMiddleLazerLength(middle_t);
+                                hlc.SetDownLazerLength(down_t);
+                                //需要算起点到最后一个brick与起点到终点的比值
+
+                                //再取这个值和t的最小者最为传入的t
+                            }
+                            else
+                            {
+
+                                float up_t = updis / hlc.maxlength;
+                                float middle_t = middledis / hlc.maxlength;
+                                float down_t = downdis / hlc.maxlength;
+                                up_t = Mathf.Min(up_t, 1);
+                                middle_t = Mathf.Min(middle_t, 1);
+                                down_t = Mathf.Min(down_t, 1);
+
+                                hlc.SetUpLazerLength(up_t);
+                                hlc.SetMiddleLazerLength(middle_t);
+                                hlc.SetDownLazerLength(down_t);
+                            }
+                            //------------------------------------
+                            foreach (var e in _effects)
+                            {
+                                if (e.hasView && e.hasPosition)
+                                {
+                                    e.view.Value.Position = e.position.position + new Vector3(0, 8, 0);
+                                }
+                            }
+                            //------------------------------------
+                        }
+                    }
+                    break;
+                case 3:
+                    {
+
+                    }
+                    break;
+            }
+
+            //处理主角受到打击
+            if (isLazerHitPlayer)
+            {
+                if (player.hasLife)
+                {
+                    player.ReplaceLife(player.life.lifeValue - 0.02f);
+                }
+            }
+        }
+    }
+}
+/*
+public class BossHugeLazerExitSystem : ReactiveSystem<GameEntity>
+{
+    protected override void Execute(List<GameEntity> entities)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    protected override bool Filter(GameEntity entity)
+    {
+        entity.bossState;
+    }
+
+    protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
+    {
+        return context.CreateCollector(GameMatcher.BossState);
+    }
+}
+*/
 
 public class TowerInitSystem : ReactiveSystem<GameEntity>
 {
@@ -571,11 +676,7 @@ public class TowerInitSystem : ReactiveSystem<GameEntity>
             e.AddHp(1);
             e.AddPosition(new Vector3(0, height, 0));
 
-            //var effectEntity = _contexts.game.CreateEntity();
-            //e.AddChild(effectEntity);
-            //effectEntity.AddAsset("Boss/Effect/Spark",0);
 
-            //effectEntity.AddPosition(new Vector3(0, height, 0));
             //effectEntity.isBossTowerEffect = true;
             //需要给effect加个名字 下面update的时候找到他
 
@@ -636,6 +737,17 @@ public class TowerUpdateSystem : IExecuteSystem
                 if(e.hp.hp <= 0)
                 {
                     e.isDestroyed = true;
+
+                    var effectEntity = _contexts.game.CreateEntity();
+                    //e.AddChild(effectEntity);
+                    effectEntity.AddAsset("Boss/Effect/EnergyExplosion", 0);
+
+                    effectEntity.AddPosition(e.view.Value.Position + new Vector3(0,8,0));
+
+                    if(floor.parent != null)
+                    {
+                        effectEntity.AddObjectParent(floor.parent);
+                    }
                 }
 
                 if (e.hasChild && e.child.value.hasView && !e.child.value.view.Value.Enabled)

@@ -88,4 +88,13 @@ public class UnityView : MonoBehaviour, IView, IDestroyedListener
             }
         }
     }
+
+    public GameEntity Entity
+    {
+        get
+        {
+            return _entity;
+        }
+    }
+
 }
