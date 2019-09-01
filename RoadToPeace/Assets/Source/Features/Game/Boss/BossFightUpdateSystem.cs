@@ -235,6 +235,7 @@ public class BossThrowTowerEnterSystem : ReactiveSystem<GameEntity>
                     var towerEntity = _contexts.game.CreateEntity();
                     towerEntity.AddObjectParent(findfloor);
                     towerEntity.isLazerTower = true;
+                    towerEntity.isDestoryOnReset = true;
                     findfloor.AddChild(towerEntity);
 
                     findfloor = findfloor.floorBrother.Right;
@@ -277,6 +278,7 @@ public class BossHugeLazerEnterSystem : ReactiveSystem<GameEntity>
         //倒计时开始
         var e = _contexts.game.CreateEntity();
         e.AddBossHugeLazer(5, 0.5f, 0, 0, 0, 0);
+        e.isDestoryOnReset = true;
         e.AddAsset("Boss/Skill/HugeLazer",0);
 
         var bossentity = _contexts.game.GetGroup(GameMatcher.Boss).GetSingleEntity();
@@ -299,6 +301,7 @@ public class BossHugeLazerEnterSystem : ReactiveSystem<GameEntity>
         //激光特效开始准备发射
         var chargeEffect = _contexts.game.CreateEntity();
         chargeEffect.isChargeEffect = true;
+        chargeEffect.isDestoryOnReset = true;
         chargeEffect.AddAsset("Boss/Effect/ChargeEffect", 0);
         chargeEffect.AddPosition(startpoint.position);
         //------------------
@@ -307,8 +310,11 @@ public class BossHugeLazerEnterSystem : ReactiveSystem<GameEntity>
         var e_spark_middle = _contexts.game.CreateEntity();
         var e_spark_down = _contexts.game.CreateEntity();
         e_spark_up.AddHugeLazerSpark("up");
+        e_spark_up.isDestoryOnReset = true;
         e_spark_middle.AddHugeLazerSpark("middle");
+        e_spark_middle.isDestoryOnReset = true;
         e_spark_down.AddHugeLazerSpark("down");
+        e_spark_down.isDestoryOnReset = true;
         e_spark_up.AddAsset("Boss/Effect/ElectricalSparks", 0);
         e_spark_middle.AddAsset("Boss/Effect/ElectricalSparks", 0);
         e_spark_down.AddAsset("Boss/Effect/ElectricalSparks", 0);
@@ -381,11 +387,18 @@ public class BossHugeLazerUpdateSystem : IExecuteSystem
             if (passedtime > _accumulateTime && _lazerstate == 1)
             {
                 _lazerstate = 2;
-                var fireeffect = _firechargeeffect.GetSingleEntity();
-                if(fireeffect != null)
+                if(_firechargeeffect.count > 0)
                 {
-                    fireeffect.isDestroyed = true;
+                    foreach(var fe in _firechargeeffect)
+                    {
+                        fe.isDestroyed = true;
+                    }
                 }
+                //var fireeffect = _firechargeeffect.GetSingleEntity();
+                //if(fireeffect != null)
+                //{
+                //    fireeffect.isDestroyed = true;
+                //}
                 //Debug.LogWarning("fire");
             }
             //发射完成 开始减弱
@@ -598,6 +611,13 @@ public class BossHugeLazerUpdateSystem : IExecuteSystem
                                 float middle_t = middledis / hlc.maxlength;
                                 float down_t = downdis / hlc.maxlength;
                                 up_t = Mathf.Min(up_t, t);
+                                if(middle_t > t)
+                                {
+                                    if (middleeffect != null)
+                                    {
+                                        middleeffect.ReplacePosition(new Vector3(999, 999, 999));
+                                    }
+                                }
                                 middle_t = Mathf.Min(middle_t, t);
                                 down_t = Mathf.Min(down_t, t);
 
@@ -746,6 +766,10 @@ public class TowerUpdateSystem : IExecuteSystem
     {
         foreach(var e in _towers)
         {
+            if(!e.hasObjectParent)
+            {
+                continue;
+            }
             var floor = e.objectParent;
             if(floor.parent.hasPosition)
             {
@@ -767,8 +791,11 @@ public class TowerUpdateSystem : IExecuteSystem
                 if(e.hp.hp <= 0)
                 {
                     e.isDestroyed = true;
+                    e.RemoveObjectParent();
+                    floor.parent.RemoveChild();
 
                     var effectEntity = _contexts.game.CreateEntity();
+                    effectEntity.isDestoryOnReset = true;
                     //e.AddChild(effectEntity);
                     effectEntity.AddAsset("Boss/Effect/EnergyExplosion", 0);
 
@@ -915,6 +942,7 @@ public class AntiBossMissileSystem : IExecuteSystem
                                 var boomentity = _contexts.game.CreateEntity();
                                 boomentity.AddAsset("Boss/Effect/SmallExplosion", 0);
                                 boomentity.AddPosition(missile.position.position);
+                                boomentity.isDestoryOnReset = true;
                                 //
                                 missile.isDestroyed = true;
                             }
@@ -925,22 +953,30 @@ public class AntiBossMissileSystem : IExecuteSystem
                         #endregion
 
                         #region collide boss
-                        var boss = _boss.GetSingleEntity();
-                        if(boss != null)
+                        if(_boss.count > 0)
                         {
-                            var bosspos = boss.position.position;
-                            if (missile.position.position.x > (bosspos.x - _bossedgeoffset))
+                            var boss = _boss.GetSingleEntity();
+                            if (boss != null)
                             {
-                                if (missile.position.position.x < (bosspos.x + _bossedgeoffset))
+                                var bosspos = boss.position.position;
+                                if (missile.position.position.x > (bosspos.x - _bossedgeoffset))
                                 {
-                                    //击中boss 之所以加个这个，是因为可能出现导弹开始时候就拼好了的情况，就不要打中boss了
-                                    //释放爆炸特效
-                                    //boss掉血
-                                    boss.ReplaceLife(boss.life.lifeValue - missile.antiBossMissile.power);
+                                    if (missile.position.position.x < (bosspos.x + _bossedgeoffset))
+                                    {
+                                        //击中boss 之所以加个这个，是因为可能出现导弹开始时候就拼好了的情况，就不要打中boss了
+                                        //释放爆炸特效
+                                        var boomeffect = _contexts.game.CreateEntity();
+                                        boomeffect.isDestoryOnReset = true;
+                                        boomeffect.AddAsset("Boss/Effect/SmallExplosion",0);
+                                        boomeffect.ReplacePosition(bosspos);
+                                        //boss掉血
+                                        boss.ReplaceLife(boss.life.lifeValue - missile.antiBossMissile.power);
+                                    }
+                                    missile.isDestroyed = true;
                                 }
-                                missile.isDestroyed = true;
                             }
                         }
+
                         #endregion
 
                         break;

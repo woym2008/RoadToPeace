@@ -39,12 +39,15 @@ public class LifetimeObjectController : MonoBehaviour
                 //_viewcontroller.transform.position.y,
                 //_viewcontroller.transform.position.z
                 //    );
+                if(_viewcontroller.transform != null)
+                {
+                    _viewcontroller.transform.position = new Vector3(
+                    _viewcontroller.Entity.objectParent.parent.position.position.x,
+                    _viewcontroller.transform.position.y,
+                    _viewcontroller.transform.position.z
+                        );
+                }
 
-                _viewcontroller.transform.position = new Vector3(
-                _viewcontroller.Entity.objectParent.parent.position.position.x,
-                _viewcontroller.transform.position.y,
-                _viewcontroller.transform.position.z
-                    );
             }
         }
     }

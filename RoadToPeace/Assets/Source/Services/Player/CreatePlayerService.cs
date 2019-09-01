@@ -31,4 +31,17 @@ public class CreatePlayerService : Service
         e.ReplaceLife(10);
         e.ReplacePlayerState(PlayerGameState.Wait);
     }
+
+    public void ResetPlayer()
+    {
+        var player = _contexts.game.playerEntity;
+
+        player.ReplaceLife(10);
+
+        var playerui = _contexts.game.playerUI;
+        if(playerui != null)
+        {
+            playerui.hpui.gameObject.SetActive(true);
+        }
+    }
 }

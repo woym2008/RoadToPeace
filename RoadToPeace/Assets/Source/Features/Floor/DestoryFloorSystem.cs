@@ -26,6 +26,14 @@ public class DestoryFloorSystem : ReactiveSystem<GameEntity>
     {
         foreach(var entity in entities)
         {
+            if(entity.hasChild)
+            {
+                if(entity.child.value.hasObjectParent)
+                {
+                    entity.child.value.RemoveObjectParent();
+                }
+                entity.RemoveChild();
+            }
             /*
             if(entity.hasFloorChild)
             {

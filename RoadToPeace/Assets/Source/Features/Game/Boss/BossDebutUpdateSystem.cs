@@ -28,10 +28,7 @@ public class BossDebutUpdateSystem : IExecuteSystem
         if(_contexts.game.bossState.state == BossState.Debut)
         {
             _curtime += Time.deltaTime;
-            if(_curtime >= _flytime)
-            {
-                _contexts.game.ReplaceBossState(BossState.HugeLazer);
-            }
+
             float t = Mathf.Min(_curtime / _flytime, 1);
             foreach(var b in _boss)
             {
@@ -39,6 +36,12 @@ public class BossDebutUpdateSystem : IExecuteSystem
                 b.ReplacePosition(newpos);
                 if(b.hasView)
                     b.view.Value.Position = b.position.position;
+            }
+
+            if (_curtime >= _flytime)
+            {
+                _contexts.game.ReplaceBossState(BossState.Thinging);
+                _curtime = 0;
             }
         }
     }

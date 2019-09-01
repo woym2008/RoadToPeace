@@ -21,7 +21,19 @@ public class CreateBossService : Service
         e.AddAsset(bosspathbase + bossname, 3);
         e.AddPosition(position);
         e.ReplaceLife(10);
+        e.isDestoryOnReset = true;
         //e.ReplaceBossState(BossState.Ready);
         //_contexts.game.ReplaceBossState(BossState.Ready);
+    }
+
+    public void ResetBoss()
+    {
+        var boss = _contexts.game.GetGroup(GameMatcher.Boss);
+        if(boss.count > 0)
+        {
+            var e = boss.GetSingleEntity();
+            _contexts.game.ReplaceBossState(BossState.Ready);
+        }
+        _contexts.game.ReplaceBossDebutCountDown(10);
     }
 }

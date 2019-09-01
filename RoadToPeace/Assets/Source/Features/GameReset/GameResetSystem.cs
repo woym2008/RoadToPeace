@@ -17,12 +17,15 @@ public class GameResetSystem : ReactiveSystem<GameEntity>, IInitializeSystem
 {
     readonly GameContext game;
     IGroup<GameEntity> _deleteEntitys;
+    Services _services;
 
     public GameResetSystem(Contexts contexts, Services servers)
         : base(contexts.game)
     {
         game = contexts.game;
         _deleteEntitys = game.GetGroup(GameMatcher.DestoryOnReset);
+
+        _services = servers;
     }
 
     public void Initialize()
@@ -48,6 +51,9 @@ public class GameResetSystem : ReactiveSystem<GameEntity>, IInitializeSystem
         {
             game.playerEntity.ReplacePlayerState(PlayerGameState.Wait);
         }
+
+        _services.CreatePlayerService.ResetPlayer();
+        _services.BossService.ResetBoss();
     }
 
     protected override bool Filter(GameEntity entity)

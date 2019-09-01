@@ -98,6 +98,7 @@ public class ShipBossCreateFloorSystem : ReactiveSystem<GameEntity>
                     var towerEntity = _contexts.game.CreateEntity();
                     towerEntity.AddObjectParent(floorentity);
                     towerEntity.isLazerTower = true;
+                    towerEntity.isDestoryOnReset = true;
                 }
                 else if (entity.isIsBlockLazerFloor)
                 {
