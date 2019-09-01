@@ -74,25 +74,28 @@ public static class GameComponentsLookup {
     public const int LastGround = 63;
     public const int LazerTower = 64;
     public const int Life = 65;
-    public const int Missile = 66;
-    public const int MissileFloor = 67;
-    public const int Move = 68;
-    public const int ObjectParent = 69;
-    public const int Player = 70;
-    public const int PlayerCurFloor = 71;
-    public const int PlayerReady = 72;
-    public const int PlayerState = 73;
-    public const int Position = 74;
-    public const int Reset = 75;
-    public const int SpecialFloor = 76;
-    public const int SpecialFloorData = 77;
-    public const int Timer = 78;
-    public const int VelocityIncrement = 79;
-    public const int View = 80;
-    public const int WaitAddFloorCount = 81;
-    public const int WayOfPassBrick = 82;
+    public const int LifeListener = 66;
+    public const int Missile = 67;
+    public const int MissileFloor = 68;
+    public const int Move = 69;
+    public const int ObjectParent = 70;
+    public const int Player = 71;
+    public const int PlayerCurFloor = 72;
+    public const int PlayerLogic = 73;
+    public const int PlayerReady = 74;
+    public const int PlayerState = 75;
+    public const int PlayerUI = 76;
+    public const int Position = 77;
+    public const int Reset = 78;
+    public const int SpecialFloor = 79;
+    public const int SpecialFloorData = 80;
+    public const int Timer = 81;
+    public const int VelocityIncrement = 82;
+    public const int View = 83;
+    public const int WaitAddFloorCount = 84;
+    public const int WayOfPassBrick = 85;
 
-    public const int TotalComponents = 83;
+    public const int TotalComponents = 86;
 
     public static readonly string[] componentNames = {
         "Anim",
@@ -161,14 +164,17 @@ public static class GameComponentsLookup {
         "LastGround",
         "LazerTower",
         "Life",
+        "LifeListener",
         "Missile",
         "MissileFloor",
         "Move",
         "ObjectParent",
         "Player",
         "PlayerCurFloor",
+        "PlayerLogic",
         "PlayerReady",
         "PlayerState",
+        "PlayerUI",
         "Position",
         "Reset",
         "SpecialFloor",
@@ -247,14 +253,17 @@ public static class GameComponentsLookup {
         typeof(LastGroundComponent),
         typeof(LazerTowerComponent),
         typeof(LifeComponent),
+        typeof(LifeListenerComponent),
         typeof(MissileComponent),
         typeof(MissileFloorComponent),
         typeof(MoveComponent),
         typeof(ObjectParentComponent),
         typeof(PlayerComponent),
         typeof(PlayerCurFloorComponent),
+        typeof(PlayerLogicComponent),
         typeof(PlayerReady),
         typeof(PlayerStateComponent),
+        typeof(PlayerUIComponent),
         typeof(PositionComponent),
         typeof(ResetComponent),
         typeof(SpecialFloorComponent),

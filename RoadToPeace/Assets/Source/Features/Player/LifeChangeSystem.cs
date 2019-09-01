@@ -38,6 +38,12 @@ public class LifeChangeSystem : ReactiveSystem<GameEntity>
             {
                 _gameContext.playerEntity.ReplacePlayerState(PlayerGameState.Die);
             }
+
+            var uitransform = _gameContext.playerUI.hpui;
+            if(uitransform != null)
+            {
+                uitransform.gameObject.SetActive(false);
+            }
         }
     }
 }

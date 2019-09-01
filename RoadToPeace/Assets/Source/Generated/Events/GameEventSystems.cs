@@ -13,5 +13,6 @@ public sealed class GameEventSystems : Feature {
         Add(new GameReadyEventSystem(contexts)); // priority: 0
         Add(new GameStartEventSystem(contexts)); // priority: 0
         Add(new GameStateEventSystem(contexts)); // priority: 0
+        Add(new LifeEventSystem(contexts)); // priority: 0
     }
 }

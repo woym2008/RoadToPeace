@@ -16,6 +16,12 @@ public class PlayerStartSystem : ReactiveSystem<GameEntity>
         if(_context.playerEntity != null)
         {
             _context.playerEntity.ReplacePlayerState(PlayerGameState.Run);
+
+            var uitransform = _context.playerUI.hpui;
+            if (uitransform != null)
+            {
+                uitransform.gameObject.SetActive(true);
+            }
         }
     }
 

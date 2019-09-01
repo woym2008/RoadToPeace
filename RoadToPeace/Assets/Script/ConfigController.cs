@@ -73,6 +73,8 @@ public class ConfigController : MonoBehaviour
 
     public List<string> BossNames = new List<string>();
     //----------------------------------
+    public GameObject PlayerUI;
+    //----------------------------------
     private void Awake()
     {
         var contexts = Contexts.sharedInstance;
@@ -162,6 +164,9 @@ public class ConfigController : MonoBehaviour
         //contexts.config.ReplaceBossDebutTime(BossDebutTime);
 
         contexts.game.ReplaceBossState(BossState.Null);
+
+        contexts.game.SetPlayerUI(PlayerUI.transform);
+        PlayerUI.SetActive(false);
     }
     private void Start()
     {

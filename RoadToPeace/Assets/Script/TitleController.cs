@@ -38,6 +38,9 @@ public class TitleController : MonoBehaviour, IGameStateListener
     private void onFinish()
     {
         Debug.LogWarning("Title Fade Finish");
+
+        var gamecontext = Contexts.sharedInstance.game;
+        gamecontext.playerUI.hpui.gameObject.SetActive(true);
     }
 
     private IEnumerator FadeOut(Action onfinish)
