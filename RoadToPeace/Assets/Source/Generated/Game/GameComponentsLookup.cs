@@ -30,67 +30,69 @@ public static class GameComponentsLookup {
     public const int BrickParent = 19;
     public const int BrickType = 20;
     public const int BrickYOffset = 21;
-    public const int Child = 22;
-    public const int Collision = 23;
-    public const int CreateMissileFloor = 24;
-    public const int DestoryOnReset = 25;
-    public const int Destroyed = 26;
-    public const int DestroyedListener = 27;
-    public const int DifficultCountDown = 28;
-    public const int Difficulty = 29;
-    public const int Drag = 30;
-    public const int DragFloor = 31;
-    public const int DragOffset = 32;
-    public const int EffecetCtrl = 33;
-    public const int Effect = 34;
-    public const int FloorBrother = 35;
-    public const int FloorChild = 36;
-    public const int Floor = 37;
-    public const int FloorCount = 38;
-    public const int FloorDifficulty = 39;
-    public const int FloorSpeed = 40;
-    public const int FloorType = 41;
-    public const int GameCamera = 42;
-    public const int GameOver = 43;
-    public const int GameReady = 44;
-    public const int GameReadyListener = 45;
-    public const int GameStart = 46;
-    public const int GameStartListener = 47;
-    public const int GameState = 48;
-    public const int GameStateListener = 49;
-    public const int GridID = 50;
-    public const int Ground = 51;
-    public const int GroundParent = 52;
-    public const int GroundView = 53;
-    public const int Hp = 54;
-    public const int HugeLazerSpark = 55;
-    public const int Id = 56;
-    public const int IsBlockLazerFloor = 57;
-    public const int IsBrickPassed = 58;
-    public const int IsLazerTowerFloor = 59;
-    public const int LastFloor = 60;
-    public const int LastGround = 61;
-    public const int LazerTower = 62;
-    public const int Life = 63;
-    public const int Missile = 64;
-    public const int MissileFloor = 65;
-    public const int Move = 66;
-    public const int ObjectParent = 67;
-    public const int Player = 68;
-    public const int PlayerCurFloor = 69;
-    public const int PlayerReady = 70;
-    public const int PlayerState = 71;
-    public const int Position = 72;
-    public const int Reset = 73;
-    public const int SpecialFloor = 74;
-    public const int SpecialFloorData = 75;
-    public const int Timer = 76;
-    public const int VelocityIncrement = 77;
-    public const int View = 78;
-    public const int WaitAddFloorCount = 79;
-    public const int WayOfPassBrick = 80;
+    public const int ChargeEffect = 22;
+    public const int Child = 23;
+    public const int Collision = 24;
+    public const int CreateMissileFloor = 25;
+    public const int DestoryOnReset = 26;
+    public const int Destroyed = 27;
+    public const int DestroyedListener = 28;
+    public const int DifficultCountDown = 29;
+    public const int Difficulty = 30;
+    public const int DoingBossHugeLazer = 31;
+    public const int Drag = 32;
+    public const int DragFloor = 33;
+    public const int DragOffset = 34;
+    public const int EffecetCtrl = 35;
+    public const int Effect = 36;
+    public const int FloorBrother = 37;
+    public const int FloorChild = 38;
+    public const int Floor = 39;
+    public const int FloorCount = 40;
+    public const int FloorDifficulty = 41;
+    public const int FloorSpeed = 42;
+    public const int FloorType = 43;
+    public const int GameCamera = 44;
+    public const int GameOver = 45;
+    public const int GameReady = 46;
+    public const int GameReadyListener = 47;
+    public const int GameStart = 48;
+    public const int GameStartListener = 49;
+    public const int GameState = 50;
+    public const int GameStateListener = 51;
+    public const int GridID = 52;
+    public const int Ground = 53;
+    public const int GroundParent = 54;
+    public const int GroundView = 55;
+    public const int Hp = 56;
+    public const int HugeLazerSpark = 57;
+    public const int Id = 58;
+    public const int IsBlockLazerFloor = 59;
+    public const int IsBrickPassed = 60;
+    public const int IsLazerTowerFloor = 61;
+    public const int LastFloor = 62;
+    public const int LastGround = 63;
+    public const int LazerTower = 64;
+    public const int Life = 65;
+    public const int Missile = 66;
+    public const int MissileFloor = 67;
+    public const int Move = 68;
+    public const int ObjectParent = 69;
+    public const int Player = 70;
+    public const int PlayerCurFloor = 71;
+    public const int PlayerReady = 72;
+    public const int PlayerState = 73;
+    public const int Position = 74;
+    public const int Reset = 75;
+    public const int SpecialFloor = 76;
+    public const int SpecialFloorData = 77;
+    public const int Timer = 78;
+    public const int VelocityIncrement = 79;
+    public const int View = 80;
+    public const int WaitAddFloorCount = 81;
+    public const int WayOfPassBrick = 82;
 
-    public const int TotalComponents = 81;
+    public const int TotalComponents = 83;
 
     public static readonly string[] componentNames = {
         "Anim",
@@ -115,6 +117,7 @@ public static class GameComponentsLookup {
         "BrickParent",
         "BrickType",
         "BrickYOffset",
+        "ChargeEffect",
         "Child",
         "Collision",
         "CreateMissileFloor",
@@ -123,6 +126,7 @@ public static class GameComponentsLookup {
         "DestroyedListener",
         "DifficultCountDown",
         "Difficulty",
+        "DoingBossHugeLazer",
         "Drag",
         "DragFloor",
         "DragOffset",
@@ -199,6 +203,7 @@ public static class GameComponentsLookup {
         typeof(BrickParentComponent),
         typeof(BrickTypeComponent),
         typeof(BrickYOffsetComponent),
+        typeof(ChargeEffectComponent),
         typeof(ChildComponent),
         typeof(CollisionComponent),
         typeof(CreateMissileFloorComponent),
@@ -207,6 +212,7 @@ public static class GameComponentsLookup {
         typeof(DestroyedListenerComponent),
         typeof(DifficultCountDownComponent),
         typeof(DifficultyComponent),
+        typeof(DoingBossHugeLazerComponent),
         typeof(DragComponent),
         typeof(DragFloorComponent),
         typeof(DragOffsetComponent),

@@ -126,3 +126,14 @@ public class HugeLazerSparkComponent : IComponent
 {
     public string markstr;
 }
+
+[Game]
+public class ChargeEffectComponent : IComponent
+{
+
+}
+
+[Game][Unique]
+public class DoingBossHugeLazerComponent : IComponent
+{
+}

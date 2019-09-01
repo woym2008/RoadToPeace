@@ -259,6 +259,7 @@ public class BossThrowTowerEnterSystem : ReactiveSystem<GameEntity>
         return context.CreateCollector(GameMatcher.BossState);
     }
 }
+//--------------------------------------------------------------------------
 public class BossHugeLazerEnterSystem : ReactiveSystem<GameEntity>
 {
     Contexts _contexts;
@@ -272,14 +273,15 @@ public class BossHugeLazerEnterSystem : ReactiveSystem<GameEntity>
     protected override void Execute(List<GameEntity> entities)
     {
         //准备发射一个大激光
-        //激光特效开始准备发射
-        //倒计时开始
 
+        //倒计时开始
         var e = _contexts.game.CreateEntity();
         e.AddBossHugeLazer(5, 0.5f, 0, 0, 0, 0);
         e.AddAsset("Boss/Skill/HugeLazer",0);
 
         var bossentity = _contexts.game.GetGroup(GameMatcher.Boss).GetSingleEntity();
+        _contexts.game.isDoingBossHugeLazer = true;
+
         var startpoint = bossentity.view.Value.Transform.GetComponent<LazerShipController>().HugeLazerStartPoint;
         e.ReplacePosition(startpoint.position);
         e.ReplaceTimer(0.0f);
@@ -292,6 +294,13 @@ public class BossHugeLazerEnterSystem : ReactiveSystem<GameEntity>
         var missilefloor = _contexts.game.CreateEntity();
         missilefloor.isBossCreateFloor = true;
         missilefloor.isMissileFloor = true;
+
+        //------------------
+        //激光特效开始准备发射
+        var chargeEffect = _contexts.game.CreateEntity();
+        chargeEffect.isChargeEffect = true;
+        chargeEffect.AddAsset("Boss/Effect/ChargeEffect", 0);
+        chargeEffect.AddPosition(startpoint.position);
         //------------------
 
         var e_spark_up = _contexts.game.CreateEntity();
@@ -332,6 +341,7 @@ public class BossHugeLazerUpdateSystem : IExecuteSystem
     IGroup<GameEntity> _boss;
 
     IGroup<GameEntity> _effects;
+    IGroup<GameEntity> _firechargeeffect;
 
     public BossHugeLazerUpdateSystem(Contexts contexts)
     {
@@ -341,6 +351,7 @@ public class BossHugeLazerUpdateSystem : IExecuteSystem
         _hugelazer = contexts.game.GetGroup(GameMatcher.BossHugeLazer);
         _boss = _contexts.game.GetGroup(GameMatcher.Boss);
         _effects = _contexts.game.GetGroup(GameMatcher.HugeLazerSpark);
+        _firechargeeffect = _contexts.game.GetGroup(GameMatcher.ChargeEffect);
     }
 
     public void Execute()
@@ -370,7 +381,11 @@ public class BossHugeLazerUpdateSystem : IExecuteSystem
             if (passedtime > _accumulateTime && _lazerstate == 1)
             {
                 _lazerstate = 2;
-
+                var fireeffect = _firechargeeffect.GetSingleEntity();
+                if(fireeffect != null)
+                {
+                    fireeffect.isDestroyed = true;
+                }
                 //Debug.LogWarning("fire");
             }
             //发射完成 开始减弱
@@ -637,17 +652,33 @@ public class BossHugeLazerUpdateSystem : IExecuteSystem
         }
     }
 }
-/*
+
 public class BossHugeLazerExitSystem : ReactiveSystem<GameEntity>
 {
+    IGroup<GameEntity> _effects;
+    Contexts _contexts;
+
+    public BossHugeLazerExitSystem(Contexts contexts) : base(contexts.game)
+    {
+        _effects = contexts.game.GetGroup(GameMatcher.HugeLazerSpark);
+
+        _contexts = contexts;
+    }
     protected override void Execute(List<GameEntity> entities)
     {
-        throw new System.NotImplementedException();
+        var boss = entities.SingleEntity();
+
+        _contexts.game.isDoingBossHugeLazer = false;
+
+        foreach(var e in _effects)
+        {
+            e.isDestroyed = true;
+        }
     }
 
     protected override bool Filter(GameEntity entity)
     {
-        entity.bossState;
+        return _contexts.game.isDoingBossHugeLazer;
     }
 
     protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
@@ -655,7 +686,6 @@ public class BossHugeLazerExitSystem : ReactiveSystem<GameEntity>
         return context.CreateCollector(GameMatcher.BossState);
     }
 }
-*/
 
 public class TowerInitSystem : ReactiveSystem<GameEntity>
 {
@@ -882,6 +912,9 @@ public class AntiBossMissileSystem : IExecuteSystem
                             {
                                 //导弹爆炸
                                 //释放爆炸特效
+                                var boomentity = _contexts.game.CreateEntity();
+                                boomentity.AddAsset("Boss/Effect/SmallExplosion", 0);
+                                boomentity.AddPosition(missile.position.position);
                                 //
                                 missile.isDestroyed = true;
                             }
