@@ -33,7 +33,7 @@ public class UpdateMissileBrickSystem : IExecuteSystem
                 var premissile = missile.missile.preMissileBrick;
                 var postmissle = missile.missile.postMissileBrick;
                 if (premissile != null && postmissle!= null &&
-                premissile.hasBrickParent && postmissle.hasBrickParent  )
+                premissile.hasBrickParent && postmissle.hasBrickParent&& missile.hasBrickParent)
                 {
                     var middileid = missile.brickParent.parent.gridID.id - missile.brickIndex.index;
                     var headid = premissile.brickParent.parent.gridID.id - premissile.brickIndex.index;
@@ -58,6 +58,7 @@ public class UpdateMissileBrickSystem : IExecuteSystem
                         antibossmissile.AddAntiBossMissile(1);
                         antibossmissile.AddPosition(postmissle.position.position + _missileoffset);
                         antibossmissile.AddAsset("Boss/AntiBossRocket", 0);
+                        antibossmissile.AddGridID(middileid);
 
                         Debug.Log("Fire Missile!!!!!!!");
                         break;

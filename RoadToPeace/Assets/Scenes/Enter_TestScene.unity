@@ -9637,6 +9637,13 @@ MonoBehaviour:
   BossNames:
   - Boss
   PlayerUI: {fileID: 678008616}
+  BGM: {fileID: 2118387175028204785, guid: 0cd3fb37d352e4ff8b79c67422790d1d, type: 3}
+  SFX_HugeLazer: {fileID: 7331743132598574630, guid: 7c17b110b9ef34250a290e969f4de179,
+    type: 3}
+  SFX_StoreLazer: {fileID: 6973431662529964551, guid: 5fa360f498fbd47b1b7d49fbdcfe098b,
+    type: 3}
+  SFX_MissileBoom: {fileID: 7938876742701588079, guid: f5190bcae1aca48a49f562151dded92d,
+    type: 3}
 --- !u!4 &1743055587
 Transform:
   m_ObjectHideFlags: 0

@@ -318,6 +318,9 @@ public class BossHugeLazerEnterSystem : ReactiveSystem<GameEntity>
         e_spark_up.AddAsset("Boss/Effect/ElectricalSparks", 0);
         e_spark_middle.AddAsset("Boss/Effect/ElectricalSparks", 0);
         e_spark_down.AddAsset("Boss/Effect/ElectricalSparks", 0);
+        //------------------
+        //sfx
+        _contexts.game.sFX.storelazer.Play();
     }
 
     protected override bool Filter(GameEntity entity)
@@ -394,6 +397,8 @@ public class BossHugeLazerUpdateSystem : IExecuteSystem
                         fe.isDestroyed = true;
                     }
                 }
+
+                _contexts.game.sFX.firelazer.Play();
                 //var fireeffect = _firechargeeffect.GetSingleEntity();
                 //if(fireeffect != null)
                 //{
@@ -484,6 +489,12 @@ public class BossHugeLazerUpdateSystem : IExecuteSystem
                                     continue;
                                 }
                                 if (b.brickType.value == "Mech")
+                                {
+                                    continue;
+                                }
+                                if(b.hasWayOfPassBrick && 
+                                b.wayOfPassBrick.value != PassBrickWay.Collision &&
+                                    b.wayOfPassBrick.value != PassBrickWay.AirCollision)
                                 {
                                     continue;
                                 }
@@ -805,6 +816,8 @@ public class TowerUpdateSystem : IExecuteSystem
                     {
                         effectEntity.AddObjectParent(floor.parent);
                     }
+
+                    _contexts.game.sFX.missileboom.Play();
                 }
 
                 if (e.hasChild && e.child.value.hasView && !e.child.value.view.Value.Enabled)
@@ -886,6 +899,8 @@ public class AntiBossMissileSystem : IExecuteSystem
 
     Vector3 _speed = new Vector3(3,0,0);
     float _bossedgeoffset = 2;
+
+    int _mechid;
     public AntiBossMissileSystem(Contexts contexts)
     {
         _contexts = contexts;
@@ -895,6 +910,9 @@ public class AntiBossMissileSystem : IExecuteSystem
         _floors = _contexts.game.GetGroup(GameMatcher.Floor);
 
         _boss = _contexts.game.GetGroup(GameMatcher.Boss);
+
+        var table = _contexts.config.brickTable.table;
+        _mechid = table.GetIndex("Mech");
     }
 
     public void Execute()
@@ -932,7 +950,9 @@ public class AntiBossMissileSystem : IExecuteSystem
                             }
 
                             var childs = floor.floorChild.childs;
-                            var curbrick = childs[gridid];
+                            var mid = missile.gridID.id;
+                            var brickid = gridid - mid;
+                            var curbrick = childs[brickid];
                             //var type = curbrick.brickType;
                             //var ispassed = curbrick.isIsBrickPassed;
                             if (curbrick.hasWayOfPassBrick && curbrick.wayOfPassBrick.value == PassBrickWay.AirCollision)
@@ -945,6 +965,10 @@ public class AntiBossMissileSystem : IExecuteSystem
                                 boomentity.isDestoryOnReset = true;
                                 //
                                 missile.isDestroyed = true;
+
+                                curbrick.ReplaceBrickBroken(_mechid);
+
+                                _contexts.game.sFX.missileboom.Play();
                             }
 
                             missile.ReplacePlayerCurFloor(floor, gridid);
@@ -971,6 +995,8 @@ public class AntiBossMissileSystem : IExecuteSystem
                                         boomeffect.ReplacePosition(bosspos);
                                         //boss掉血
                                         boss.ReplaceLife(boss.life.lifeValue - missile.antiBossMissile.power);
+
+                                        _contexts.game.sFX.missileboom.Play();
                                     }
                                     missile.isDestroyed = true;
                                 }

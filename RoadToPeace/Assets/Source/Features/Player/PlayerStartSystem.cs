@@ -23,6 +23,8 @@ public class PlayerStartSystem : ReactiveSystem<GameEntity>
                 uitransform.gameObject.SetActive(true);
             }
         }
+
+        _context.bgm.value.Play();
     }
 
     protected override bool Filter(GameEntity entity)

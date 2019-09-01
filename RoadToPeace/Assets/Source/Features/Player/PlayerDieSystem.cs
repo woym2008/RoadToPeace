@@ -21,6 +21,7 @@ public class PlayerDieSystem : ReactiveSystem<GameEntity>
                 anim.PlayAnim("die");
             }
         }
+        _contexts.game.bgm.value.Stop();
     }
 
     protected override bool Filter(GameEntity entity)

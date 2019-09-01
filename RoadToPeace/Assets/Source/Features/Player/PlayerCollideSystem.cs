@@ -7,12 +7,16 @@ public class PlayerCollideSystem : IExecuteSystem
     private Contexts _contexts;
     private Services _serivces;
     private IGroup<GameEntity> _floors;
+    private int _mechid;
     public PlayerCollideSystem(Contexts contexts, Services services)
     {
         _contexts = contexts;
         _serivces = services;
 
         _floors = _contexts.game.GetGroup(GameMatcher.Floor);
+
+        var table = _contexts.config.brickTable.table;
+        _mechid = table.GetIndex("Mech");
     }
 
     public void Execute()
@@ -77,7 +81,11 @@ public class PlayerCollideSystem : IExecuteSystem
                                                     player.ReplaceLife(player.life.lifeValue - 1);
                                                 }
                                                 //curbrick.isBrickBroken = true;
-                                                curbrick.ReplaceBrickBroken(-1);
+                                                //curbrick.ReplaceBrickBroken(-1);
+                                                var collideeffect = _contexts.game.CreateEntity();
+                                                collideeffect.AddAsset("Boss/Effect/EnergyExplosion",0);
+                                                collideeffect.ReplacePosition(player.position.position + new Vector3(0,5,0));
+                                                curbrick.ReplaceBrickBroken(_mechid);
                                                 //_serivces.CreateEffectService.CreateEffect("Dust", curbrick.position.position +
                                                 //new Vector3(0, floorheight * 0.5f, 0), 10);
                                             }

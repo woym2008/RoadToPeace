@@ -53,6 +53,7 @@ public class GameResetSystem : ReactiveSystem<GameEntity>, IInitializeSystem
         }
 
         _services.CreatePlayerService.ResetPlayer();
+        
         _services.BossService.ResetBoss();
     }
 

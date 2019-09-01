@@ -272,7 +272,12 @@ public class CreateBrickSystem : ReactiveSystem<GameEntity>
                 break;
             case "Mech_Battery":
                 return PassBrickWay.AirCollision;
-                break;
+            case "Mech_Block":
+                return PassBrickWay.AirCollision;
+            case "Mech_MissileTail":
+            case "Mech_MissileMiddle":
+            case "Mech_MissileHead":
+                return PassBrickWay.AirCollision;
         }
 
         return PassBrickWay.Run;

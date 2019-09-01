@@ -74,6 +74,11 @@ public class ConfigController : MonoBehaviour
     public List<string> BossNames = new List<string>();
     //----------------------------------
     public GameObject PlayerUI;
+
+    public GameObject BGM;
+    public GameObject SFX_HugeLazer;
+    public GameObject SFX_StoreLazer;
+    public GameObject SFX_MissileBoom;
     //----------------------------------
     private void Awake()
     {
@@ -167,6 +172,18 @@ public class ConfigController : MonoBehaviour
 
         contexts.game.SetPlayerUI(PlayerUI.transform);
         PlayerUI.SetActive(false);
+
+        var bgminstance = GameObject.Instantiate(BGM);
+        contexts.game.ReplaceBgm(bgminstance.GetComponent<AudioSource>());
+
+        var sfx_store = GameObject.Instantiate(SFX_StoreLazer);
+        var sfx_fire = GameObject.Instantiate(SFX_HugeLazer);
+        var sfx_missileboom = GameObject.Instantiate(SFX_MissileBoom);
+        contexts.game.ReplaceSFX(
+            sfx_store.GetComponent<AudioSource>(), 
+            sfx_fire.GetComponent<AudioSource>(),
+            sfx_missileboom.GetComponent<AudioSource>()
+            );
     }
     private void Start()
     {
